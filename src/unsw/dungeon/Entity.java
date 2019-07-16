@@ -12,7 +12,6 @@ import unsw.collisionBehaviour.CollisionBehaviour;
  *
  */
 
-// do i have to make it abstract ??
 public abstract class Entity {
 
     // IntegerProperty is used so that changes to the entities position can be
