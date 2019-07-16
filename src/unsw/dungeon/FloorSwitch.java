@@ -1,5 +1,5 @@
 package unsw.dungeon;
-
+import unsw.collisionBehaviour.*;
 public class FloorSwitch extends Entity{
 	
 	private boolean switchState;
@@ -7,8 +7,7 @@ public class FloorSwitch extends Entity{
 	public FloorSwitch(int x, int y) {
 		super(x, y, "floor switch");
 		this.switchState = false;
-		// should every entity has its own collision behaviour ?
-		setCollisionBehaviour(new CollideWithFloorSwitch());
+		setCollisionBehaviour(new interactWithSwitch());
 		
 	}
 	
@@ -16,7 +15,8 @@ public class FloorSwitch extends Entity{
 		return switchState;
 	}
 	
-	
+	// true means activated
+	// false means not-activated
 	public void setSwitchState(boolean state) {
 		this.switchState = state;
 	}

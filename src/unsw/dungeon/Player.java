@@ -16,6 +16,7 @@ public class Player extends MovingEntity {
     private int swordNum;
     private int invincibleTime;
     private ArrayList<Integer> keys;
+	private int treasureCollected;
 
     /**
      * Create a player positioned in square (x,y)
@@ -28,6 +29,7 @@ public class Player extends MovingEntity {
         this.dungeon = dungeon;
         this.bombNum = 0;
         this.swordNum = 0;
+        this.treasureCollected = 0;
         this.invincibleTime = 0;
         this.keys = new ArrayList<Integer>();
         setCollisionBehaviour(new CollisionWithPlayer());
@@ -81,8 +83,16 @@ public class Player extends MovingEntity {
 	public void setInvincibleTime(int invincibleTime) {
 		this.invincibleTime = invincibleTime;
 	}
-
 	
+	
+	public int getTreasureCollected() {
+		return treasureCollected;
+	}
+
+	public void setTreasureCollected(int treasureCollected) {
+		this.treasureCollected = treasureCollected;
+	}
+
 	public ArrayList<Integer> getKeys() {
 		return keys;
 	}
@@ -97,6 +107,13 @@ public class Player extends MovingEntity {
 		} else {
 			return false;
 		}
+	}
+	
+	
+	
+	@Override
+	public boolean isPlayer() {
+		return true;
 	}
 
 }

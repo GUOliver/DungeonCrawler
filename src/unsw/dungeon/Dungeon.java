@@ -1,6 +1,4 @@
-/**
- *
- */
+
 package unsw.dungeon;
 
 import java.util.ArrayList;
@@ -51,9 +49,33 @@ public class Dungeon {
     	
     //}
 
-    public Entity findEntity(int x, int y) {
-		// TODO Auto-generated method stub
-		return null;
+    /**
+     * 
+     * @param x
+     * @param y
+     * @return the list of entities on a given spot
+     */
+    public List<Entity> findEntity(int x, int y) {
+    	// Since ArrayList is a kind of List
+    	// we can easily upcast it:
+		List<Entity> items = new ArrayList<Entity>();
+		for (Entity e : getEntities()) {
+			if (x == e.getX() && y == e.getY()) {
+				items.add(e);
+			}
+		}
+		return items;
+	}
+    
+    public List<String> findEntityType(int x, int y) {
+		List<String> entityTypes = new ArrayList<String>();
+		List<Entity> entities = findEntity(x, y);
+		
+		for (Entity entity : entities) {
+			entityTypes.add(entity.getType());
+		}
+		
+		return entityTypes;
 	}
 
 	public int getWidth() {
@@ -72,10 +94,32 @@ public class Dungeon {
         this.player = player;
     }
     
-
+    
+    /**
+	 * This method adds the given BoardEntity to the board.
+	 * @param entity - the BoardEntity to be added
+	 */
     public void addEntity(Entity entity) {
+    	
+    	if (entity.getType().equals("exit")) {
+			setHasExit(true);
+		} 
+    	
+    	else if (entity.isEnemy()) {
+			setEnemyTotal(getEnemyTotal() + 1);
+		} 
+    	
+    	else if (entity.getType().equals("floor switch")) {
+			setSwitchTotal(getSwitchTotal() + 1);
+		} 
+    	
+    	else if (entity.getType().equals("treasure")) {
+			setTreasureTotal(getTreasureTotal() + 1);
+		}
+    	
         entities.add(entity);
     }
+    
     
     
     public void removeEntity(Entity e2) {

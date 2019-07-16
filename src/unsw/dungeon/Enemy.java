@@ -30,6 +30,11 @@ public class Enemy extends MovingEntity{
 		// TODO Auto-generated method stub
 		
 	}
+	@Override
+	public boolean isEnemy() {
+		return true;
+	}
+	
 	
 	
 	

@@ -9,4 +9,5 @@ public interface CollisionBehaviour {
 	 * @param e2
 	 */
 	public void interact(Dungeon dungeon, Entity e1, Entity e2);
+	
 }

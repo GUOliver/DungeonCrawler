@@ -11,11 +11,11 @@ public class killEnermy implements CollisionBehaviour{
 			
 			if (player.isInvincible()) {
 				dungeon.removeEntity(enermy);
-				dungeon.setEnermyTotal(dungeon.getEnermyTotal() - 1);
+				dungeon.setEnemyTotal(dungeon.getEnemyTotal() - 1);
 			}
 			else if (player.getSwordNum() > 0) {
 				dungeon.removeEntity(enermy);
-				dungeon.setEnermyTotal(dungeon.getEnermyTotal() - 1);
+				dungeon.setEnemyTotal(dungeon.getEnemyTotal() - 1);
 				player.addSwordNum(-1);
 			} 
 			

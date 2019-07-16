@@ -2,7 +2,9 @@ package unsw.dungeon;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+
 import unsw.collisionBehaviour.CollisionBehaviour;
+
 
 /**
  * An entity in the dungeon.
@@ -17,7 +19,7 @@ public abstract class Entity {
     // externally observed.
     private IntegerProperty x, y;
     private String type;
-    // private CollisionBehaviour behaviour;
+    private CollisionBehaviour behavior;
     
     /**
      * Create an entity positioned in square (x,y)
@@ -29,11 +31,6 @@ public abstract class Entity {
         this.y = new SimpleIntegerProperty(y);
         this.type = type;
     }
-    
-    // public void interact(Dungeon dungeon, Entity other) {
-    	
-	// 	behaviour.interact(dungeon, other, this);
-    // }
     
     
     /**
@@ -100,7 +97,34 @@ public abstract class Entity {
 		this.type = type;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
+	public CollisionBehaviour getCollisionBehaviour() {
+		return behavior;
+	}
+	
+	public void setCollisionBehaviour(CollisionBehaviour behavior) {
+		this.behavior = behavior;
+	}
+	
+	
+	/**
+	 * This method calls the collision behaviour of this Entity.
+	 * @param dungeon The dungeon
+	 * @param mover The Entity moving onto this entity
+	 */
+	public void interact(Dungeon dungeon, Entity mover) {
+		behavior.interact(dungeon, mover, this);
+	}
+	
 	public boolean isPlayer() {
+		return false;
+	}
+
+	public boolean isEnemy() {
+		// TODO Auto-generated method stub
 		return false;
 	}
 }
