@@ -3,13 +3,16 @@ package unsw.dungeon;
 import java.util.ArrayList;
 
 import unsw.collisionBehaviour.*;
+import unsw.playerObserve.Observer;
+import unsw.playerObserve.Subject;
+
 import java.util.List;
 /**
  * The player entity
  * @author Robert Clifton-Everest
  *
  */
-public class Player extends MovingEntity {
+public class Player extends MovingEntity implements Subject {
 
 	private Dungeon dungeon;
     private int bombNum;
@@ -17,6 +20,9 @@ public class Player extends MovingEntity {
     private int invincibleTime;
     private ArrayList<Integer> keys;
 	private int treasureCollected;
+	ArrayList<Observer> listObservers = new ArrayList<Observer>();
+	//Placeholder attribute for state pattern implementation
+	private State playerState;
 
     /**
      * Create a player positioned in square (x,y)
@@ -89,6 +95,51 @@ public class Player extends MovingEntity {
 	@Override
 	public boolean isPlayer() {
 		return true;
+	}
+	
+	/**
+	 * Placeholder function to update state and notify observers
+	 */
+	public void changeState() {
+		this.playerState.changeState();
+		notifyObservers();
+	}
+
+	/**
+	 * Adds all enemies in the dungeon as an observer of the player
+	 * Also provides enemies with the initial position of the player
+	 */
+	@Override
+	public void registerObservers() {
+		for (Entity entity : this.dungeon.getEntities()) {
+			if (entity.getClass()==Enemy.class) {
+				this.listObservers.add((Observer)entity);
+				Enemy enemy = (Enemy)entity;
+				enemy.setPlayerPos(this.getX(), this.getY());
+			}
+		}
+		
+	}
+
+	
+	/**
+	 * Removes a specific enemy from the observed list, e.g. when they die
+	 */
+	@Override
+	public void removeObserver(Observer o) {
+		this.listObservers.remove(o);
+	}
+
+	
+	/**
+	 * Provides enemies a constant update of where the player is, also
+	 * notifies the enemies when the player becomes invincible, or returns to normal
+	 */
+	@Override
+	public void notifyObservers() {
+		for( Observer obs : listObservers) {
+			obs.update(this);
+		}
 	}
 
 }
