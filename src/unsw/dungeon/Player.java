@@ -3,7 +3,7 @@ package unsw.dungeon;
 import java.util.ArrayList;
 
 import unsw.collisionBehaviour.*;
-import java.util.List;
+//import java.util.List;
 /**
  * The player entity
  * @author Robert Clifton-Everest
@@ -73,6 +73,13 @@ public class Player extends MovingEntity {
 	public ArrayList<Integer> getKeys() {
 		return keys;
 	}
+	
+	public boolean findKey(int keyId) {
+		if (keys.contains(keyId)) {
+			return true;
+		} 
+		return false;
+	}
 
 	public void addKeys(int keyId) {
 		this.keys.add(keyId);
@@ -89,6 +96,23 @@ public class Player extends MovingEntity {
 	@Override
 	public boolean isPlayer() {
 		return true;
+	}
+
+
+	public Dungeon getDungeon() {
+		return dungeon;
+	}
+
+
+	public void setDungeon(Dungeon dungeon) {
+		this.dungeon = dungeon;
+	}
+
+
+	@Override
+	public boolean canMoveOnto(Dungeon dungeon, Entity character) {
+		// cannot move onto another player ?
+		return false;
 	}
 
 }

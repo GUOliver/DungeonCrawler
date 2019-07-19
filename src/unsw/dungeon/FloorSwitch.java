@@ -8,8 +8,12 @@ public class FloorSwitch extends Entity{
 		super(x, y, "floor switch");
 		this.switchState = false;
 		setCollisionBehaviour(new interactWithSwitch());
-		
 	}
+	
+	public boolean canMoveOnto(Dungeon dungeon, Entity mover) {
+		return true;
+	}
+	
 	
 	public boolean isActivated() {
 		return switchState;

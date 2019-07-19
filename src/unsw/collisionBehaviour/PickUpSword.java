@@ -5,7 +5,6 @@ public class PickUpSword implements CollisionBehaviour{
 	
 	
 	@Override  
-	// apply strategy pattern (or state pattern ?) 
 	public void interact(Dungeon dungeon, Entity character, Entity sword) {
 		// player picked up the sword
 		// Only one sword can be carried at once. 
@@ -20,8 +19,7 @@ public class PickUpSword implements CollisionBehaviour{
 			
 			// if e2 is of type sword
 			// remove this instance from the dungeon
-			dungeon.removeEntity(sword);
-			
+			dungeon.removeEntity(sword);	
 		}
 		
 		

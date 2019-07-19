@@ -24,7 +24,7 @@ public class Dungeon {
     private int treasureTotal;
     private boolean hasExit;
     private boolean gameState;
-    
+    private boolean reachExit;
 
     public Dungeon(int width, int height) {
     	// start mode is maze 
@@ -38,16 +38,8 @@ public class Dungeon {
         this.treasureTotal = 0;
         this.hasExit = false;
         this.gameState = false;
+        this.setReachExit(false);
     }
-    
-    //public boolean moveChecking(Entity item, int x, int y) {
-    //	Entity itemFound = findEntity(x, y);
-    //	if (itemFound.moveChecking(this, item)) {
-    //		return true;
-    //	}
-    //	return false;
-    	
-    //}
 
     /**
      * 
@@ -177,12 +169,20 @@ public class Dungeon {
 		this.hasExit = hasExit;
 	}
 
-	public boolean isGameState() {
+	public boolean getGameState() {
 		return gameState;
 	}
 
 	public void setGameState(boolean gameState) {
 		this.gameState = gameState;
+	}
+
+	public boolean isReachExit() {
+		return reachExit;
+	}
+
+	public void setReachExit(boolean reachExit) {
+		this.reachExit = reachExit;
 	}
 
 	

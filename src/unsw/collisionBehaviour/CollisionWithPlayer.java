@@ -11,6 +11,7 @@ public class CollisionWithPlayer implements CollisionBehaviour{
 			return;
 		}
 		
+		
 		Player player = (Player) character;
 		
 		if (e2 instanceof Enemy) {
