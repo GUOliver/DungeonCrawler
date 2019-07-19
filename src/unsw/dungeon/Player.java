@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import unsw.collisionBehaviour.*;
 import unsw.playerObserve.Observer;
 import unsw.playerObserve.Subject;
-
 import java.util.List;
 /**
  * The player entity
@@ -79,6 +78,13 @@ public class Player extends MovingEntity implements Subject {
 	public ArrayList<Integer> getKeys() {
 		return keys;
 	}
+	
+	public boolean findKey(int keyId) {
+		if (keys.contains(keyId)) {
+			return true;
+		} 
+		return false;
+	}
 
 	public void addKeys(int keyId) {
 		this.keys.add(keyId);
@@ -140,6 +146,23 @@ public class Player extends MovingEntity implements Subject {
 		for( Observer obs : listObservers) {
 			obs.update(this);
 		}
+	}
+
+
+	public Dungeon getDungeon() {
+		return dungeon;
+	}
+
+
+	public void setDungeon(Dungeon dungeon) {
+		this.dungeon = dungeon;
+	}
+
+
+	@Override
+	public boolean canMoveOnto(Dungeon dungeon, Entity character) {
+		// cannot move onto another player ?
+		return false;
 	}
 
 }

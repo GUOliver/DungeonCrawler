@@ -1,13 +1,17 @@
 package unsw.collisionBehaviour;
 
-import unsw.dungeon.Dungeon;
-import unsw.dungeon.Entity;
+import unsw.dungeon.*;
+
 
 public class interactWithSwitch implements CollisionBehaviour{
 
 	@Override
-	public void interact(Dungeon dungeon, Entity e1, Entity e2) {
-		// TODO Auto-generated method stub
+	public void interact(Dungeon dungeon, Entity boulderEntity, Entity switchEntity) {
+		if (boulderEntity instanceof Boulder) {
+			FloorSwitch fs = (FloorSwitch) switchEntity;
+			fs.setSwitchState(true);
+			dungeon.setSwitchTotal(dungeon.getSwitchTotal() - 1);
+		}
 		
 	}
 

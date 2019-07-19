@@ -47,4 +47,5 @@ public class Enemy extends MovingEntity implements Observer {
 	public int getPlayerY() {
 		return playerY.get();
 	}
+	
 }

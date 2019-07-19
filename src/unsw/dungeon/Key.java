@@ -11,6 +11,10 @@ public class Key extends Entity{
 		setCollisionBehaviour(new PickUpKey());
 	}
 	
+	public boolean canMoveOnto(Dungeon dungeon, Entity mover) {
+		return true;
+	}
+	
 	public void setKeyID(int keyID) {
 		this.keyID = keyID;
 	}

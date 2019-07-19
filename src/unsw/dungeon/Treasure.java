@@ -8,4 +8,10 @@ public class Treasure extends Entity {
 		setCollisionBehaviour(new CollectTreasure());
 	}
 
+	@Override
+	public boolean canMoveOnto(Dungeon dungeon, Entity character) {
+		return true;
+	}
+
+
 }

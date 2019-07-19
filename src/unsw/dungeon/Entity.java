@@ -19,7 +19,7 @@ public abstract class Entity {
     private IntegerProperty x, y;
     private String type;
     private CollisionBehaviour behavior;
-    
+ 
     /**
      * Create an entity positioned in square (x,y)
      * @param x
@@ -29,10 +29,18 @@ public abstract class Entity {
         this.x = new SimpleIntegerProperty(x);
         this.y = new SimpleIntegerProperty(y);
         this.type = type;
+        
     }
     
-    
     /**
+     * check the character can moveonto th entity or not
+     * @param dungeon
+     * @param character
+     * @return true or false
+     */
+    public abstract boolean canMoveOnto(Dungeon dungeon, Entity character);
+   
+	/**
      * 
      * @return the x integer
      */
@@ -114,8 +122,9 @@ public abstract class Entity {
 	 * @param dungeon The dungeon
 	 * @param mover The Entity moving onto this entity
 	 */
-	public void interact(Dungeon dungeon, Entity mover) {
-		behavior.interact(dungeon, mover, this);
+	public void interact(Dungeon dungeon, Entity character) {
+		
+		behavior.interact(dungeon, character, this);
 	}
 	
 	public boolean isPlayer() {
