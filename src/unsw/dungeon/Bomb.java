@@ -10,7 +10,7 @@ public class Bomb extends Entity{
 	//private boolean isExploded;
 	//private Timer timer;
 
-	public Bomb(int x, int y, String type) {
+	public Bomb(int x, int y) {
 		super(x, y, "bomb");
 		setCollisionBehaviour(new PickUpUnlitBomb());
 		

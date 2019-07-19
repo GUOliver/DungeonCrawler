@@ -132,7 +132,6 @@ public abstract class Entity {
 	}
 
 	public boolean isEnemy() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 }

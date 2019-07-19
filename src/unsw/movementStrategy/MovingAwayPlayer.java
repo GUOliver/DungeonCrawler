@@ -8,7 +8,7 @@ public class MovingAwayPlayer implements MovementStrategy {
 
 	@Override
 	public void moveDirection(Dungeon dungeon, MovingEntity entity) {
-		if (entity.getClass()==Enemy.class) {
+		if (entity.isEnemy()) {
 			Enemy enemy = (Enemy)entity;
 			if (enemy.getX()<enemy.getPlayerX()) {
 				enemy.moveLeft(dungeon);

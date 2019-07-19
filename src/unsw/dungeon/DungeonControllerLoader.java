@@ -31,6 +31,7 @@ public class DungeonControllerLoader extends DungeonLoader {
         entities = new ArrayList<>();
         playerImage = new Image("/human_new.png");
         wallImage = new Image("/brick_brown_0.png");
+        //TODO images for other entities
     }
 
     @Override
@@ -44,6 +45,61 @@ public class DungeonControllerLoader extends DungeonLoader {
         ImageView view = new ImageView(wallImage);
         addEntity(wall, view);
     }
+    
+    @Override
+	public void onLoad(Bomb bomb) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onLoad(Boulder boulder) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onLoad(Key key) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onLoad(Door door) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onLoad(Enemy enemy) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onLoad(FloorSwitch floorSwitch) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onLoad(InvincibilityPotion potion) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onLoad(Sword sword) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onLoad(Treasure treasure) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
     private void addEntity(Entity entity, ImageView view) {
         trackPosition(entity, view);
@@ -89,5 +145,6 @@ public class DungeonControllerLoader extends DungeonLoader {
         return new DungeonController(load(), entities);
     }
 
+	
 
 }

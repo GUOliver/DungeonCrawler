@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.Test;
 import unsw.dungeon.*;
-public class MovementTest {
+public class PlayerMovementTest {
 	
 	//    0 1 2 3 4
 	// 0  _ _ _ _ _

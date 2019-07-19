@@ -1,11 +1,13 @@
 package unsw.dungeon;
 
 import java.util.ArrayList;
-
 import unsw.collisionBehaviour.*;
+import unsw.movementStrategy.MovementStrategy;
 import unsw.playerObserve.Observer;
 import unsw.playerObserve.Subject;
-import java.util.List;
+import unsw.playerState.NormalState;
+import unsw.playerState.PlayerState;
+
 /**
  * The player entity
  * @author Robert Clifton-Everest
@@ -21,7 +23,7 @@ public class Player extends MovingEntity implements Subject {
 	private int treasureCollected;
 	ArrayList<Observer> listObservers = new ArrayList<Observer>();
 	//Placeholder attribute for state pattern implementation
-	private State playerState;
+	private PlayerState playerState;
 
     /**
      * Create a player positioned in square (x,y)
@@ -37,6 +39,7 @@ public class Player extends MovingEntity implements Subject {
         this.treasureCollected = 0;
         this.invincibleTime = 0;
         this.keys = new ArrayList<Integer>();
+        this.playerState = new NormalState();
         // setCollisionBehaviour is implemented in super class MovingEntity
         setCollisionBehaviour(new CollisionWithPlayer());
     }
@@ -103,13 +106,6 @@ public class Player extends MovingEntity implements Subject {
 		return true;
 	}
 	
-	/**
-	 * Placeholder function to update state and notify observers
-	 */
-	public void changeState() {
-		this.playerState.changeState();
-		notifyObservers();
-	}
 
 	/**
 	 * Adds all enemies in the dungeon as an observer of the player
@@ -118,7 +114,7 @@ public class Player extends MovingEntity implements Subject {
 	@Override
 	public void registerObservers() {
 		for (Entity entity : this.dungeon.getEntities()) {
-			if (entity.getClass()==Enemy.class) {
+			if (entity.isEnemy()) {
 				this.listObservers.add((Observer)entity);
 				Enemy enemy = (Enemy)entity;
 				enemy.setPlayerPos(this.getX(), this.getY());
@@ -163,6 +159,19 @@ public class Player extends MovingEntity implements Subject {
 	public boolean canMoveOnto(Dungeon dungeon, Entity character) {
 		// cannot move onto another player ?
 		return false;
+	}
+	
+	public void setPlayerState(PlayerState state) {
+		this.playerState = state;
+	}
+
+
+	public PlayerState getPlayerState() {
+		return playerState;
+	}
+	
+	public MovementStrategy getStrategy() {
+		return this.playerState.enemyStrategy();
 	}
 
 }
