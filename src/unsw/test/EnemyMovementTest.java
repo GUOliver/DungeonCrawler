@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 import unsw.dungeon.*;
+import unsw.playerState.InvincibleState;
 public class EnemyMovementTest {
 	
 	@Test
@@ -123,6 +124,21 @@ public class EnemyMovementTest {
 		c1.moveRight(maze);
 		assertEquals(4,c2.getX());
 		assertEquals(3,c3.getX());
+	}
+	
+	@Test
+	public void testMoveDownInvincible() {
+		Dungeon maze = new Dungeon(15, 15);
+		Player c1 = new Player(maze, 2, 6);
+		Enemy c2 = new Enemy(3,1);
+		maze.addEntity(c1);
+		maze.setPlayer(c1);
+		maze.addEntity(c2);
+		c1.registerObservers();
+		c1.setPlayerState(new InvincibleState());
+		
+		c1.moveRight(maze);
+		assertEquals(0,c2.getY());
 	}
 	
 	
