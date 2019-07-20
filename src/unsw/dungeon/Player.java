@@ -45,7 +45,21 @@ public class Player extends MovingEntity implements Subject {
         // setCollisionBehaviour is implemented in super class MovingEntity
         setCollisionBehaviour(new CollisionWithPlayer());
     }
-
+    
+    /**
+     * mimic the animation UI of dropping the bomb
+     * need change when implementing javaFX
+     */
+    public void dropBomb() {
+    	if (this.getBombNum() > 0) {
+    		int x = this.getX();
+    		int y = this.getY();
+    		Bomb bomb = new Bomb(x, y);
+    		this.addBombNum(-1);
+    		dungeon.addEntity(bomb);
+    		bomb.setBombState(true);
+    	}
+    }
 	
     public int getBombNum() {
 		return bombNum;
