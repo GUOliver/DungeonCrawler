@@ -67,8 +67,6 @@ public class WeaponTest {
 		assertEquals(3, player.getSwordNum());
 	}
 	
-	
-	
 	@Test
 	public void testBomb() {
 		/*

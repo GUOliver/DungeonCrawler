@@ -37,11 +37,11 @@ public class BombTest {
 		c1.registerObservers();
 		
 		c1.moveDown(maze);
-		assertEquals(1,c1.getBombNum());
+		assertEquals(1,c1.getBombs().size());
 		c1.moveDown(maze);
 		List<Entity> box = maze.findEntity(1, 2);
 		assertTrue(box.isEmpty());
-		assertEquals(2,c1.getBombNum());
+		assertEquals(2,c1.getBombs().size());
 	}
 	
 	@Test
@@ -55,9 +55,9 @@ public class BombTest {
 		c1.registerObservers();
 		
 		c1.moveDown(maze);
-		assertEquals(1,c1.getBombNum());
+		assertEquals(1,c1.getBombs().size());
 		c1.dropBomb();
-		assertEquals(0,c1.getBombNum());
+		assertEquals(0,c1.getBombs().size());
 		c1.moveDown(maze);
 		List<Entity> box = maze.findEntity(1, 2);
 		assertTrue(box.get(0) instanceof LitBomb);
