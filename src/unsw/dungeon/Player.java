@@ -7,6 +7,7 @@ import unsw.collisionBehaviour.*;
 import unsw.movementStrategy.MovementStrategy;
 import unsw.playerObserve.Observer;
 import unsw.playerObserve.Subject;
+import unsw.playerState.InvincibleState;
 import unsw.playerState.NormalState;
 import unsw.playerState.PlayerState;
 
@@ -111,7 +112,7 @@ public class Player extends MovingEntity implements Subject {
 	}
 
 	public boolean isInvincible() {
-		if (this.getInvincibleTime() > 0) {
+		if (this.playerState instanceof InvincibleState) {
 			return true;
 		} else {
 			return false;
