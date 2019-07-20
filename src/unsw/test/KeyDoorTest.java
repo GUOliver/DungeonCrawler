@@ -75,4 +75,29 @@ public class KeyDoorTest {
 		assertTrue(c1.getKeys().isEmpty());
 	}
 	
+	@Test
+	public void testKeyDoorGenerate() {
+		Dungeon maze = new Dungeon(10, 10);
+		Player c1 = new Player(maze, 1, 1);
+		Key c2 = new Key(2,1);
+		Door c3 = new Door(3,1);
+		Key c4 = new Key(4,1);
+		Door c5 = new Door(5,1);
+		Key c6 = new Key(6,1);
+		Door c7 = new Door(7,1);
+		maze.addEntity(c1);
+		maze.setPlayer(c1);
+		maze.addEntity(c2);
+		maze.addEntity(c3);
+		maze.addEntity(c4);
+		maze.addEntity(c5);
+		maze.addEntity(c6);
+		maze.addEntity(c7);
+		c1.registerObservers();
+		
+		assertEquals(c2.getKeyID(), c3.getKeyId());
+		assertEquals(c4.getKeyID(), c5.getKeyId());
+		assertEquals(c6.getKeyID(), c7.getKeyId());
+	}
+	
 }
