@@ -21,7 +21,7 @@ public class Player extends MovingEntity implements Subject {
     private int invincibleTime;
     private ArrayList<Integer> keys;
 	private int treasureCollected;
-	ArrayList<Observer> listObservers = new ArrayList<Observer>();
+	private ArrayList<Observer> listObservers;
 	//Placeholder attribute for state pattern implementation
 	private PlayerState playerState;
 
@@ -40,6 +40,7 @@ public class Player extends MovingEntity implements Subject {
         this.invincibleTime = 0;
         this.keys = new ArrayList<Integer>();
         this.playerState = new NormalState();
+        this.listObservers = new ArrayList<Observer>();
         // setCollisionBehaviour is implemented in super class MovingEntity
         setCollisionBehaviour(new CollisionWithPlayer());
     }
@@ -172,6 +173,10 @@ public class Player extends MovingEntity implements Subject {
 	
 	public MovementStrategy getStrategy() {
 		return this.playerState.enemyStrategy();
+	}
+	
+	public ArrayList<Observer> getObserversList(){
+		return this.listObservers;
 	}
 
 }
