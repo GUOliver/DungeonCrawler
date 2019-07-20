@@ -153,7 +153,13 @@ public abstract class MovingEntity extends Entity {
 		
 	}
 	
-	
+	/**
+	 * 
+	 * @param x the given x
+	 * @param y the given y
+	 * @param dungeon the given dungeon
+	 * @return if there is a barrar or not
+	 */
 	public boolean isBarriarInFront(int x, int y, Dungeon dungeon) {
 		
 		int newX = 0, newY = 0;
@@ -201,7 +207,7 @@ public abstract class MovingEntity extends Entity {
 	public boolean isBarriar(int x, int y, Dungeon dungeon) {
 		List<Entity> items = dungeon.findEntity(x, y);
 		for (Entity item : items) {
-			if (item.getType().equals("wall") || item.getType().equals("door")) {
+			if (item.getType().equals("wall") || item.getType().equals("locked door")) {
 				return true;
 			} 
 		}

@@ -8,7 +8,7 @@ public class Door extends Entity {
 	private boolean isOpen;
 	
 	public Door(int x, int y) {
-		super(x, y, "door");
+		super(x, y, "locked door");
 		setDoorId(++counter);
 		// there will be no collision behaviour here 
 		//setCanMoveOnto(false);
@@ -43,6 +43,7 @@ public class Door extends Entity {
 	public void openDoor(Player player) {
 		if (player.findKey(getKeyId())) {
 			setIsOpen(true);
+			setType("unlocked door");
 		} else {
 			return;
 		}
