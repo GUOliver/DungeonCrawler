@@ -15,10 +15,13 @@ public class EnemyMovementTest {
 		Dungeon maze = new Dungeon(15, 15);
 		Player c1 = new Player(maze, 1, 1);
 		Enemy c2 = new Enemy(3,1);
+		Enemy c3 = new Enemy(6,6);
 		maze.addEntity(c1);
 		maze.setPlayer(c1);
 		maze.addEntity(c2);
+		maze.addEntity(c3);
 		c1.registerObservers();
+		assertEquals(2,maze.getEnemyTotal());
 		
 		c1.moveLeft(maze);
 		assertEquals(2,c2.getX());

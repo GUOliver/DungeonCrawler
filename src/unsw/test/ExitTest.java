@@ -17,6 +17,7 @@ public class ExitTest {
 		dungeon.addEntity(exit1);
 		assertTrue(exit1.getX() == 9);
 		assertTrue(exit1.getY() == 9);
+		assertTrue(dungeon.isHasExit());
 		
 		// only one exit can exit
 		Exit exit2 = new Exit(0, 0);
