@@ -39,6 +39,8 @@ public class TreasureTest {
 		// Collected treasure, game over?
 		c1.moveRight(maze);
 		assertEquals(1,c1.getTreasureCollected());
+		List<Entity> box = maze.findEntity(2, 1);
+		assertTrue(!box.contains(c2));
 		assertTrue(maze.getGameState());
 		
 	}
