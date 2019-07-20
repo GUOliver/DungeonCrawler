@@ -112,7 +112,7 @@ public class Player extends MovingEntity {
 	@Override
 	public boolean canMoveOnto(Dungeon dungeon, Entity character) {
 		// cannot move onto another player ?
-		return false;
+		return true;
 	}
 
 }

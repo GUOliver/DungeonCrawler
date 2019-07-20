@@ -62,12 +62,14 @@ public class WeaponTest {
 		assertTrue(entities.contains(player));
 		assertEquals(4, player.getSwordNum());
 		
-		enemy2.moveUp(dungeon);
-		entities = dungeon.findEntity(1,1);
-		System.out.println(entities);
+		player.moveDown(dungeon);
+		entities = dungeon.findEntity(1,2);
+		
+		
+		// enemy was killed, only player is in (1, 2) now
 		assertEquals(1, entities.size());
 		assertTrue(entities.contains(player));
-		assertEquals(4, player.getSwordNum());
+		assertEquals(3, player.getSwordNum());
 	}
 	
 	
