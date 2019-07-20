@@ -10,7 +10,7 @@ public class interactWithSwitch implements CollisionBehaviour{
 		if (boulderEntity instanceof Boulder) {
 			FloorSwitch fs = (FloorSwitch) switchEntity;
 			fs.setSwitchState(true);
-			dungeon.setSwitchTotal(dungeon.getSwitchTotal() - 1);
+			dungeon.addBoulderOnSwitch(1);
 		}
 		
 	}

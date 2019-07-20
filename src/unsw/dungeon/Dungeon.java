@@ -20,12 +20,13 @@ public class Dungeon {
     private List<Entity> entities;
     private Player player;
     private int switchTotal;
-    private int enemyTotal;
-    private int treasureTotal;
+    private int enemyTotal;		 // win condition
+    private int treasureTotal;	 // win condition
     private boolean hasExit;
     private boolean gameState;
-    private boolean reachExit;
-
+    private boolean reachExit;	 // win condition
+    private int boulderOnSwitch; // win condition
+    
     public Dungeon(int width, int height) {
     	// start mode is maze 
     	this.name = "maze";
@@ -39,9 +40,20 @@ public class Dungeon {
         this.hasExit = false;
         this.gameState = false;
         this.setReachExit(false);
+        this.boulderOnSwitch = 0;
     }
     
-    public void checkSetGameComplete() {
+    public void addBoulderOnSwitch(int i) {
+		this.boulderOnSwitch += i;
+		
+	}
+    public int getBoulderOnSwitch() {
+		return boulderOnSwitch;
+		
+	}
+    
+
+	public void checkSetGameComplete() {
     	if (this.switchTotal == 0 && this.enemyTotal == 0 && this.treasureTotal == 0) {
     		if (this.hasExit == true) {
     			if (this.reachExit == true) {
@@ -133,7 +145,7 @@ public class Dungeon {
 			setEnemyTotal(getEnemyTotal() + 1);
 		} 
     	
-    	else if (entity.getType().equals("floor switch")) {
+    	else if (entity.getType().equals("switch")) {
 			setSwitchTotal(getSwitchTotal() + 1);
 		} 
     	

@@ -1,6 +1,6 @@
 package unsw.dungeon;
 
-import unsw.collisionBehaviour.DoorUnlock;
+import unsw.collisionBehaviour.*;
 
 public class Door extends Entity {
 	

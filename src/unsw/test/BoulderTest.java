@@ -54,14 +54,14 @@ public class BoulderTest {
 		
 		FloorSwitch sw = new FloorSwitch(3, 2);
 		maze.addEntity(sw);
+		assertEquals(1, maze.getSwitchTotal());
 		c1.moveRight(maze);
 		c1.moveDown(maze);
-		assertEquals(1,maze.getSwitchTotal());
+		assertEquals(1, maze.getBoulderOnSwitch());
 		assertTrue(boulder.getX() == 3);
 		assertTrue(boulder.getY() == 2);
 		// pushing the boulder into the switch, it is activated now
-		assertTrue(sw.isActivated() == true); 
-		assertTrue(maze.getGameState() == false);
+		assertTrue(sw.isActivated() == true);
 	}
 	
 	@Test
