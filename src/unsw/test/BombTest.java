@@ -56,8 +56,7 @@ public class BombTest {
 		
 		c1.moveDown(maze);
 		assertEquals(1,c1.getBombNum());
-		// TODO place bomb
-		//c1.placeBomb();
+		c1.dropBomb();
 		assertEquals(0,c1.getBombNum());
 		c1.moveDown(maze);
 		List<Entity> box = maze.findEntity(1, 2);
@@ -85,8 +84,7 @@ public class BombTest {
 		c1.registerObservers();
 		
 		c1.moveDown(maze);
-		// TODO place bomb
-		//c1.placeBomb();
+		c1.dropBomb();
 		// Tick 1
 		c1.moveDown(maze);
 		
@@ -140,9 +138,8 @@ public class BombTest {
 		// Player picks up bomb, enemy is 2 spots behind
 		c1.moveLeft(maze);
 		assertEquals(3,c3.getX());
-		// TODO place bomb
 		// Player places bomb, enemy is 1 spots behind
-		//c1.placeBomb();
+		c1.dropBomb();
 		assertEquals(2,c3.getX());
 		
 		// Tick 1, enemy cant move past bomb
@@ -178,9 +175,8 @@ public class BombTest {
 		// Player picks up bomb
 		boolean checkMove = c1.moveLeft(maze);
 		assertTrue(checkMove);
-		// TODO place bomb
 		// Player places bomb
-		//c1.placeBomb();
+		c1.dropBomb();
 		// Can move off the lit bomb
 		checkMove = c1.moveRight(maze);
 		assertTrue(checkMove);
