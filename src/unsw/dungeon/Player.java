@@ -110,6 +110,10 @@ public class Player extends MovingEntity implements Subject {
 	public void addKeys(int keyId) {
 		this.keys.add(keyId);
 	}
+	
+	public void removeKeys(int keyId) {
+		this.keys.remove(keyId);
+	}
 
 	public boolean isInvincible() {
 		if (this.playerState instanceof InvincibleState) {

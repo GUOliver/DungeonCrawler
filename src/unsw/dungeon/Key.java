@@ -3,11 +3,10 @@ import unsw.collisionBehaviour.*;
 public class Key extends Entity{
 	
 	private int keyID;
-	private int counter;
 	
-	public Key(int x, int y) {
+	public Key(Dungeon dungeon, int x, int y) {
 		super(x, y, "key");
-		setKeyID(++counter);
+		setKeyID(dungeon.getNumKeys());
 		setCollisionBehaviour(new PickUpKey());
 	}
 	

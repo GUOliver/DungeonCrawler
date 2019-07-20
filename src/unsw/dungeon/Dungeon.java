@@ -204,11 +204,24 @@ public class Dungeon {
 	public void setReachExit(boolean reachExit) {
 		this.reachExit = reachExit;
 	}
-
 	
-    
-    
-    
+	public int getNumKeys() {
+		int count = 0;
+		for (Entity entity : this.entities) {
+			if (entity.getType()=="key")
+				count++;
+		}
+		return count;
+	}
+	
+	public int getNumDoors() {
+		int count = 0;
+		for (Entity entity : this.entities) {
+			if (entity.getType()=="locked door")
+				count++;
+		}
+		return count;
+	}
     
     
 }
