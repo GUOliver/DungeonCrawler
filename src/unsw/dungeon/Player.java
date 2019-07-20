@@ -12,7 +12,7 @@ import unsw.collisionBehaviour.*;
 public class Player extends MovingEntity {
 
 	private Dungeon dungeon;
-    private int bombNum;
+    private ArrayList<Bomb> bombs;
     private int swordNum;
     private int invincibleTime;
     private ArrayList<Integer> keys;
@@ -27,7 +27,7 @@ public class Player extends MovingEntity {
     public Player(Dungeon dungeon, int x, int y) {
         super(x, y, "player");
         this.dungeon = dungeon;
-        this.bombNum = 0;
+        this.bombs = new ArrayList<Bomb>();
         this.swordNum = 0;
         this.treasureCollected = 0;
         this.invincibleTime = 0;
@@ -35,16 +35,36 @@ public class Player extends MovingEntity {
         // setCollisionBehaviour is implemented in super class MovingEntity
         setCollisionBehaviour(new CollisionWithPlayer());
     }
+    
+    public void dropBomb() {
+    	if (getBombs().size() > 0) {
+    		int x = this.getX();
+    		int y = this.getY();
+    		Bomb bomb = this.bombs.get(this.getBombs().size() - 1);
+    		bomb.setX(x);
+    		bomb.setY(y);
+    		
+    		// add to the map, where the player stands
+    		dungeon.addEntity(bomb);
+    		// remove from player
+    		removeBombFromPlayer();
+    		bomb.setBombState(true);
+    	}
+    }
 
 	
-    public int getBombNum() {
-		return bombNum;
+    public ArrayList<Bomb> getBombs() {
+		return bombs;
 	}
 
-	public void addBombNum(int bombNum) {
-		this.bombNum += bombNum;
+	public void addBomb(Bomb bomb) {
+		this.bombs.add(bomb);
 	}
-
+	
+	public void removeBombFromPlayer() {
+		this.bombs.remove(this.getBombs().size() - 1);
+	}
+	
 	public int getSwordNum() {
 		return swordNum;
 	}
