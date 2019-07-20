@@ -253,6 +253,41 @@ public class EnemyMovementTest {
 		assertTrue(!box.isEmpty());
 	}
 	
+	//  0 1 2 3 4 5
+	// 0  w w _ _
+	// 1  e e w p
+	// 2  w w 
+	// 3
+	// 4	
+	@Test
+	public void testInteractEnemy() {
+		Dungeon maze = new Dungeon(7, 7);
+		Player c1 = new Player(maze, 4, 1);
+		Enemy c2 = new Enemy(2,1);
+		Enemy c3 = new Enemy(1,1);
+		Wall c4 = new Wall(1,0);
+		Wall c5 = new Wall(2,0);
+		Wall c6 = new Wall(3,1);
+		Wall c7 = new Wall(2,2);
+		Wall c8 = new Wall(1,2);
+		maze.addEntity(c1);
+		maze.setPlayer(c1);
+		maze.addEntity(c2);
+		maze.addEntity(c3);
+		maze.addEntity(c4);
+		maze.addEntity(c5);
+		maze.addEntity(c6);
+		maze.addEntity(c7);
+		maze.addEntity(c8);
+		c1.registerObservers();
+		
+		c1.moveRight(maze);
+		// enemies should not be able to collide or swap places
+		assertEquals(5,c1.getX());
+		assertEquals(2,c2.getX());
+		assertEquals(1,c3.getX());
+	}
+	
 	@Test
 	public void testMoveDownInvincible() {
 		Dungeon maze = new Dungeon(15, 15);
