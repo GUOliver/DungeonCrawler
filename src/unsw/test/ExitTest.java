@@ -13,10 +13,10 @@ public class ExitTest {
 	@Test
 	public void testOnlyOneExit() {
 		Dungeon dungeon = new Dungeon(10, 10);
-		Exit exit = new Exit(10, 10);
-		dungeon.addEntity(exit);
-		assertTrue(exit.getX() == 10);
-		assertTrue(exit.getY() == 10);
+		Exit exit1 = new Exit(9, 9);
+		dungeon.addEntity(exit1);
+		assertTrue(exit1.getX() == 9);
+		assertTrue(exit1.getY() == 9);
 		
 		// only one exit can exit
 		Exit exit2 = new Exit(0, 0);
@@ -31,8 +31,8 @@ public class ExitTest {
 	@Test
 	public void testOnlyPlayerCanMoveThrough() {
 		Dungeon dungeon = new Dungeon(10, 10);
-		Exit exit = new Exit(9, 9);
-		dungeon.addEntity(exit);
+		Exit exit1 = new Exit(9, 9);
+		dungeon.addEntity(exit1);
 		Player oliver = new Player(dungeon, 8, 9);
 		dungeon.addEntity(oliver);
 		dungeon.setPlayer(oliver);

@@ -111,6 +111,9 @@ public class Dungeon {
     public void addEntity(Entity entity) {
     	
     	if (entity.getType().equals("exit")) {
+    		if (this.isHasExit() == true ) {
+    			return;
+    		}
 			setHasExit(true);
 		} 
     	
