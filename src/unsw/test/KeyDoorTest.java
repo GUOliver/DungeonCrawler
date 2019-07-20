@@ -13,8 +13,8 @@ public class KeyDoorTest {
 	public void testKeyDoorExist() {
 		Dungeon maze = new Dungeon(5, 5);
 		Player c1 = new Player(maze, 1, 1);
-		Key c2 = new Key(2,1);
-		Door c3 = new Door(3,1);
+		Key c2 = new Key(maze,2,1);
+		Door c3 = new Door(maze,3,1);
 		maze.addEntity(c1);
 		maze.setPlayer(c1);
 		maze.addEntity(c2);
@@ -32,8 +32,8 @@ public class KeyDoorTest {
 	public void testKeyPickup() {
 		Dungeon maze = new Dungeon(5, 5);
 		Player c1 = new Player(maze, 1, 1);
-		Key c2 = new Key(2,1);
-		Door c3 = new Door(3,1);
+		Key c2 = new Key(maze,2,1);
+		Door c3 = new Door(maze,3,1);
 		maze.addEntity(c1);
 		maze.setPlayer(c1);
 		maze.addEntity(c2);
@@ -42,14 +42,15 @@ public class KeyDoorTest {
 		
 		c1.moveRight(maze);
 		assertTrue(!c1.getKeys().isEmpty());
+		assertTrue(c1.findKey(c2.getKeyID()));
 	}
 	
 	@Test
 	public void testKeyUnlock() {
 		Dungeon maze = new Dungeon(5, 5);
 		Player c1 = new Player(maze, 1, 1);
-		Key c2 = new Key(2,1);
-		Door c3 = new Door(3,1);
+		Key c2 = new Key(maze,2,1);
+		Door c3 = new Door(maze,3,1);
 		maze.addEntity(c1);
 		maze.setPlayer(c1);
 		maze.addEntity(c2);
@@ -79,12 +80,12 @@ public class KeyDoorTest {
 	public void testKeyDoorGenerate() {
 		Dungeon maze = new Dungeon(10, 10);
 		Player c1 = new Player(maze, 1, 1);
-		Key c2 = new Key(2,1);
-		Door c3 = new Door(3,1);
-		Key c4 = new Key(4,1);
-		Door c5 = new Door(5,1);
-		Key c6 = new Key(6,1);
-		Door c7 = new Door(7,1);
+		Key c2 = new Key(maze,2,1);
+		Door c3 = new Door(maze,3,1);
+		Key c4 = new Key(maze,4,1);
+		Door c5 = new Door(maze,5,1);
+		Key c6 = new Key(maze,6,1);
+		Door c7 = new Door(maze,7,1);
 		maze.addEntity(c1);
 		maze.setPlayer(c1);
 		maze.addEntity(c2);

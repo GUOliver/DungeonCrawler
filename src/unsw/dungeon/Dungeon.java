@@ -40,6 +40,18 @@ public class Dungeon {
         this.gameState = false;
         this.setReachExit(false);
     }
+    
+    public void checkSetGameComplete() {
+    	if (this.switchTotal == 0 && this.enemyTotal == 0 && this.treasureTotal == 0) {
+    		if (this.hasExit == true) {
+    			if (this.reachExit == true) {
+    				this.gameState = true;
+    			}
+    		} else {
+    			this.gameState = true;
+    		}
+    	}
+    }
 
     /**
      * 
@@ -204,11 +216,24 @@ public class Dungeon {
 	public void setReachExit(boolean reachExit) {
 		this.reachExit = reachExit;
 	}
-
 	
-    
-    
-    
+	public int getNumKeys() {
+		int count = 0;
+		for (Entity entity : this.entities) {
+			if (entity.getType()=="key")
+				count++;
+		}
+		return count;
+	}
+	
+	public int getNumDoors() {
+		int count = 0;
+		for (Entity entity : this.entities) {
+			if (entity.getType()=="locked door")
+				count++;
+		}
+		return count;
+	}
     
     
 }

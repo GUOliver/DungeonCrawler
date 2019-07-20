@@ -119,7 +119,7 @@ public class EnemyMovementTest {
 		Dungeon maze = new Dungeon(7, 7);
 		Player c1 = new Player(maze, 5, 0);
 		Enemy c2 = new Enemy(2,1);
-		Key c3 = new Key(3,1);
+		Key c3 = new Key(maze,3,1);
 		maze.addEntity(c1);
 		maze.setPlayer(c1);
 		maze.addEntity(c2);
@@ -179,7 +179,7 @@ public class EnemyMovementTest {
 		Dungeon maze = new Dungeon(7, 7);
 		Player c1 = new Player(maze, 5, 0);
 		Enemy c2 = new Enemy(2,1);
-		Door c3 = new Door(3,1);
+		Door c3 = new Door(maze,3,1);
 		c3.setIsOpen(true);
 		maze.addEntity(c1);
 		maze.setPlayer(c1);
@@ -199,7 +199,7 @@ public class EnemyMovementTest {
 		Dungeon maze = new Dungeon(7, 7);
 		Player c1 = new Player(maze, 5, 0);
 		Enemy c2 = new Enemy(2,1);
-		Door c3 = new Door(3,1);
+		Door c3 = new Door(maze,3,1);
 		maze.addEntity(c1);
 		maze.setPlayer(c1);
 		maze.addEntity(c2);

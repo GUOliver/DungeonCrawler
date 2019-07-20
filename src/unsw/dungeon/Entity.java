@@ -123,7 +123,6 @@ public abstract class Entity {
 	 * @param mover The Entity moving onto this entity
 	 */
 	public void interact(Dungeon dungeon, Entity character) {
-		
 		behavior.interact(dungeon, character, this);
 	}
 	

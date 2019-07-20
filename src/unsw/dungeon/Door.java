@@ -1,17 +1,16 @@
 package unsw.dungeon;
 
+import unsw.collisionBehaviour.DoorUnlock;
+
 public class Door extends Entity {
 	
 	private int keyId;
-	private int doorId;
-	private static int counter;
 	private boolean isOpen;
 	
-	public Door(int x, int y) {
+	public Door(Dungeon dungeon, int x, int y) {
 		super(x, y, "locked door");
-		setDoorId(++counter);
-		// there will be no collision behaviour here 
-		//setCanMoveOnto(false);
+		setKeyId(dungeon.getNumDoors());
+		setCollisionBehaviour(new DoorUnlock());
 		this.isOpen = false;
 	}
 
@@ -22,15 +21,6 @@ public class Door extends Entity {
 	public void setKeyId(int keyId) {
 		this.keyId = keyId;
 	}
-
-	public int getDoorId() {
-		return doorId;
-	}
-
-	public void setDoorId(int doorId) {
-		this.doorId = doorId;
-	}
-
 	public boolean isOpen() {
 		return isOpen;
 	}
@@ -52,18 +42,16 @@ public class Door extends Entity {
 	public boolean canMoveOnto(Dungeon dungeon, Entity mover) {
 		// nobody can move onto the boulder except when the player
 		// pushing the boulder
-		if (!(mover instanceof Player)) {
-			return false;
-		}
-		
-		
-		// if the door is closed, player can not walk through
-		// if the door is open, player can wall through
-		
-		if (this.isOpen) {
+		if (this.isOpen()) {
 			return true;
-		}
-		else {
+		} else if (mover instanceof Player) {
+			Player player = (Player)mover;
+			if (player.findKey(this.getKeyId())) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
 			return false;
 		}
 	}

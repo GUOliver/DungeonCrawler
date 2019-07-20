@@ -148,9 +148,14 @@ public abstract class MovingEntity extends Entity {
 			// Checks if invincibility ran out
 			if (player.getInvincibleTime()==0 && player.isInvincible()) {
 				player.setPlayerState(new NormalState());
+			} else if (player.getInvincibleTime()>0) {
+				player.setInvincibleTime(player.getInvincibleTime()-1);
 			}
 
 		}
+		
+		// Checks if all goals are complete after player movement
+		dungeon.checkSetGameComplete();
 		
 		return true;
 

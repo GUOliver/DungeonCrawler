@@ -10,7 +10,7 @@ public class getInvincibilityPotion implements CollisionBehaviour{
 		// TODO Auto-generated method stub
 		if (character.isPlayer()) {
 			Player player = (Player) character;
-			player.setInvincibleTime(20);
+			player.setInvincibleTime(21);
 			player.setPlayerState(new InvincibleState());
 			dungeon.removeEntity(potionEntity);
 		}

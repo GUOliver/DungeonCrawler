@@ -59,6 +59,7 @@ public class InvincibilityTest {
 		
 		// Pickup, time = 20
 		c1.moveRight(maze);
+		assertEquals(20,c1.getInvincibleTime());
 		
 		//Time = 19
 		c1.moveDown(maze);
@@ -82,6 +83,8 @@ public class InvincibilityTest {
 		c1.moveDown(maze);
 		c1.moveUp(maze);
 		assertEquals(0,c1.getInvincibleTime());
+		// This turn is when state changes
+		c1.moveUp(maze);
 		assertTrue(c1.getPlayerState() instanceof NormalState);
 	}
 	
