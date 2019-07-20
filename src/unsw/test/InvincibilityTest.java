@@ -92,21 +92,25 @@ public class InvincibilityTest {
 		InvincibilityPotion c2 = new InvincibilityPotion(2,1);
 		Enemy c3 = new Enemy(4,1);
 		Wall c4 = new Wall(6,1);
+		Sword c5 = new Sword(3,1);
 		maze.addEntity(c1);
 		maze.setPlayer(c1);
 		maze.addEntity(c2);
 		maze.addEntity(c3);
 		maze.addEntity(c4);
+		maze.addEntity(c5);
 		c1.registerObservers();
 		
 		//pickup potion, enemy in next cell
 		c1.moveRight(maze);
 		// Chase enemy
 		c1.moveRight(maze);
-		// Chase enemy, enemy at wall
+		// Chase enemy, enemy at wall, now have sword
 		c1.moveRight(maze);
-		// kill enemy
+		assertEquals(5,c1.getSwordNum());
+		// kill enemy, check sword hasn't been used
 		c1.moveRight(maze);
+		assertEquals(5,c1.getSwordNum());
 		
 		// enemy was killed, only player is in (5, 1) now
 		List<Entity> entities = maze.findEntity(5,1);
