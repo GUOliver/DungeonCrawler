@@ -154,6 +154,9 @@ public abstract class MovingEntity extends Entity {
 
 		}
 		
+		// Checks if all goals are complete after player movement
+		dungeon.checkSetGameComplete();
+		
 		return true;
 
 	}

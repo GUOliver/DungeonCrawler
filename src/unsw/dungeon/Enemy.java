@@ -2,6 +2,7 @@ package unsw.dungeon;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import unsw.collisionBehaviour.CollisionWithPlayer;
 import unsw.movementStrategy.MovementStrategy;
 import unsw.movementStrategy.MovingToPlayer;
 import unsw.playerObserve.Observer;
@@ -14,6 +15,8 @@ public class Enemy extends MovingEntity implements Observer {
 	public Enemy(int x, int y) {
 		super(x, y, "enemy");
 		this.howMove = new MovingToPlayer();
+		this.setPlayerPos(x,y);
+		this.setCollisionBehaviour(new CollisionWithPlayer());
 	}
 	
 	/**
@@ -54,8 +57,10 @@ public class Enemy extends MovingEntity implements Observer {
 
 	@Override
 	public boolean canMoveOnto(Dungeon dungeon, Entity character) {
-		// player can move onto enemy
-		return true;
+		if (character instanceof Player)
+			return true;
+		else
+			return false;
 	}
 	
 	@Override

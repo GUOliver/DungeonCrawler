@@ -40,6 +40,18 @@ public class Dungeon {
         this.gameState = false;
         this.setReachExit(false);
     }
+    
+    public void checkSetGameComplete() {
+    	if (this.switchTotal == 0 && this.enemyTotal == 0 && this.treasureTotal == 0) {
+    		if (this.hasExit == true) {
+    			if (this.reachExit == true) {
+    				this.gameState = true;
+    			}
+    		} else {
+    			this.gameState = true;
+    		}
+    	}
+    }
 
     /**
      * 
