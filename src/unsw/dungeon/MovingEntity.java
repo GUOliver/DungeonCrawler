@@ -117,7 +117,7 @@ public abstract class MovingEntity extends Entity {
 
 
 		// call the collision for this colliding with the entities on the tile, unless moving entity is enemy
-		if (this.isPlayer()) {
+		if (this instanceof Player) {
 			
 			Player player = (Player) this;
 			for (Entity entity : items) {
@@ -138,7 +138,7 @@ public abstract class MovingEntity extends Entity {
 			player.notifyObservers();
 			// If the entity moving is player, after player moves make enemies move
 			for (Entity entity : dungeon.getEntities()) {
-				if (entity.isEnemy()) {
+				if (entity instanceof Enemy) {
 					Enemy enemy = (Enemy)entity;
 					enemy.moveEnemy(dungeon);
 				}

@@ -61,12 +61,6 @@ public class BoulderTest {
 		// pushing the boulder into the switch, it is activated now
 		assertTrue(sw.isActivated() == true); 
 		assertTrue(maze.getGameState() == false);
-		
-		// game over
-		Enemy oliver = new Enemy(4, 1);
-		maze.addEntity(oliver);
-		c1.moveRight(maze);
-		assertTrue(maze.getGameState() == true);
 	}
 	
 	@Test
