@@ -2,6 +2,8 @@ package unsw.dungeon;
 
 import java.util.List;
 
+import unsw.playerState.NormalState;
+
 public abstract class MovingEntity extends Entity {
 
 	private Direction direction;
@@ -142,6 +144,10 @@ public abstract class MovingEntity extends Entity {
 					Enemy enemy = (Enemy)entity;
 					enemy.moveEnemy(dungeon);
 				}
+			}
+			// Checks if invincibility ran out
+			if (player.getInvincibleTime()==0 && player.isInvincible()) {
+				player.setPlayerState(new NormalState());
 			}
 
 		}
