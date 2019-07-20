@@ -1,6 +1,7 @@
 package unsw.dungeon;
 
 import java.util.List;
+
 public abstract class MovingEntity extends Entity {
 
 	private Direction direction;
@@ -96,23 +97,44 @@ public abstract class MovingEntity extends Entity {
 			//if the player can not move onto this item 
 			//return false
 			if (! item.canMoveOnto(dungeon, this)) {
-				System.out.println("Cannot move to " + item.getType());
+				//System.out.println("Cannot move to " + item.getType());
 				return false;
 			}
-
-
-
+			
+			// when the boulder in the list, to be careful if there is a wall in front
+			// a little hard coding here, when a special case like this " p->b->w"
+			if (item instanceof Boulder) {
+				if (isBarriarInFront(x, y,dungeon)) {
+					return false;
+				}
+			}	
 		}
+		
+		
 		// move ! And use x() and y() integerProperty to make it consistent
 		x().set(x);
 		y().set(y);
 
+
 		// call the collision for this colliding with the entities on the tile, unless moving entity is enemy
 		if (this.isPlayer()) {
+			
 			Player player = (Player) this;
 			for (Entity entity : items) {
+				// call the collision for this colliding with the entities on the tile
 				entity.interact(dungeon, player);
+				
+				// if the boulder pushed into switch, two interaction occurred here, so make 
+				// the interaction betweem boulder and switch mannualy 
+				if (entity instanceof Boulder) {
+					FloorSwitch sw = (FloorSwitch) dungeon.findSpecificEntity(entity.getX(), entity.getY(), "switch");
+					// if not a switch,  do nothing
+					if (sw != null) {
+						sw.interact(dungeon, entity);
+					}
+				}
 			}
+			
 			player.notifyObservers();
 			// If the entity moving is player, after player moves make enemies move
 			for (Entity entity : dungeon.getEntities()) {
@@ -121,26 +143,80 @@ public abstract class MovingEntity extends Entity {
 					enemy.moveEnemy(dungeon);
 				}
 			}
+
 		}
+		
 		return true;
 
 	}
 
 
-
-	/* abandon this block of codes cuz it obeys OOP principle, hardcode
-	public boolean isValidMovement(Dungeon dungeon, Entity other) {
-		if (other.getType().equals("boulder")) {
-			Boulder blouder = (Boulder) other;
-			return false;
-		} else if (other.getType().equals("wall")) {
-			Wall wall = (Wall) other;
-			return wall.getCanMoveOnto();
-		} 
-		return true;
-
-	}
+	/**
+	 * 
+	 * @param x the given x
+	 * @param y the given y
+	 * @param dungeon the given dungeon
+	 * @return if there is a barrar or not
 	 */
-
-
+	public boolean isBarriarInFront(int x, int y, Dungeon dungeon) {
+		
+		int newX = 0, newY = 0;
+		
+		switch (this.getDirection()){
+			case Up:
+				newX = x;
+				newY = y - 1;
+				
+				if (isBarriar(newX, newY, dungeon)) {
+					return true;
+				}
+				return false;
+				
+			case Down:
+				newX = x;
+				newY = y + 1;
+				if (isBarriar(newX, newY, dungeon)) {
+					return true;
+				}
+				return false;
+				
+			case Left:
+				newX = x - 1;
+				newY = y;
+				if (isBarriar(newX, newY, dungeon)) {
+					return true;
+				}
+				return false;
+			case Right:
+				newX = x + 1;
+				newY = y;
+				if (isBarriar(newX, newY, dungeon)) {
+					return true;
+				}
+				return false;
+			case Resting:
+				break;
+			default:
+				break;
+		}
+		return false;
+	}
+	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param dungeon
+	 * @return
+	 */
+	public boolean isBarriar(int x, int y, Dungeon dungeon) {
+		List<Entity> items = dungeon.findEntity(x, y);
+		for (Entity item : items) {
+			if (item.getType().equals("wall") || item.getType().equals("locked door")) {
+				return true;
+			} 
+		}
+		return false;
+		
+	}
 }

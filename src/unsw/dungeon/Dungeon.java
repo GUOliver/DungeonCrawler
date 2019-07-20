@@ -31,7 +31,7 @@ public class Dungeon {
     	this.name = "maze";
         this.width = width;
         this.height = height;
-        this.entities = new ArrayList<>();
+        this.entities = new ArrayList<Entity>();
         this.player = null;
         this.switchTotal = 0;
         this.enemyTotal = 0;
@@ -58,6 +58,23 @@ public class Dungeon {
 		}
 		return items;
 	}
+    
+    /**
+     * 
+     * @param x the x coordinnate
+     * @param y the y coordinnate
+     * @param type the given type of the entity
+     * @return the item 
+     */
+    public Entity findSpecificEntity(int x, int y, String type) {
+    	List<Entity> items = findEntity(x, y);
+    	for (Entity item : items) {
+    		if (item.getType().equals(type)) {
+    			return item;
+    		}
+    	}
+    	return null;
+    }
     
     public List<String> findEntityType(int x, int y) {
 		List<String> entityTypes = new ArrayList<String>();
@@ -94,6 +111,9 @@ public class Dungeon {
     public void addEntity(Entity entity) {
     	
     	if (entity.getType().equals("exit")) {
+    		if (this.isHasExit() == true ) {
+    			return;
+    		}
 			setHasExit(true);
 		} 
     	
