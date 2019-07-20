@@ -1,6 +1,8 @@
 package unsw.dungeon;
 
+
 import java.util.ArrayList;
+
 import unsw.collisionBehaviour.*;
 import unsw.movementStrategy.MovementStrategy;
 import unsw.playerObserve.Observer;
@@ -158,7 +160,7 @@ public class Player extends MovingEntity implements Subject {
 	@Override
 	public boolean canMoveOnto(Dungeon dungeon, Entity character) {
 		// cannot move onto another player ?
-		return false;
+		return true;
 	}
 	
 	public void setPlayerState(PlayerState state) {
