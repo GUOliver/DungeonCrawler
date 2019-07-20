@@ -5,7 +5,7 @@ public class FloorSwitch extends Entity{
 	private boolean switchState;
 	
 	public FloorSwitch(int x, int y) {
-		super(x, y, "floor switch");
+		super(x, y, "switch");
 		this.switchState = false;
 		setCollisionBehaviour(new interactWithSwitch());
 	}

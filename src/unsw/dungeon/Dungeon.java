@@ -59,6 +59,23 @@ public class Dungeon {
 		return items;
 	}
     
+    /**
+     * 
+     * @param x the x coordinnate
+     * @param y the y coordinnate
+     * @param type the given type of the entity
+     * @return the item 
+     */
+    public Entity findSpecificEntity(int x, int y, String type) {
+    	List<Entity> items = findEntity(x, y);
+    	for (Entity item : items) {
+    		if (item.getType().equals(type)) {
+    			return item;
+    		}
+    	}
+    	return null;
+    }
+    
     public List<String> findEntityType(int x, int y) {
 		List<String> entityTypes = new ArrayList<String>();
 		List<Entity> entities = findEntity(x, y);
