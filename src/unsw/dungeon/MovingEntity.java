@@ -115,7 +115,7 @@ public abstract class MovingEntity extends Entity {
 			//if the player can not move onto this item 
 			//return false
 			if (! item.canMoveOnto(dungeon, this)) {
-				System.out.println("Cannot move to " + item.getType());
+				//System.out.println("Cannot move to " + item.getType());
 				return false;
 			}
 			
