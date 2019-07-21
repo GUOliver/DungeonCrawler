@@ -13,7 +13,9 @@ public class Enemy extends MovingEntity implements Observer {
 	private IntegerProperty playerX,playerY;
 	
 	/**
-	 *  
+	 *  Constructor for an enemy entity, which keeps track of player position
+	 *  Player position is updated with Observer pattern, movement of enemy is defined
+	 *  with strategy pattern
 	 * @param x the x coord
 	 * @param y the y coord
 	 */
@@ -34,6 +36,7 @@ public class Enemy extends MovingEntity implements Observer {
 	
 	
 	/**
+	 * Moves the enemy according to the movement strategy
 	 * @param dungeon
 	 */
 	public void moveEnemy(Dungeon dungeon) {
@@ -41,7 +44,7 @@ public class Enemy extends MovingEntity implements Observer {
 	}
 	
 	/**
-	 * 
+	 * Sets the player position
 	 * @param x x coord
 	 * @param y y coord
 	 */
@@ -50,6 +53,9 @@ public class Enemy extends MovingEntity implements Observer {
 		this.playerY = new SimpleIntegerProperty(y);
 	}
 
+	/**
+	 * Updates the player position for the enemy, and the movement strategy to use
+	 */
 	@Override
 	public void update(Subject obj) {
 		Player person = (Player)obj;
@@ -57,14 +63,23 @@ public class Enemy extends MovingEntity implements Observer {
 		this.howMove = person.getStrategy();
 	}
 
+	/**
+	 * @return integer value from IntegerProperty
+	 */
 	public int getPlayerX() {
 		return playerX.get();
 	}
 
+	/**
+	 * @return integer value from IntegerProperty
+	 */
 	public int getPlayerY() {
 		return playerY.get();
 	}
 
+	/**
+	 * Only players can move onto enemies, enemies cannot stack onto other enemies
+	 */
 	@Override
 	public boolean canMoveOnto(Dungeon dungeon, Entity character) {
 		if (character instanceof Player)
@@ -73,6 +88,9 @@ public class Enemy extends MovingEntity implements Observer {
 			return false;
 	}
 	
+	/**
+	 * Enemy returns true always
+	 */
 	@Override
 	public boolean isEnemy() {
 		return true;

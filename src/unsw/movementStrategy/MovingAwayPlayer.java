@@ -6,6 +6,10 @@ import unsw.dungeon.MovingEntity;
 
 public class MovingAwayPlayer implements MovementStrategy {
 
+	/**
+	 * Defining behaviour for an enemy moving away from player position
+	 * Extra entities can be added, does not assume entity is enemy
+	 */
 	@Override
 	public void moveDirection(Dungeon dungeon, MovingEntity entity) {
 		if (entity.isEnemy()) {

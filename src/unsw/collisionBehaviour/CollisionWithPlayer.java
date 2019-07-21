@@ -14,13 +14,16 @@ public class CollisionWithPlayer implements CollisionBehaviour{
 			Player player = (Player) character;
 
 			if (e2 instanceof Enemy) {
+				Enemy enemy = (Enemy)e2;
 				if (player.isInvincible()) {
 					dungeon.removeEntity(e2);
 					dungeon.setEnemyTotal(dungeon.getEnemyTotal() - 1);
+					player.removeObserver(enemy);
 				} else if (player.getSwordNum() > 0) {
 					dungeon.removeEntity(e2);
 					player.addSwordNum(-1);
 					dungeon.setEnemyTotal(dungeon.getEnemyTotal() - 1);
+					player.removeObserver(enemy);
 				} else {
 					dungeon.setGameState(true);
 				}

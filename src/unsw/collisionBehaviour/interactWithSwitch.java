@@ -6,7 +6,7 @@ import unsw.dungeon.*;
 public class interactWithSwitch implements CollisionBehaviour{
 
 	/**
-	 * When boulder is moved onto a switch, sets switch state and adds 
+	 * When boulder is moved onto a switch, sets switch state and adds to completion
 	 */
 	@Override
 	public void interact(Dungeon dungeon, Entity boulderEntity, Entity switchEntity) {

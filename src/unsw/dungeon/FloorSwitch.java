@@ -5,7 +5,7 @@ public class FloorSwitch extends Entity{
 	private boolean switchState;
 	
 	/**
-	 * 
+	 * Constructor for a boulder activated floor switch
 	 * @param x coord
 	 * @param y coord
 	 */
@@ -24,12 +24,19 @@ public class FloorSwitch extends Entity{
 	}
 	
 
+	/**
+	 * Checks if switch is already activated
+	 * @return boolean true or false
+	 */
 	public boolean isActivated() {
 		return switchState;
 	}
 	
-	// true means activated
-	// false means not-activated
+	
+	/**
+	 * Sets the state of the switch
+	 * @param state boolean true or false
+	 */
 	public void setSwitchState(boolean state) {
 		this.switchState = state;
 	}

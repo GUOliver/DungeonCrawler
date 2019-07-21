@@ -25,7 +25,6 @@ public class Player extends MovingEntity implements Subject {
     private ArrayList<Integer> keys;
 	private int treasureCollected;
 	private ArrayList<Observer> listObservers;
-	//Placeholder attribute for state pattern implementation
 	private PlayerState playerState;
 
     /**
@@ -44,7 +43,6 @@ public class Player extends MovingEntity implements Subject {
         this.keys = new ArrayList<Integer>();
         this.playerState = new NormalState();
         this.listObservers = new ArrayList<Observer>();
-        // setCollisionBehaviour is implemented in super class MovingEntity
         setCollisionBehaviour(new CollisionWithPlayer());
     }
     
@@ -66,7 +64,7 @@ public class Player extends MovingEntity implements Subject {
     }
 
 	/**
-	 * 
+	 * List of bombs collected
 	 * @return Bombs
 	 */
     public ArrayList<Bomb> getBombs() {
@@ -89,7 +87,7 @@ public class Player extends MovingEntity implements Subject {
 	}
 	
 	/**
-	 * 
+	 * Number of sword uses left
 	 * @return swordNum
 	 */
 	public int getSwordNum() {

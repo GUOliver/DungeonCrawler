@@ -3,19 +3,17 @@ package unsw.dungeon;
 public class Wall extends Entity {
 	
 	/**
-	 * 
+	 * Wall constructor
 	 * @param x x coord
 	 * @param y y coord
 	 */
     public Wall(int x, int y) {
         super(x, y, "wall");
-        // nothing can move onto the wall
-        //setCollisionBehaviour(none);
         
     }
 
 	/**
-	 * checking if it can be moved onto or not
+	 * No entity can move past a wall
 	 */
     
     @Override
