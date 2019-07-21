@@ -37,7 +37,6 @@ public class WeaponTest {
 		dungeon.addEntity(enemy1);
 		Enemy enemy2 = new Enemy(1, 2);
 		dungeon.addEntity(enemy2);
-		
 		enemy1.moveUp(dungeon);
 		enemy1.moveDown(dungeon);
 		
@@ -95,6 +94,7 @@ public class WeaponTest {
 		dungeon.addEntity(boulder1);
 		dungeon.addEntity(boulder2);
 		dungeon.addEntity(wall);
+		player.registerObservers();
 		
 		// get the unlit bomb
 		player.moveUp(dungeon);
@@ -109,7 +109,6 @@ public class WeaponTest {
 		
 		List<Entity> entities = dungeon.findEntity(2,2);
 		
-		// all destroyed except enemy1
 		assertEquals(0, entities.size());
 		entities = dungeon.findEntity(2, 3);
 		assertEquals(0, entities.size());
