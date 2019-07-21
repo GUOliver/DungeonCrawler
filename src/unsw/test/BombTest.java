@@ -134,9 +134,7 @@ public class BombTest {
 		// Can move off the lit bomb
 		checkMove = c1.moveRight(maze);
 		assertTrue(checkMove);
-		// Can NOT move onto the lit bomb
-		//checkMove = c1.moveLeft(maze);
-		//assertTrue(!checkMove);
+		
 	}
 	
 }

@@ -3,11 +3,11 @@ import unsw.dungeon.*;
 
 public interface CollisionBehaviour {
 	/**
-	 * wheh an Entity collide with another entity
-	 * @param dungeon
-	 * @param e1
-	 * @param e2
+	 * wheh an Entity collides with another entity
+	 * @param dungeon the dungeon
+	 * @param movingEntity the moving entity
+	 * @param entity the item
 	 */
-	public void interact(Dungeon dungeon, Entity e1, Entity e2);
+	public void interact(Dungeon dungeon, Entity movingEntity, Entity entity);
 	
 }

@@ -31,8 +31,8 @@ public class Player extends MovingEntity implements Subject {
     /**
      * Create a player positioned in square (x,y)
      * @param dungeon
-     * @param x
-     * @param y
+     * @param x the x coord
+     * @param y the y coord
      */
     public Player(Dungeon dungeon, int x, int y) {
         super(x, y, "player");
@@ -65,63 +65,117 @@ public class Player extends MovingEntity implements Subject {
     	}
     }
 
-	
+	/**
+	 * 
+	 * @return Bombs
+	 */
     public ArrayList<Bomb> getBombs() {
 		return bombs;
 	}
-
+    
+    /**
+     * add the bomb to player
+     * @param bomb 
+     */
 	public void addBomb(Bomb bomb) {
 		this.bombs.add(bomb);
 	}
 	
+	/**
+	 * remove bomb from player
+	 */
 	public void removeBombFromPlayer() {
 		this.bombs.remove(this.getBombs().size() - 1);
 	}
 	
+	/**
+	 * 
+	 * @return swordNum
+	 */
 	public int getSwordNum() {
 		return swordNum;
 	}
-
+	
+	/**
+	 * addSwordNum
+	 * @param count
+	 */
 	public void addSwordNum(int count) {
 		this.swordNum += count;
 	}
-
+	
+	/**
+	 * getInvincibleTime
+	 * @return invincibleTime
+	 */
 	public int getInvincibleTime() {
 		return invincibleTime;
 	}
-
+	
+	/**
+	 * setInvincibleTime
+	 * @param invincibleTime
+	 */
 	public void setInvincibleTime(int invincibleTime) {
 		this.invincibleTime = invincibleTime;
 	}
 	
-	
+	/**
+	 * get Treasure Collected
+	 * @return treasureCollected
+	 */
 	public int getTreasureCollected() {
 		return treasureCollected;
 	}
-
+	
+	/**
+	 * set Treasure Collected
+	 * @param treasure Collected
+	 */
 	public void setTreasureCollected(int treasureCollected) {
 		this.treasureCollected = treasureCollected;
 	}
-
+	
+	/**
+	 * getKeys
+	 * @return keys list
+	 */
 	public ArrayList<Integer> getKeys() {
 		return keys;
 	}
 	
+	/**
+	 * find Key or not
+	 * @param keyId
+	 * @return true or false
+	 */
 	public boolean findKey(int keyId) {
 		if (keys.contains(keyId)) {
 			return true;
 		} 
 		return false;
 	}
-
+	
+	/**
+	 * add Keys to the key list
+	 * @param keyId id of key
+	 */
 	public void addKeys(int keyId) {
 		this.keys.add(keyId);
 	}
 	
+	/**
+	 * remove Key from list
+	 * @param keyId id of key
+	 */
 	public void removeKeys(int keyId) {
 		this.keys.remove(keyId);
 	}
 
+	/**
+	 * checking if is Invincible
+	 * @return true or false
+	 */
 	public boolean isInvincible() {
 		if (this.playerState instanceof InvincibleState) {
 			return true;
@@ -173,36 +227,62 @@ public class Player extends MovingEntity implements Subject {
 		}
 	}
 
-
+	/**
+	 * get Dungeon
+	 * @return dungeon
+	 */
 	public Dungeon getDungeon() {
 		return dungeon;
 	}
 
-
+	
+	/**
+	 * set Dungeon
+	 * @param dungeon the dungeon
+	 */
 	public void setDungeon(Dungeon dungeon) {
 		this.dungeon = dungeon;
 	}
 
 
+
+	/**
+	 * checking if it can be moved onto or not
+	 */
 	@Override
 	public boolean canMoveOnto(Dungeon dungeon, Entity character) {
 		// cannot move onto another player ?
 		return true;
 	}
-	
+		
+	/**
+	 * set Player State
+	 * @param state player state
+	 */
 	public void setPlayerState(PlayerState state) {
 		this.playerState = state;
 	}
 
-
+	/**
+	 * get Player State
+	 * @return player State
+	 */
 	public PlayerState getPlayerState() {
 		return playerState;
 	}
 	
+	/**
+	 * get Strategy
+	 * @return movement strategy
+	 */
 	public MovementStrategy getStrategy() {
 		return this.playerState.enemyStrategy();
 	}
 	
+	/**
+	 * get Observers List
+	 * @return observers List
+	 */
 	public ArrayList<Observer> getObserversList(){
 		return this.listObservers;
 	}

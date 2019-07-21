@@ -5,18 +5,29 @@ import java.util.ArrayList;
 public class LitBomb extends Entity{
 
 	private int tick;
-
+	
+	/* 
+	 * @param x coord
+	 * @param y coord
+	 */
 	public LitBomb(int x, int y) {
 		super(x, y, "lit bomb 1");
 		
 		setTick(3);
 	}
 	
+	/**
+	 * checking if bomb can be moved onto or not
+	 */
+	@Override
 	public boolean canMoveOnto(Dungeon dungeon, Entity mover) {
 		return true;
 	}
 	
-	
+	/**
+	 * mimic the state of bomb before explosion
+	 * @param dungeon
+	 */
 	public void tickTock(Dungeon dungeon) {
 		setTick(getTick()-1);
 		
@@ -37,7 +48,10 @@ public class LitBomb extends Entity{
 	}
 	
 	
-	
+	/**
+	 * explode
+	 * @param dungeon the dungeon
+	 */
 	private void explode(Dungeon dungeon) {
 		// destroy all the entity which 1 grid near the bomb
 		ArrayList<Entity> toBeRm = new ArrayList<Entity>();
@@ -65,11 +79,19 @@ public class LitBomb extends Entity{
 		
 	}
 
-
+	
+	/**
+	 * set the tick num
+	 * @param num 
+	 */
 	public void setTick(int num) {
 		this.tick = num;
 	}
 	
+	/**
+	 * get the ticknum
+	 * @return
+	 */
 	public int getTick() {
 		return tick;
 	}

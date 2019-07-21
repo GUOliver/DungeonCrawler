@@ -22,8 +22,8 @@ public abstract class Entity {
  
     /**
      * Create an entity positioned in square (x,y)
-     * @param x
-     * @param y
+     * @param x x coord
+     * @param y y coord
      */
     public Entity(int x, int y, String type) {
         this.x = new SimpleIntegerProperty(x);
@@ -33,10 +33,10 @@ public abstract class Entity {
     }
     
     /**
-     * check the character can moveonto th entity or not
-     * @param dungeon
-     * @param character
-     * @return true or false
+     * check the character can moveonto the entity or not
+     * @param dungeon the dungeon
+     * @param character the entity
+     * @return true or false 
      */
     public abstract boolean canMoveOnto(Dungeon dungeon, Entity character);
    
@@ -105,13 +105,17 @@ public abstract class Entity {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * get the collision behaviour
+	 * @return the collision behaviour
 	 */
 	public CollisionBehaviour getCollisionBehaviour() {
 		return behavior;
 	}
 	
+	/**
+	 * set the collision behaviour
+	 * @param behavior the collision behaviour
+	 */
 	public void setCollisionBehaviour(CollisionBehaviour behavior) {
 		this.behavior = behavior;
 	}
@@ -126,10 +130,18 @@ public abstract class Entity {
 		behavior.interact(dungeon, character, this);
 	}
 	
+	/**
+	 * checking if the entity is player or not
+	 * @return true or false
+	 */
 	public boolean isPlayer() {
 		return false;
 	}
-
+	
+	/**
+	 * return if the entity is enemy or not
+	 * @return true or false
+	 */
 	public boolean isEnemy() {
 		return false;
 	}

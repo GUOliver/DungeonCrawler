@@ -32,6 +32,11 @@ public abstract class MovingEntity extends Entity {
 
 	// put movement function in this class so that 
 	// both enemy and player can use the method in the class
+	/**
+	 * moveUp
+	 * @param dungeon
+	 * @return true or false
+	 */
 	public boolean moveUp(Dungeon dungeon) {
 		setDirection(Direction.Up);
 		if (getY() > 0) {
@@ -45,7 +50,12 @@ public abstract class MovingEntity extends Entity {
 
 		return false;
 	}
-
+	
+	/**
+	 * moveDown
+	 * @param dungeon
+	 * @return true or false
+	 */
 	public boolean moveDown(Dungeon dungeon) {
 		setDirection(Direction.Down);
 		if (getY() < dungeon.getHeight() - 1) {
@@ -58,7 +68,12 @@ public abstract class MovingEntity extends Entity {
 		// y().set(getY() + 1);
 		return false;
 	}
-
+	
+	/**
+	 * moveLeft
+	 * @param dungeon
+	 * @return true or false
+	 */
 	public boolean moveLeft(Dungeon dungeon) {
 		setDirection(Direction.Left);
 		if (getX() > 0) {
@@ -71,7 +86,12 @@ public abstract class MovingEntity extends Entity {
 		//x().set(getX() - 1);
 		return false;
 	}
-
+	
+	/**
+	 * move Right
+	 * @param dungeon
+	 * @return trueor false
+	 */
 	public boolean moveRight(Dungeon dungeon) {
 		setDirection(Direction.Right);
 		if (getX() < dungeon.getWidth() - 1) {
@@ -87,7 +107,13 @@ public abstract class MovingEntity extends Entity {
 
 
 
-
+	/**
+	 * checking if the entity can move to that place or not
+	 * @param dungeon the dungeon
+	 * @param x coord
+	 * @param y coord
+	 * @return true or false
+	 */ 
 	public boolean moveTo(Dungeon dungeon, int x, int y) {
 		// checking if it can be move to this place or not
 
@@ -215,10 +241,10 @@ public abstract class MovingEntity extends Entity {
 	
 	/**
 	 * 
-	 * @param x
-	 * @param y
+	 * @param x coord
+	 * @param y coord
 	 * @param dungeon
-	 * @return
+	 * @return if there is barriar or not
 	 */
 	public boolean isBarriar(int x, int y, Dungeon dungeon) {
 		List<Entity> items = dungeon.findEntity(x, y);

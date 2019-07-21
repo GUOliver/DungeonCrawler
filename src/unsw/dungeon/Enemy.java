@@ -12,6 +12,11 @@ public class Enemy extends MovingEntity implements Observer {
 	private MovementStrategy howMove;
 	private IntegerProperty playerX,playerY;
 	
+	/**
+	 *  
+	 * @param x the x coord
+	 * @param y the y coord
+	 */
 	public Enemy(int x, int y) {
 		super(x, y, "enemy");
 		this.howMove = new MovingToPlayer();
@@ -20,7 +25,7 @@ public class Enemy extends MovingEntity implements Observer {
 	}
 	
 	/**
-	 * 
+	 * get the strategy
 	 * @return the movement strategy
 	 */
 	public MovementStrategy getMovementStrategy() {
@@ -35,6 +40,11 @@ public class Enemy extends MovingEntity implements Observer {
 		howMove.moveDirection(dungeon, this);
 	}
 	
+	/**
+	 * 
+	 * @param x x coord
+	 * @param y y coord
+	 */
 	public void setPlayerPos(int x, int y) {
 		this.playerX = new SimpleIntegerProperty(x);
 		this.playerY = new SimpleIntegerProperty(y);
