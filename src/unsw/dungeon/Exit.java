@@ -3,7 +3,7 @@ import unsw.collisionBehaviour.*;
 public class Exit extends Entity{
 	
 	/**
-	 * 
+	 * Constructor for an exit
 	 * @param x x coord
 	 * @param y y coord
 	 */
@@ -15,7 +15,7 @@ public class Exit extends Entity{
 	
 	
 	/**
-	 * checking if exit can be moved onto or not
+	 * Only players can move onto and interact with the exit
 	 */
 	@Override
 	public boolean canMoveOnto(Dungeon dungeon, Entity mover) {

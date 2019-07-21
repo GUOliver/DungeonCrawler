@@ -4,7 +4,7 @@ import unsw.collisionBehaviour.*;
 public class InvincibilityPotion extends Entity{
 	
 	/**
-	 * 
+	 * Constructor for invincibility potion
 	 * @param x coord
 	 * @param y coord
 	 */
@@ -14,7 +14,7 @@ public class InvincibilityPotion extends Entity{
 		setCollisionBehaviour(new getInvincibilityPotion());
 	}
 	/**
-	 * checking if potion can be moved onto or not
+	 * Any moving entity can move onto same position as potion
 	 */
 	@Override
 	public boolean canMoveOnto(Dungeon dungeon, Entity mover) {

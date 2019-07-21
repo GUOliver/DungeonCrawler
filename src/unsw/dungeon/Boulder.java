@@ -4,12 +4,11 @@ public class Boulder extends Entity{
 	
 	/**
 	 * 
-	 * @param x x coord
-	 * @param y	y coord
+	 * @param x x coordinate
+	 * @param y	y coordinate
 	 */
 	public Boulder(int x, int y) {
 		super(x, y, "boulder");
-		// TODO Auto-generated constructor stub
 		setCollisionBehaviour(new MovingBoulder());
 	}
 	

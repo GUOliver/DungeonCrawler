@@ -6,6 +6,9 @@ import unsw.dungeon.*;
 
 public class MovingBoulder implements CollisionBehaviour {
 
+	/**
+	 * Moves boulder if player, but ensure boulder can move to where its directed to
+	 */
 	@Override
 	public void interact(Dungeon dungeon, Entity character, Entity boulderEntity) {
 		// if not a player, no collision happens

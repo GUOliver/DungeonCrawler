@@ -7,7 +7,8 @@ import unsw.dungeon.MovingEntity;
 public class MovingToPlayer implements MovementStrategy{
 	
 	/**
-	 * Does not assume that what is moving to player is entity to allow future additions
+	 * Defining behaviour for an enemy moving away from player position
+	 * Extra entities can be added, does not assume entity is enemy
 	 */
 	@Override
 	public void moveDirection(Dungeon dungeon, MovingEntity entity) {

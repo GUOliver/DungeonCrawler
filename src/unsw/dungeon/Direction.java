@@ -1,8 +1,7 @@
 package unsw.dungeon;
 
 /**
- * 
- * @author chengyuanguo
+ * Enumiration of directions
  *
  */
 public enum Direction {

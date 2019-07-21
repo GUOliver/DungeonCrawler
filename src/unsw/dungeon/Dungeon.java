@@ -28,9 +28,10 @@ public class Dungeon {
     private int boulderOnSwitch; // win condition
     
     /**
-     * 
+     * Constructor for dungeon, takes in width and height and has attributes for win conditions and
+     * list of all entities in the dungeon
      * @param width the width of the dungeon
-     * @param height the hight of the dungeon
+     * @param height the height of the dungeon
      */
     public Dungeon(int width, int height) {
     	// start mode is maze 

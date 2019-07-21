@@ -8,19 +8,19 @@ import java.util.ArrayList;
 import unsw.collisionBehaviour.*;
 public class Bomb extends Entity{
 
-	//private boolean isLitten;
-	//private boolean isExploded;
-	//private Timer timer;
-	
-
+	/**private boolean isLitten;
+	*private boolean isExploded;
+	*private Timer timer;
+	*/
 	private boolean bombState;
 	private int tick;
 	private boolean isExploded;
+	
 	/**
-	 * 
-	 * @param x x coordinate
-	 * @param y y coordinate
-	 */ 
+	 * Constructor for a bomb, starts off unlit, is lit when placed by player
+	 * @param x X position of bomb
+	 * @param y Y position of bomb
+	 */
 	public Bomb(int x, int y) {
 	
 		super(x, y, "unlit bomb");
@@ -76,11 +76,10 @@ public class Bomb extends Entity{
 	
 	
 	/**
-	 * explode and destroy things around
+	 * explode and destroy things to the top, left, right and bottom of the bomb position
 	 * @param dungeon the dungeon
 	 */
 	private void explode(Dungeon dungeon) {
-		// destroy all the entity which 1 grid near the bomb
 		setExploded(true);
 		ArrayList<Entity> toBeRm = new ArrayList<Entity>();
 		toBeRm.addAll(dungeon.findEntity(getX() + 1, getY()));
@@ -95,7 +94,7 @@ public class Bomb extends Entity{
 				if (((Player) item).getInvincibleTime() > 0) {
 					return;
 				}
-				// else, normol player is dead, good game (game over)
+				// else, normal player is dead, good game (game over)
 				dungeon.removeEntity(item);
 				dungeon.setGameState(true);
 			}

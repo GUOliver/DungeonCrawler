@@ -8,7 +8,7 @@ public class Door extends Entity {
 	private boolean isOpen;
 	
 	/**
-	 * 
+	 * This class is a locked door, which requires a key of matching ID
 	 * @param dungeon the dungeon
 	 * @param x the x coord
 	 * @param y the y coord

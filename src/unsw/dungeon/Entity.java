@@ -59,14 +59,14 @@ public abstract class Entity {
     
     /**
      * 
-     * @return the y
+     * @return integer value from IntegerProperty
      */
     public int getY() {
         return y().get();
     }
     
     /**
-	 * @param y 
+	 * @param y sets the Y position
 	 */
 	public void setY(int y) {
 		y().set(y);
@@ -74,7 +74,7 @@ public abstract class Entity {
     
     /**
      * 
-     * @return the x
+     * @return integer value from IntegerProperty
      */
     public int getX() {
         return x().get();
@@ -82,7 +82,7 @@ public abstract class Entity {
     
 
 	/**
-	 * @param x the x to set
+	 * @param x sets the X position
 	 */
 	public void setX(int x) {
 		x().set(x);
@@ -90,15 +90,15 @@ public abstract class Entity {
 	
 	/**
 	 * 
-	 * @return
+	 * @return Gets the class of the object as String
 	 */
 	public String getType() {
 		return type;
 	}
 	
 	/**
-	 * 
-	 * @param name
+	 * Sets the class of the object as a string
+	 * @param type the class name
 	 */
 	public void setType(String type) {
 		this.type = type;

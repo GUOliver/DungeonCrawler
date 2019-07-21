@@ -6,6 +6,9 @@ import unsw.dungeon.Entity;
 
 public class PickUpKey implements CollisionBehaviour {
 
+	/**
+	 * Adds key to player, removes from dungeon
+	 */
 	@Override
 	public void interact(Dungeon dungeon, Entity character, Entity keyEntity) {
 		if (character instanceof Player && keyEntity instanceof Key) {

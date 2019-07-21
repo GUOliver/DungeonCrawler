@@ -8,13 +8,19 @@ public abstract class MovingEntity extends Entity {
 
 	private Direction direction;
 
+	/**
+	 * Constructor for a moving entity, takes in position and type
+	 * @param x X pos
+	 * @param y Y pos
+	 * @param name String class name
+	 */
 	public MovingEntity(int x, int y, String name) {
 		super(x, y, name);
 		setDirection(Direction.Resting);   // set the initail direction to null ?
 	}
 
 	/**
-	 * 
+	 * Gets direction of moving entity
 	 * @return the curr direction
 	 */
 	public Direction getDirection() {
@@ -22,20 +28,18 @@ public abstract class MovingEntity extends Entity {
 	}
 
 	/**
-	 * 
-	 * @param direction set the direction
+	 * sets direction of moving entity
+	 * @param direction new direction
 	 */
 	public void setDirection(Direction direction) {
 		this.direction = direction;
 	}
 
 
-	// put movement function in this class so that 
-	// both enemy and player can use the method in the class
 	/**
 	 * moveUp
 	 * @param dungeon
-	 * @return true or false
+	 * @return whether or not the movement occurs
 	 */
 	public boolean moveUp(Dungeon dungeon) {
 		setDirection(Direction.Up);
@@ -54,7 +58,7 @@ public abstract class MovingEntity extends Entity {
 	/**
 	 * moveDown
 	 * @param dungeon
-	 * @return true or false
+	 * @return whether or not the movement occurs
 	 */
 	public boolean moveDown(Dungeon dungeon) {
 		setDirection(Direction.Down);
@@ -72,7 +76,7 @@ public abstract class MovingEntity extends Entity {
 	/**
 	 * moveLeft
 	 * @param dungeon
-	 * @return true or false
+	 * @return whether or not the movement occurs
 	 */
 	public boolean moveLeft(Dungeon dungeon) {
 		setDirection(Direction.Left);
@@ -90,7 +94,7 @@ public abstract class MovingEntity extends Entity {
 	/**
 	 * move Right
 	 * @param dungeon
-	 * @return trueor false
+	 * @return whether or not the movement occurs
 	 */
 	public boolean moveRight(Dungeon dungeon) {
 		setDirection(Direction.Right);
@@ -108,11 +112,14 @@ public abstract class MovingEntity extends Entity {
 
 
 	/**
-	 * checking if the entity can move to that place or not
+	 * checking if the entity can move to that place or not. If they can, perform the move.
+	 * If the moving entity is a player, allow them to interact with any objects they 
+	 * move into. Checks if invincibility wears off and if all goals are completed at 
+	 * end of player turn.
 	 * @param dungeon the dungeon
-	 * @param x coord
-	 * @param y coord
-	 * @return true or false
+	 * @param x x coord entity is trying to move to
+	 * @param y y coord entity is trying to move to
+	 * @return whether or not the movement occurs
 	 */ 
 	public boolean moveTo(Dungeon dungeon, int x, int y) {
 		// checking if it can be move to this place or not
@@ -188,7 +195,7 @@ public abstract class MovingEntity extends Entity {
 
 
 	/**
-	 * 
+	 * Checks if there is a barrier in front of moving entity
 	 * @param x the given x
 	 * @param y the given y
 	 * @param dungeon the given dungeon
@@ -239,7 +246,7 @@ public abstract class MovingEntity extends Entity {
 	}
 	
 	/**
-	 * 
+	 * Checks if barrier exists at a given position
 	 * @param x coord
 	 * @param y coord
 	 * @param dungeon

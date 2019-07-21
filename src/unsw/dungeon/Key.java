@@ -1,10 +1,11 @@
 package unsw.dungeon;
 import unsw.collisionBehaviour.*;
 public class Key extends Entity{
-	
+
 	private int keyID;
-	
-	 /* 
+
+	/* 
+	 * Constructor for a key
 	 * @param x coord
 	 * @param y coord
 	 */
@@ -13,7 +14,7 @@ public class Key extends Entity{
 		setKeyID(dungeon.getNumKeys());
 		setCollisionBehaviour(new PickUpKey());
 	}
-	
+
 	/**
 	 * checking if key can be moved onto or not
 	 */
@@ -21,7 +22,7 @@ public class Key extends Entity{
 	public boolean canMoveOnto(Dungeon dungeon, Entity mover) {
 		return true;
 	}
-	
+
 	/**
 	 * set the key id 
 	 * @param keyID the id 
@@ -29,7 +30,7 @@ public class Key extends Entity{
 	public void setKeyID(int keyID) {
 		this.keyID = keyID;
 	}
-	
+
 	/**
 	 * get the key id
 	 * @return the key id
