@@ -1,5 +1,7 @@
 package unsw.collisionBehaviour;
 
+import java.util.List;
+
 import unsw.dungeon.*;
 
 public class MovingBoulder implements CollisionBehaviour {
@@ -46,6 +48,32 @@ public class MovingBoulder implements CollisionBehaviour {
 		Boulder boulder = (Boulder) boulderEntity;
 		boulder.setX(boulderX);
 		boulder.setY(boulderY);
+		
+		
+		// moving the boulder off a switch !!
+		// when boulder is not on the grid of switch, and player is on the grid of boulder
+		// and the player is still in interaction with the boulder (pushing the boulder) 
+		// numOf boulder on switch minus 1
+		List<Entity> items = dungeon.findEntity(player.getX(), player.getY());
+		for (Entity item : items) {
+			if (item.getType().equals("switch")) {
+				
+				FloorSwitch sw = (FloorSwitch) dungeon.findSpecificEntity(player.getX(), player.getY(), "switch");
+				if (dungeon.getBoulderOnSwitch() == 0) {
+					return;
+				}
+				if (Math.abs(boulderX - player.getX()) == 1 && boulderY == player.getY()) {
+					
+					dungeon.addBoulderOnSwitch(-1);
+					sw.setSwitchState(false);
+				} else if (Math.abs(boulderY - player.getY()) == 1 && boulderX == player.getX()) {
+					dungeon.addBoulderOnSwitch(-1);
+					sw.setSwitchState(false);
+				}
+				
+				break;
+			}
+		}
 		
 	}
 	

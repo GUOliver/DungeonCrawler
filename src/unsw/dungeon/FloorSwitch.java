@@ -34,5 +34,6 @@ public class FloorSwitch extends Entity{
 		this.switchState = state;
 	}
 
+
 }
 	

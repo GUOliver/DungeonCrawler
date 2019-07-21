@@ -1,7 +1,9 @@
 package unsw.test;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 import java.util.List;
 
@@ -66,33 +68,40 @@ public class BoulderTest {
 	
 	@Test
 	public void moveBoulderOffSwitchSucessful() {
-		/*   0 1 2        0 1 2
-		 * 0 _ _ _      0 _ _ _
-		 * 1 P S _  --> 1 _pf B
-		 * 2 _ _ _      2 _ _ _
+		/*   0 1 2 3       0 1 2 3
+		 * 0 _ _ _       0 _ _ _
+		 * 1 P b s _ --> 1 _pf B
+		 * 2 _ _ _       2 _ _ _
 		 */
-		Dungeon dungeon = new Dungeon(3, 3);
+		Dungeon dungeon = new Dungeon(4, 4);
 		Player player = new Player(dungeon, 0, 1);
 		Boulder boulder = new Boulder(1, 1);
 		dungeon.addEntity(player);
 		dungeon.addEntity(boulder);
 		
-		FloorSwitch sw = new FloorSwitch(1, 1);
+		FloorSwitch sw = new FloorSwitch(2, 1);
 		dungeon.addEntity(sw);
 		
 		assertTrue(player.moveRight(dungeon));
 		assertTrue(boulder.getX() == 2);
 		assertTrue(boulder.getY() == 1);
 		
+		assertTrue(sw.isActivated());
+		assertEquals(dungeon.getBoulderOnSwitch(), 1);
 		
 		List<Entity> entities = dungeon.findEntity(1, 1);
-		assertEquals(2, entities.size());
-		assertTrue(entities.contains(player));
-		assertTrue(entities.get(0) instanceof FloorSwitch || entities.get(1) instanceof FloorSwitch);
-		
-		entities = dungeon.findEntity(2, 1);
 		assertEquals(1, entities.size());
+		assertTrue(entities.contains(player));
+				
+		entities = dungeon.findEntity(2, 1);
+		assertEquals(2, entities.size());
 		assertTrue(entities.get(0) instanceof Boulder);
+		
+		// move the boulder off the switch successfuly
+		player.moveRight(dungeon);
+		assertFalse(sw.isActivated());
+		assertEquals(dungeon.getBoulderOnSwitch(), 0);
+		
 	}
 	
 	@Test
