@@ -109,6 +109,7 @@ public class WeaponTest {
 		
 		List<Entity> entities = dungeon.findEntity(2,2);
 		
+		// all destroyed except enemy1
 		assertEquals(0, entities.size());
 		entities = dungeon.findEntity(2, 3);
 		assertEquals(0, entities.size());
