@@ -69,15 +69,18 @@ public class Dungeon {
      * set the game progress, checking if the game is completed or not
      */
 	public void checkSetGameComplete() {
-    	if (this.switchTotal == this.getBoulderOnSwitch() && this.enemyTotal == 0 && this.treasureTotal == 0) {
-    		if (this.hasExit == true) {
-    			if (this.reachExit == true) {
-    				this.gameState = true;
-    			}
-    		} else {
-    			this.gameState = true;
-    		}
-    	}
+		if (this.gameState != true) {
+			if (this.switchTotal == this.getBoulderOnSwitch() && this.enemyTotal == 0 
+					&& this.treasureTotal == 0) {
+				if (this.hasExit == true) {
+					if (this.reachExit == true) {
+						this.gameState = true;
+					}
+				} else {
+					this.gameState = true;
+				}
+			}
+		}
     }
 
     /**

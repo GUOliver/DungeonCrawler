@@ -125,14 +125,13 @@ public abstract class MovingEntity extends Entity {
 			//if the player can not move onto this item 
 			//return false
 			if (! item.canMoveOnto(dungeon, this)) {
-				//System.out.println("Cannot move to " + item.getType());
 				return false;
 			}
 			
 			// when the boulder in the list, to be careful if there is a wall in front
 			// a little hard coding here, when a special case like this " p->b->w"
 			if (item instanceof Boulder) {
-				if (isBarriarInFront(x, y,dungeon)) {
+				if (isBarrierInFront(x, y,dungeon)) {
 					return false;
 				}
 			}	
@@ -193,9 +192,9 @@ public abstract class MovingEntity extends Entity {
 	 * @param x the given x
 	 * @param y the given y
 	 * @param dungeon the given dungeon
-	 * @return if there is a barrar or not
+	 * @return if there is a barrier or not
 	 */
-	public boolean isBarriarInFront(int x, int y, Dungeon dungeon) {
+	public boolean isBarrierInFront(int x, int y, Dungeon dungeon) {
 		
 		int newX = 0, newY = 0;
 		
@@ -204,7 +203,7 @@ public abstract class MovingEntity extends Entity {
 				newX = x;
 				newY = y - 1;
 				
-				if (isBarriar(newX, newY, dungeon)) {
+				if (isBarrier(newX, newY, dungeon)) {
 					return true;
 				}
 				return false;
@@ -212,7 +211,7 @@ public abstract class MovingEntity extends Entity {
 			case Down:
 				newX = x;
 				newY = y + 1;
-				if (isBarriar(newX, newY, dungeon)) {
+				if (isBarrier(newX, newY, dungeon)) {
 					return true;
 				}
 				return false;
@@ -220,14 +219,14 @@ public abstract class MovingEntity extends Entity {
 			case Left:
 				newX = x - 1;
 				newY = y;
-				if (isBarriar(newX, newY, dungeon)) {
+				if (isBarrier(newX, newY, dungeon)) {
 					return true;
 				}
 				return false;
 			case Right:
 				newX = x + 1;
 				newY = y;
-				if (isBarriar(newX, newY, dungeon)) {
+				if (isBarrier(newX, newY, dungeon)) {
 					return true;
 				}
 				return false;
@@ -244,9 +243,9 @@ public abstract class MovingEntity extends Entity {
 	 * @param x coord
 	 * @param y coord
 	 * @param dungeon
-	 * @return if there is barriar or not
+	 * @return if there is barrier or not
 	 */
-	public boolean isBarriar(int x, int y, Dungeon dungeon) {
+	public boolean isBarrier(int x, int y, Dungeon dungeon) {
 		List<Entity> items = dungeon.findEntity(x, y);
 		for (Entity item : items) {
 			if (item.getType().equals("wall") || item.getType().equals("locked door")) {

@@ -32,11 +32,11 @@ public class Enemy extends MovingEntity implements Observer {
 		return this.howMove;
 	}
 	
+	
 	/**
-	 * This method moves the enemy according to the strategy it holds
+	 * @param dungeon
 	 */
 	public void moveEnemy(Dungeon dungeon) {
-		System.out.println("Enemy about to move");
 		howMove.moveDirection(dungeon, this);
 	}
 	
