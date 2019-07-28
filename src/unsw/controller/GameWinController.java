@@ -7,10 +7,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
-public class GameOverController extends BasicController{
+public class GameWinController extends BasicController{
 	
 	@FXML
-    private Button reset;
+    private Button replay;
 
     @FXML
     private Button exit;
@@ -18,12 +18,12 @@ public class GameOverController extends BasicController{
     @FXML
     private Button back;
 
-	public GameOverController(Stage stage) {
+	public GameWinController(Stage stage) {
 		super(stage);
 	}
 	
 	@FXML
-    void handleReset(ActionEvent event) {
+    void handleReplay(ActionEvent event) {
 
     }
 

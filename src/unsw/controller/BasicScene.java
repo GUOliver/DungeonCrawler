@@ -36,6 +36,17 @@ public class BasicScene {
        
     }
     
+    public void start(DungeonController dc) throws IOException{
+    	this.stage.setTitle(this.screenTitle);
+        this.fxmlLoader.setController(dc);
+       
+        Parent root = this.fxmlLoader.load();
+        Scene sc = new Scene(root);
+        this.stage.setScene(sc);
+        this.stage.show();
+       
+    }
+    
     public Stage getStage() {
         return this.stage;
     }

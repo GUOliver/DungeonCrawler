@@ -10,7 +10,9 @@ public class DungeonApplication extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
     	MainMenuScene startScreen = new MainMenuScene(primaryStage);
-        startScreen.start();/*
+        startScreen.start();
+        
+        /* Old code
         primaryStage.setTitle("Dungeon");
 
         DungeonControllerLoader dungeonLoader = new DungeonControllerLoader("maze.json");
@@ -23,8 +25,8 @@ public class DungeonApplication extends Application {
         Scene scene = new Scene(root);
         root.requestFocus();
         primaryStage.setScene(scene);
-        primaryStage.show();*/
-
+        primaryStage.show();
+        */
     }
 
     public static void main(String[] args) {
