@@ -9,22 +9,29 @@ import javafx.stage.Stage;
 
 public class GameOverController extends BasicController{
 	
+	private String filename;
+	
 	@FXML
-    private Button reset;
+    private Button retry;
 
     @FXML
     private Button exit;
 
     @FXML
     private Button back;
+    
 
-	public GameOverController(Stage stage) {
+	public GameOverController(Stage stage, String filename) {
 		super(stage);
+		this.filename = filename;
 	}
 	
 	@FXML
-    void handleReset(ActionEvent event) {
-
+    void handleRetry(ActionEvent event) throws IOException {
+		BasicScene gameScene = new BasicScene(this.getStage(), "Dungeon", "DungeonView.fxml");
+        DungeonControllerLoader dungeonLoader = new DungeonControllerLoader(getFilename(),this.getStage());
+        DungeonController controller = dungeonLoader.loadController();
+        gameScene.start(controller);
     }
 
     @FXML
@@ -39,5 +46,9 @@ public class GameOverController extends BasicController{
     	MainMenuController dmc = new MainMenuController(this.getStage());
 		menuScreen.start(dmc);
     }
+
+	public String getFilename() {
+		return filename;
+	}
 
 }

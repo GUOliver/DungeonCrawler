@@ -1,5 +1,6 @@
 package unsw.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 import unsw.dungeon.Dungeon;
 import unsw.dungeon.Player;
 
@@ -16,7 +18,7 @@ import unsw.dungeon.Player;
  * @author Robert Clifton-Everest
  *
  */
-public class DungeonController {
+public class DungeonController extends BasicController{
 
     @FXML
     private GridPane squares;
@@ -27,11 +29,15 @@ public class DungeonController {
 
     private Dungeon dungeon;
     
+    private String filename;
     
-    public DungeonController(Dungeon dungeon, List<ImageView> initialEntities) {
-        this.dungeon = dungeon;
+    
+    public DungeonController(Stage stage, Dungeon dungeon, List<ImageView> initialEntities, String filename) {
+        super(stage);
+    	this.dungeon = dungeon;
         this.player = dungeon.getPlayer();
         this.initialEntities = new ArrayList<>(initialEntities);
+        this.filename = filename;
     }
 
     @FXML
@@ -51,24 +57,60 @@ public class DungeonController {
     }
 
     @FXML
-    public void handleKeyPress(KeyEvent event) {
+    public void handleKeyPress(KeyEvent event) throws IOException {
         switch (event.getCode()) {
         case UP:
             player.moveUp(dungeon);
+            if (dungeon.getGameState() == true)
+            	if (dungeon.getPlayer() != null)
+            		handleWin();
+            	else
+            		handleDeath();
             break;
         case DOWN:
             player.moveDown(dungeon);
+            if (dungeon.getGameState() == true)
+            	if (dungeon.getPlayer() != null)
+            		handleWin();
+            	else
+            		handleDeath();
             break;
         case LEFT:
             player.moveLeft(dungeon);
+            if (dungeon.getGameState() == true)
+            	if (dungeon.getPlayer() != null)
+            		handleWin();
+            	else
+            		handleDeath();
             break;
         case RIGHT:
             player.moveRight(dungeon);
+            if (dungeon.getGameState() == true)
+            	if (dungeon.getPlayer() != null)
+            		handleWin();
+            	else
+            		handleDeath();
             break;
         default:
             break;
         }
     }
+
+	public String getFilename() {
+		return filename;
+	}
+	
+	private void handleDeath() throws IOException {
+		BasicScene gameOver = new BasicScene(this.getStage(), "Game Over", "GameOverScene.fxml");
+    	GameOverController goc = new GameOverController(this.getStage(), getFilename());
+		gameOver.start(goc);
+	}
+	
+	private void handleWin() throws IOException {
+		BasicScene gameWin = new BasicScene(this.getStage(), "Level Complete", "GameWinScene.fxml");
+    	GameWinController gwc = new GameWinController(this.getStage(), getFilename());
+		gameWin.start(gwc);
+	}
 
 }
 
