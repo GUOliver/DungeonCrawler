@@ -1,4 +1,4 @@
-package unsw.dungeon;
+package unsw.controller;
 
 import java.io.IOException;
 

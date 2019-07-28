@@ -1,4 +1,4 @@
-package unsw.dungeon;
+package unsw.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +8,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import unsw.dungeon.Dungeon;
+import unsw.dungeon.Player;
 
 /**
  * A JavaFX controller for the dungeon.
@@ -24,7 +26,8 @@ public class DungeonController {
     private Player player;
 
     private Dungeon dungeon;
-
+    
+    
     public DungeonController(Dungeon dungeon, List<ImageView> initialEntities) {
         this.dungeon = dungeon;
         this.player = dungeon.getPlayer();
