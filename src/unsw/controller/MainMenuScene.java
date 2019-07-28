@@ -36,14 +36,29 @@ public class MainMenuScene {
         scene = new Scene(root);
     }
     
+    /**
+     * start and show the scene
+     */
     public void start() {
         stage.setTitle(title);
         stage.setScene(scene);
         stage.show();
     }
-
+    
+    /**
+     * get the controller
+     * @return
+     */
     public MainMenuController getController() {
         return controller;
+    }
+    
+    /**
+     * set the controller
+     * @param c the main menu controller
+     */
+    public void setController(MainMenuController c) {
+    	this.controller = c;
     }
 
 }

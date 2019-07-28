@@ -18,11 +18,20 @@ public class MainMenuController extends BasicController{
 		super(stage);
 	}
     @FXML
+    /**
+     * handle the exit button, exit the game
+     * @param event
+     */
     public void handleExit(ActionEvent event) {
     	System.exit(1);
     }
 
     @FXML
+    /**
+     * handle the start button, then go to the map chosing scene
+     * @param event
+     * @throws IOException
+     */
     public void handleStart(ActionEvent event) throws IOException {
 		BasicScene map = new BasicScene(this.getStage(), "Map selection", "MapScene.fxml");
 		MapController mc = new MapController(this.getStage());
