@@ -29,8 +29,8 @@ public class MapController extends BasicController{
     @FXML
     void handleBack(ActionEvent event) throws IOException {
     	
-    	BasicScreen menuScreen = new BasicScreen(this.getStage(), "Game Menu", "MainMenu.fxml");
-    	DungeonMenuController dmc = new DungeonMenuController(this.getStage());
+    	BasicScene menuScreen = new BasicScene(this.getStage(), "Game Menu", "MainMenuScene.fxml");
+    	MainMenuController dmc = new MainMenuController(this.getStage());
 		menuScreen.start(dmc);
     }
 

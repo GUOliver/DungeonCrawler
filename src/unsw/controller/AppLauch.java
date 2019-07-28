@@ -7,11 +7,11 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 
-public class Menu extends Application {
+public class AppLauch extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) throws IOException {
-		StartScreen startScreen = new StartScreen(primaryStage);
+		MainMenuScene startScreen = new MainMenuScene(primaryStage);
         startScreen.start();
 	}
 	

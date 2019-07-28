@@ -12,18 +12,18 @@ import javafx.stage.Stage;
  * @author chengyuanguo
  *
  */
-public class StartScreen {
+public class MainMenuScene {
 	private Stage stage;
     private String title;
-    private DungeonMenuController controller;
+    private MainMenuController controller;
     private Scene scene;
 
-    public StartScreen(Stage stage) throws IOException {
+    public MainMenuScene(Stage stage) throws IOException {
         this.stage = stage;
         title = "Game Menu";
 
-        controller = new DungeonMenuController(stage);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
+        controller = new MainMenuController(stage);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenuScene.fxml"));
         loader.setController(controller);
 
         // load into a Parent node called root
@@ -37,7 +37,7 @@ public class StartScreen {
         stage.show();
     }
 
-    public DungeonMenuController getController() {
+    public MainMenuController getController() {
         return controller;
     }
 
