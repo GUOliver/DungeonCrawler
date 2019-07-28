@@ -7,12 +7,23 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-
+/**
+ * a basic controller to make life much easier
+ * inspired by tute7 code
+ * @author chengyuanguo
+ *
+ */
 public class BasicScene {
 	private Stage stage;
     private String screenTitle;
     private FXMLLoader fxmlLoader;
-
+    
+    /**
+     * a template for all the controller
+     * @param stage the window
+     * @param screenTitle the title of a particular scene
+     * @param fxmlFile the name of the .fxml file
+     */
     public BasicScene(Stage stage, String screenTitle, String fxmlFile) {
         this.stage = stage;
         this.screenTitle = screenTitle;
@@ -22,7 +33,7 @@ public class BasicScene {
     
     /**
      * 
-     * @param bc
+     * @param bc the controller 
      * @throws IOException
      */
     public void start(BasicController bc) throws IOException{
@@ -36,6 +47,11 @@ public class BasicScene {
        
     }
     
+    /**
+     * 
+     * @param dc start and show the current scene
+     * @throws IOException
+     */
     public void start(DungeonController dc) throws IOException{
     	this.stage.setTitle(this.screenTitle);
         this.fxmlLoader.setController(dc);
@@ -47,10 +63,18 @@ public class BasicScene {
        
     }
     
+    /**
+     * 
+     * @return the window 
+     */
     public Stage getStage() {
         return this.stage;
     }
     
+    /**
+     * set the stage
+     * @param stage the window
+     */
     public void setStage(Stage stage) {
         this.stage = stage;
     }

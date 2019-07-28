@@ -17,7 +17,12 @@ public class MainMenuScene {
     private String title;
     private MainMenuController controller;
     private Scene scene;
-
+    
+    /**
+     * the first scene of the game 
+     * @param stage the primar
+     * @throws IOException
+     */
     public MainMenuScene(Stage stage) throws IOException {
         this.stage = stage;
         title = "Game Menu";
