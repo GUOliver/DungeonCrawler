@@ -57,7 +57,7 @@ public class MapController extends BasicController{
     void handleLevelOne(ActionEvent event) throws IOException {
     	
     	BasicScene gameScene = new BasicScene(this.getStage(), "Dungeon", "DungeonView.fxml");
-        DungeonControllerLoader dungeonLoader = new DungeonControllerLoader("maze.json");
+        DungeonControllerLoader dungeonLoader = new DungeonControllerLoader("maze.json",this.getStage());
         DungeonController controller = dungeonLoader.loadController();
         gameScene.start(controller);
 
@@ -72,7 +72,7 @@ public class MapController extends BasicController{
     void handleLevelTwo(ActionEvent event) throws IOException {
     	
     	BasicScene gameScene = new BasicScene(this.getStage(), "Dungeon", "DungeonView.fxml");
-        DungeonControllerLoader dungeonLoader = new DungeonControllerLoader("boulders.json");
+        DungeonControllerLoader dungeonLoader = new DungeonControllerLoader("boulders.json",this.getStage());
         DungeonController controller = dungeonLoader.loadController();
         gameScene.start(controller);
 
@@ -86,7 +86,7 @@ public class MapController extends BasicController{
      */
     void handleLevelThree(ActionEvent event) throws IOException {
     	BasicScene gameScene = new BasicScene(this.getStage(), "Dungeon", "DungeonView.fxml");
-        DungeonControllerLoader dungeonLoader = new DungeonControllerLoader("advanced.json");
+        DungeonControllerLoader dungeonLoader = new DungeonControllerLoader("advanced.json",this.getStage());
         DungeonController controller = dungeonLoader.loadController();
         gameScene.start(controller);
     }

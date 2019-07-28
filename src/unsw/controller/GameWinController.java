@@ -9,6 +9,8 @@ import javafx.stage.Stage;
 
 public class GameWinController extends BasicController{
 	
+	private String filename;
+	
 	@FXML
     private Button replay;
 
@@ -18,13 +20,17 @@ public class GameWinController extends BasicController{
     @FXML
     private Button back;
 
-	public GameWinController(Stage stage) {
+	public GameWinController(Stage stage, String filename) {
 		super(stage);
+		this.filename = filename;
 	}
 	
 	@FXML
-    void handleReplay(ActionEvent event) {
-
+    void handleReplay(ActionEvent event) throws IOException {
+		BasicScene gameScene = new BasicScene(this.getStage(), "Dungeon", "DungeonView.fxml");
+        DungeonControllerLoader dungeonLoader = new DungeonControllerLoader(getFilename(),this.getStage());
+        DungeonController controller = dungeonLoader.loadController();
+        gameScene.start(controller);
     }
 
     @FXML
@@ -39,5 +45,9 @@ public class GameWinController extends BasicController{
     	MainMenuController dmc = new MainMenuController(this.getStage());
 		menuScreen.start(dmc);
     }
+    
+    public String getFilename() {
+		return filename;
+	}
 
 }

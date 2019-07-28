@@ -7,6 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+import javafx.stage.Stage;
 import unsw.dungeon.Bomb;
 import unsw.dungeon.Boulder;
 import unsw.dungeon.Door;
@@ -33,9 +34,13 @@ import unsw.dungeon.Wall;
 public abstract class DungeonLoader {
 
     private JSONObject json;
+    private String filename;
+    private Stage stage;
 
-    public DungeonLoader(String filename) throws FileNotFoundException {
+    public DungeonLoader(String filename, Stage stage) throws FileNotFoundException {
         json = new JSONObject(new JSONTokener(new FileReader("dungeons/" + filename)));
+        this.filename = filename;
+        this.stage = stage;
     }
 
     /**
@@ -152,6 +157,14 @@ public abstract class DungeonLoader {
     public abstract void onLoad(Sword sword);
     
     public abstract void onLoad(Treasure treasure);
+
+	public String getFilename() {
+		return filename;
+	}
+
+	public Stage getStage() {
+		return stage;
+	}
 
     // TODO Create additional abstract methods for the other entities
 

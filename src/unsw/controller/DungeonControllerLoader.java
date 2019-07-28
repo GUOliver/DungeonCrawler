@@ -10,6 +10,7 @@ import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 import unsw.dungeon.Bomb;
 import unsw.dungeon.Boulder;
 import unsw.dungeon.Door;
@@ -37,9 +38,9 @@ public class DungeonControllerLoader extends DungeonLoader {
     private Image playerImage;
     private Image wallImage;
 
-    public DungeonControllerLoader(String filename)
+    public DungeonControllerLoader(String filename, Stage stage)
             throws FileNotFoundException {
-        super(filename);
+        super(filename, stage);
         entities = new ArrayList<>();
         playerImage = new Image("/human_new.png");
         wallImage = new Image("/brick_brown_0.png");
@@ -154,7 +155,7 @@ public class DungeonControllerLoader extends DungeonLoader {
      * @throws FileNotFoundException
      */
     public DungeonController loadController() throws FileNotFoundException {
-        return new DungeonController(load(), entities);
+        return new DungeonController(getStage(),load(), entities, getFilename());
     }
 
 	
