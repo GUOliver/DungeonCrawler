@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label alignment="CENTER" layoutX="161.0" layoutY="14.0" prefHeight="73.0" prefWidth="279.0" text="Game Over">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="retry" layoutX="61.0" layoutY="99.0" mnemonicParsing="false" onAction="#handleRetry" prefHeight="67.0" prefWidth="479.0" text="Retry" />
+      <Button fx:id="exit" layoutX="61.0" layoutY="299.0" mnemonicParsing="false" onAction="#handleExit" prefHeight="67.0" prefWidth="479.0" text="Exit Game" />
+      <Button fx:id="back" layoutX="61.0" layoutY="200.0" mnemonicParsing="false" onAction="#handleBack" prefHeight="67.0" prefWidth="479.0" text="Return to Main Menu" />
+   </children>
+</AnchorPane>
