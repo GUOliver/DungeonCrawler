@@ -8,12 +8,12 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 
-public class Screen {
+public class BasicScreen {
 	private Stage stage;
     private String screenTitle;
     private FXMLLoader fxmlLoader;
 
-    public Screen(Stage stage, String screenTitle, String fxmlFile) {
+    public BasicScreen(Stage stage, String screenTitle, String fxmlFile) {
         this.stage = stage;
         this.screenTitle = screenTitle;
         this.fxmlLoader = new FXMLLoader(getClass().getResource(fxmlFile));

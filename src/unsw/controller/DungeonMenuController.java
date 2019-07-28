@@ -27,7 +27,7 @@ public class DungeonMenuController extends BasicController{
 
     @FXML
     public void handleStart(ActionEvent event) throws IOException {
-		Screen map = new Screen(this.getStage(), "Map selection", "MapScreen.fxml");
+		BasicScreen map = new BasicScreen(this.getStage(), "Map selection", "MapScreen.fxml");
 		MapController mc = new MapController(this.getStage());
 		map.start(mc);
     }

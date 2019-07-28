@@ -12,7 +12,7 @@
          <children>
             <Button fx:id="startButton" layoutX="61.0" layoutY="167.0" mnemonicParsing="false" onAction="#handleStart" prefHeight="67.0" prefWidth="479.0" text="Start" />
             <Button fx:id="exitButton" layoutX="61.0" layoutY="284.0" mnemonicParsing="false" onAction="#handleExit" prefHeight="67.0" prefWidth="479.0" text="Exit" />
-            <Label layoutX="63.0" prefHeight="104.0" prefWidth="508.0" text="Welcome To Dungeon Clawer !">
+            <Label layoutX="63.0" prefHeight="104.0" prefWidth="508.0" text="Welcome To Dungeon Crawler !">
                <font>
                   <Font size="26.0" />
                </font>
