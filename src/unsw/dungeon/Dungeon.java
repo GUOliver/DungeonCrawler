@@ -4,6 +4,8 @@ package unsw.dungeon;
 import java.util.ArrayList;
 import java.util.List;
 
+import unsw.compositeGoal.Component;
+
 /**
  * A dungeon in the interactive dungeon player.
  *
@@ -15,9 +17,9 @@ import java.util.List;
  */
 public class Dungeon {
 	
-	private String name;
     private int width, height;
     private List<Entity> entities;
+    private Component goals;
     private Player player;
     private int switchTotal;
     private int enemyTotal;		 // win condition
@@ -34,8 +36,6 @@ public class Dungeon {
      * @param height the height of the dungeon
      */
     public Dungeon(int width, int height) {
-    	// start mode is maze 
-    	this.name = "maze";
         this.width = width;
         this.height = height;
         this.entities = new ArrayList<Entity>();
@@ -47,6 +47,7 @@ public class Dungeon {
         this.gameState = false;
         this.setReachExit(false);
         this.boulderOnSwitch = 0;
+        this.goals = null;
     }
     
     /**
@@ -65,24 +66,6 @@ public class Dungeon {
 		return boulderOnSwitch;
 		
 	}
-    
-    /**
-     * set the game progress, checking if the game is completed or not
-     */
-	public void checkSetGameComplete() {
-		if (this.gameState != true) {
-			if (this.switchTotal == this.getBoulderOnSwitch() && this.enemyTotal == 0 
-					&& this.treasureTotal == 0) {
-				if (this.hasExit == true) {
-					if (this.reachExit == true) {
-						this.gameState = true;
-					}
-				} else {
-					this.gameState = true;
-				}
-			}
-		}
-    }
 
     /**
      * 
@@ -197,25 +180,7 @@ public class Dungeon {
      * @param e2 the entity want to remove
      */
     public void removeEntity(Entity e2) {
-		// TODO Auto-generated method stub
 		entities.remove(e2);
-	}
-    
-    
-    /**
-     * get the name of the dungeon
-     * @return the name
-     */
-	public String getName() {
-		return name;
-	}
-	
-	/**
-	 * set the name of the dungeon
-	 * @param name the name of the dungeon
-	 */
-	public void setName(String name) {
-		this.name = name;
 	}
 	
 	/**
@@ -354,6 +319,66 @@ public class Dungeon {
 				count++;
 		}
 		return count;
+	}
+
+	/**
+	 * Gets the goal, could be nested depending on goal complexity
+	 * @return Component, which can be a composite or a leaf goal
+	 */
+	public Component getGoal() {
+		return goals;
+	}
+	
+	/**
+	 * Gets the list of goals 
+	 * @return
+	 */
+	public boolean getGoalComplete() {
+		return goals.checkComplete(this);
+	}
+	
+	/**
+	 * Sets the complete goal component as the goal of the game
+	 * This could be a single goal, or an overarching composite goal
+	 */
+	public void setGoal(Component goal) {
+		this.goals = goal;
+	}
+	
+    /**
+     * set the game progress, checking if the game is completed or not
+     * TODO now obsolete due to composite pattern
+     */
+	public void checkSetGameComplete() {
+		if (getGoalComplete())
+			gameState = true;
+		/*
+		if (this.gameState != true) {
+			if (this.switchTotal == this.getBoulderOnSwitch() && this.enemyTotal == 0 
+					&& this.treasureTotal == 0) {
+				if (this.hasExit == true) {
+					if (this.reachExit == true) {
+						this.gameState = true;
+					}
+				} else {
+					this.gameState = true;
+				}
+			}
+		}
+		*/
+    }
+	
+	public Enemy[] getEnemyArray() {
+		Enemy[] tempArray = new Enemy[entities.size()];
+		int iter = 0;
+		for (Entity ent : entities) {
+			if (ent.isEnemy()) {
+				tempArray[iter] = (Enemy)ent;
+				iter++;
+			}
+		}
+		
+		return tempArray;
 	}
     
     

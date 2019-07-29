@@ -6,6 +6,8 @@ import static org.junit.Assert.assertTrue;
 import java.util.List;
 
 import org.junit.Test;
+
+import unsw.compositeGoal.LeafExit;
 import unsw.dungeon.*;
 public class KeyDoorTest {
 	
@@ -20,6 +22,8 @@ public class KeyDoorTest {
 		maze.addEntity(c2);
 		maze.addEntity(c3);
 		c1.registerObservers();
+		LeafExit exit = new LeafExit();
+		maze.setGoal(exit);
 		
 		List<Entity> box = maze.findEntity(2, 1);
 		assertTrue(box.contains(c2));
@@ -39,6 +43,8 @@ public class KeyDoorTest {
 		maze.addEntity(c2);
 		maze.addEntity(c3);
 		c1.registerObservers();
+		LeafExit exit = new LeafExit();
+		maze.setGoal(exit);
 		
 		c1.moveRight(maze);
 		assertTrue(!c1.getKeys().isEmpty());
@@ -56,6 +62,8 @@ public class KeyDoorTest {
 		maze.addEntity(c2);
 		maze.addEntity(c3);
 		c1.registerObservers();
+		LeafExit exit = new LeafExit();
+		maze.setGoal(exit);
 		
 		// Check locked
 		assertTrue(!c3.isOpen());
@@ -95,6 +103,8 @@ public class KeyDoorTest {
 		maze.addEntity(c6);
 		maze.addEntity(c7);
 		c1.registerObservers();
+		LeafExit exit = new LeafExit();
+		maze.setGoal(exit);
 		
 		assertEquals(c2.getKeyID(), c3.getKeyId());
 		assertEquals(c4.getKeyID(), c5.getKeyId());

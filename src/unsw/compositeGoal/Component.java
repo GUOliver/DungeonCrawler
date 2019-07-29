@@ -1,8 +1,10 @@
 package unsw.compositeGoal;
 
+import unsw.dungeon.Dungeon;
+
 public interface Component {
 	
-	public String nameString();
-	public double calculateCost();
+	public String goalName();
+	public boolean checkComplete(Dungeon dungeon);
 	
 }

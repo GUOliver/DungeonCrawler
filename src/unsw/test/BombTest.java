@@ -6,6 +6,8 @@ import static org.junit.Assert.assertTrue;
 import java.util.List;
 
 import org.junit.Test;
+
+import unsw.compositeGoal.LeafExit;
 import unsw.dungeon.*;
 public class BombTest {
 	
@@ -18,6 +20,8 @@ public class BombTest {
 		maze.setPlayer(c1);
 		maze.addEntity(c2);
 		c1.registerObservers();
+		LeafExit exit = new LeafExit();
+		maze.setGoal(exit);
 		
 		List<Entity> box = maze.findEntity(3, 1);
 		assertEquals(c2,box.get(0));
@@ -34,6 +38,8 @@ public class BombTest {
 		maze.setPlayer(c1);
 		maze.addEntity(c2);
 		maze.addEntity(c3);
+		LeafExit exit = new LeafExit();
+		maze.setGoal(exit);
 		c1.registerObservers();
 		
 		c1.moveDown(maze);
@@ -53,6 +59,8 @@ public class BombTest {
 		maze.setPlayer(c1);
 		maze.addEntity(c2);
 		c1.registerObservers();
+		LeafExit exit = new LeafExit();
+		maze.setGoal(exit);
 		
 		c1.moveDown(maze);
 		assertEquals(1,c1.getBombs().size());
@@ -80,6 +88,8 @@ public class BombTest {
 		dungeon.addEntity(bomb);
 		dungeon.addEntity(player);
 		dungeon.setPlayer(player);
+		LeafExit exit = new LeafExit();
+		dungeon.setGoal(exit);
 		
 		Enemy enemy1 = new Enemy(1,1);
 		Enemy enemy2 = new Enemy(1,2);
@@ -125,6 +135,8 @@ public class BombTest {
 		maze.setPlayer(c1);
 		maze.addEntity(c2);
 		c1.registerObservers();
+		LeafExit exit = new LeafExit();
+		maze.setGoal(exit);
 		
 		// Player picks up bomb
 		boolean checkMove = c1.moveLeft(maze);

@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import unsw.compositeGoal.LeafExit;
 import unsw.dungeon.*;
 
 // User Story 1.2: movable boulders and boulder-activated floor switches
@@ -28,6 +29,8 @@ public class BoulderTest {
 		maze.addEntity(c1);
 		maze.addEntity(boulder);
 		maze.setPlayer(c1);
+		LeafExit exit = new LeafExit();
+		maze.setGoal(exit);
 		
 		assertTrue(boulder.getX() == 2);
 		assertTrue(boulder.getY() == 1);
@@ -78,6 +81,8 @@ public class BoulderTest {
 		Boulder boulder = new Boulder(1, 1);
 		dungeon.addEntity(player);
 		dungeon.addEntity(boulder);
+		LeafExit exit = new LeafExit();
+		dungeon.setGoal(exit);
 		
 		FloorSwitch sw = new FloorSwitch(2, 1);
 		dungeon.addEntity(sw);
@@ -118,6 +123,8 @@ public class BoulderTest {
 		dungeon.addEntity(boulder);
 		FloorSwitch sw = new FloorSwitch(1, 1);
 		dungeon.addEntity(sw);
+		LeafExit exit = new LeafExit();
+		dungeon.setGoal(exit);
 		
 		Wall wall = new Wall(2, 1);
 		
