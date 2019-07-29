@@ -6,6 +6,8 @@ import static org.junit.Assert.assertTrue;
 import java.util.List;
 
 import org.junit.Test;
+
+import unsw.compositeGoal.LeafExit;
 import unsw.dungeon.*;
 import unsw.playerState.InvincibleState;
 import unsw.playerState.NormalState;
@@ -20,6 +22,8 @@ public class InvincibilityTest {
 		maze.setPlayer(c1);
 		maze.addEntity(c2);
 		c1.registerObservers();
+		LeafExit exit = new LeafExit();
+		maze.setGoal(exit);
 		
 		List<Entity> box = maze.findEntity(2, 1);
 		assertEquals(c2,box.get(0));
@@ -35,6 +39,8 @@ public class InvincibilityTest {
 		maze.setPlayer(c1);
 		maze.addEntity(c2);
 		c1.registerObservers();
+		LeafExit exit = new LeafExit();
+		maze.setGoal(exit);
 		
 		assertTrue(c1.getPlayerState() instanceof NormalState);
 		c1.moveRight(maze);
@@ -56,6 +62,8 @@ public class InvincibilityTest {
 		maze.setPlayer(c1);
 		maze.addEntity(c2);
 		c1.registerObservers();
+		LeafExit exit = new LeafExit();
+		maze.setGoal(exit);
 		
 		// Pickup, time = 20
 		c1.moveRight(maze);
@@ -103,6 +111,8 @@ public class InvincibilityTest {
 		maze.addEntity(c4);
 		maze.addEntity(c5);
 		c1.registerObservers();
+		LeafExit exit = new LeafExit();
+		maze.setGoal(exit);
 		
 		//pickup potion, enemy in next cell
 		c1.moveRight(maze);

@@ -3,6 +3,8 @@ package unsw.test;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
+
+import unsw.compositeGoal.LeafExit;
 import unsw.dungeon.*;
 
 //userUser Story 1.7: Player movement
@@ -19,6 +21,8 @@ public class PlayerMovementTest {
 		Player c1 = new Player(maze, 0, 1);
 		maze.addEntity(c1);
 		maze.setPlayer(c1);
+		LeafExit exit = new LeafExit();
+		maze.setGoal(exit);
 		c1.moveUp(maze);
 		assertTrue(c1.getX() == 0);
 		assertTrue(c1.getY() == 0);
@@ -30,6 +34,8 @@ public class PlayerMovementTest {
 		Player c1 = new Player(maze, 1, 2);
 		maze.addEntity(c1);
 		maze.setPlayer(c1);
+		LeafExit exit = new LeafExit();
+		maze.setGoal(exit);
 		
 		c1.moveDown(maze);
 		assertTrue(c1.getX() == 1);
@@ -43,6 +49,8 @@ public class PlayerMovementTest {
 		Player c1 = new Player(maze, 1, 1);
 		maze.addEntity(c1);
 		maze.setPlayer(c1);
+		LeafExit exit = new LeafExit();
+		maze.setGoal(exit);
 		
 		c1.moveLeft(maze);
 		assertTrue(c1.getX() == 0);
@@ -55,6 +63,8 @@ public class PlayerMovementTest {
 		Player c1 = new Player(maze, 1, 1);
 		maze.addEntity(c1);
 		maze.setPlayer(c1);
+		LeafExit exit = new LeafExit();
+		maze.setGoal(exit);
 		
 		c1.moveRight(maze);
 		assertTrue(c1.getX() == 2);
@@ -75,6 +85,8 @@ public class PlayerMovementTest {
 		maze.addEntity(c1);
 		maze.addEntity(wall);
 		maze.setPlayer(c1);
+		LeafExit exit = new LeafExit();
+		maze.setGoal(exit);
 		assertTrue(wall.getX() == 2);
 		assertTrue(wall.getY() == 1);
 		

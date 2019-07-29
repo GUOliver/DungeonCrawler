@@ -6,6 +6,8 @@ import static org.junit.Assert.assertTrue;
 import java.util.List;
 
 import org.junit.Test;
+
+import unsw.compositeGoal.LeafExit;
 import unsw.dungeon.*;
 import unsw.playerState.InvincibleState;
 public class EnemyMovementTest {
@@ -21,6 +23,8 @@ public class EnemyMovementTest {
 		maze.addEntity(c2);
 		maze.addEntity(c3);
 		c1.registerObservers();
+		LeafExit exit = new LeafExit();
+		maze.setGoal(exit);
 		assertEquals(2,maze.getEnemyTotal());
 		
 		c1.moveLeft(maze);
@@ -36,6 +40,8 @@ public class EnemyMovementTest {
 		maze.setPlayer(c1);
 		maze.addEntity(c2);
 		c1.registerObservers();
+		LeafExit exit = new LeafExit();
+		maze.setGoal(exit);
 		
 		c1.moveRight(maze);
 		assertEquals(4,c2.getX());
@@ -50,6 +56,8 @@ public class EnemyMovementTest {
 		maze.setPlayer(c1);
 		maze.addEntity(c2);
 		c1.registerObservers();
+		LeafExit exit = new LeafExit();
+		maze.setGoal(exit);
 		
 		c1.moveRight(maze);
 		assertEquals(5,c2.getY());
@@ -64,6 +72,8 @@ public class EnemyMovementTest {
 		maze.setPlayer(c1);
 		maze.addEntity(c2);
 		c1.registerObservers();
+		LeafExit exit = new LeafExit();
+		maze.setGoal(exit);
 		
 		c1.moveRight(maze);
 		assertEquals(2,c2.getY());
@@ -87,6 +97,8 @@ public class EnemyMovementTest {
 		maze.addEntity(c2);
 		maze.addEntity(c3);
 		c1.registerObservers();
+		LeafExit exit = new LeafExit();
+		maze.setGoal(exit);
 		
 		c1.moveRight(maze);
 		assertEquals(0,c2.getY());
@@ -109,6 +121,8 @@ public class EnemyMovementTest {
 		maze.addEntity(c2);
 		maze.addEntity(c3);
 		c1.registerObservers();
+		LeafExit exit = new LeafExit();
+		maze.setGoal(exit);
 		
 		c1.moveDown(maze);
 		assertEquals(2,c2.getX());
@@ -125,6 +139,8 @@ public class EnemyMovementTest {
 		maze.addEntity(c2);
 		maze.addEntity(c3);
 		c1.registerObservers();
+		LeafExit exit = new LeafExit();
+		maze.setGoal(exit);
 		
 		c1.moveDown(maze);
 		c1.moveRight(maze);
@@ -145,6 +161,8 @@ public class EnemyMovementTest {
 		maze.addEntity(c2);
 		maze.addEntity(c3);
 		c1.registerObservers();
+		LeafExit exit = new LeafExit();
+		maze.setGoal(exit);
 		
 		c1.moveDown(maze);
 		c1.moveRight(maze);
@@ -165,6 +183,8 @@ public class EnemyMovementTest {
 		maze.addEntity(c2);
 		maze.addEntity(c3);
 		c1.registerObservers();
+		LeafExit exit = new LeafExit();
+		maze.setGoal(exit);
 		
 		c1.moveDown(maze);
 		c1.moveRight(maze);
@@ -186,6 +206,8 @@ public class EnemyMovementTest {
 		maze.addEntity(c2);
 		maze.addEntity(c3);
 		c1.registerObservers();
+		LeafExit exit = new LeafExit();
+		maze.setGoal(exit);
 		
 		c1.moveDown(maze);
 		c1.moveRight(maze);
@@ -205,6 +227,8 @@ public class EnemyMovementTest {
 		maze.addEntity(c2);
 		maze.addEntity(c3);
 		c1.registerObservers();
+		LeafExit exit = new LeafExit();
+		maze.setGoal(exit);
 		
 		c1.moveDown(maze);
 		c1.moveRight(maze);
@@ -224,6 +248,8 @@ public class EnemyMovementTest {
 		maze.addEntity(c2);
 		maze.addEntity(c3);
 		c1.registerObservers();
+		LeafExit exit = new LeafExit();
+		maze.setGoal(exit);
 		
 		c1.moveDown(maze);
 		c1.moveRight(maze);
@@ -244,6 +270,8 @@ public class EnemyMovementTest {
 		maze.addEntity(c2);
 		maze.addEntity(c3);
 		c1.registerObservers();
+		LeafExit exit = new LeafExit();
+		maze.setGoal(exit);
 		
 		c1.moveDown(maze);
 		c1.moveRight(maze);
@@ -280,6 +308,8 @@ public class EnemyMovementTest {
 		maze.addEntity(c7);
 		maze.addEntity(c8);
 		c1.registerObservers();
+		LeafExit exit = new LeafExit();
+		maze.setGoal(exit);
 		
 		c1.moveRight(maze);
 		// enemies should not be able to collide or swap places
@@ -298,6 +328,8 @@ public class EnemyMovementTest {
 		maze.addEntity(c2);
 		c1.registerObservers();
 		c1.setPlayerState(new InvincibleState());
+		LeafExit exit = new LeafExit();
+		maze.setGoal(exit);
 		
 		c1.moveRight(maze);
 		assertEquals(0,c2.getY());

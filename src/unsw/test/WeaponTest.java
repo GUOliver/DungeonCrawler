@@ -1,5 +1,6 @@
 package unsw.test;
 
+import unsw.compositeGoal.LeafExit;
 import unsw.dungeon.*;
 import org.junit.Test;
 
@@ -37,6 +38,8 @@ public class WeaponTest {
 		dungeon.addEntity(enemy1);
 		Enemy enemy2 = new Enemy(1, 2);
 		dungeon.addEntity(enemy2);
+		LeafExit exit = new LeafExit();
+		dungeon.setGoal(exit);
 		enemy1.moveUp(dungeon);
 		enemy1.moveDown(dungeon);
 		
@@ -82,6 +85,8 @@ public class WeaponTest {
 		dungeon.addEntity(bomb);
 		dungeon.addEntity(player);
 		dungeon.setPlayer(player);
+		LeafExit exit = new LeafExit();
+		dungeon.setGoal(exit);
 		
 		Enemy enemy1 = new Enemy(1,1);
 		Enemy enemy2 = new Enemy(1,2);

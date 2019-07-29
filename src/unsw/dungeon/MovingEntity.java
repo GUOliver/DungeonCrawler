@@ -148,8 +148,7 @@ public abstract class MovingEntity extends Entity {
 		// move ! And use x() and y() integerProperty to make it consistent
 		x().set(x);
 		y().set(y);
-
-
+		
 		// call the collision for this colliding with the entities on the tile, unless moving entity is enemy
 		if (this instanceof Player) {
 			
@@ -171,12 +170,12 @@ public abstract class MovingEntity extends Entity {
 			
 			player.notifyObservers();
 			// If the entity moving is player, after player moves make enemies move
-			for (Entity entity : dungeon.getEntities()) {
-				if (entity instanceof Enemy) {
-					Enemy enemy = (Enemy)entity;
-					enemy.moveEnemy(dungeon);
-				}
+			Enemy[] tempArray = dungeon.getEnemyArray();
+			for(int i = 0; i < tempArray.length;i++) {
+				if (tempArray[i]!=null)
+					tempArray[i].moveEnemy(dungeon);
 			}
+			
 			// Checks if invincibility ran out
 			if (player.getInvincibleTime()==0 && player.isInvincible()) {
 				player.setPlayerState(new NormalState());
@@ -184,6 +183,11 @@ public abstract class MovingEntity extends Entity {
 				player.setInvincibleTime(player.getInvincibleTime()-1);
 			}
 
+		}
+		// Enemies moving onto players should also cause collision
+		else if (this instanceof Enemy) {
+			if (dungeon.findSpecificEntity(x, y, "player") instanceof Player)
+				this.interact(dungeon, dungeon.getPlayer());
 		}
 		
 		// Checks if all goals are complete after player movement
