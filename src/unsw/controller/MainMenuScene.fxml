@@ -15,7 +15,7 @@
          <children>
             <ImageView fitHeight="441.0" fitWidth="809.0" layoutX="-82.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../Desktop/Screen%20Shot%202019-07-30%20at%206.14.56%20pm.png" />
+                  <Image url="@../../../bin/background.png" />
                </image>
                <viewport>
                   <Rectangle2D />
