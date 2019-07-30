@@ -61,35 +61,35 @@ public class DungeonController extends BasicController{
         switch (event.getCode()) {
         case UP:
             player.moveUp(dungeon);
-//            if (dungeon.getGameState() == true)
-//            	if (dungeon.getPlayer() != null)
-//            		handleWin();
-//            	else
-//            		handleDeath();
+            if (dungeon.getGameState() == true)
+            	if (dungeon.getEntities().contains(dungeon.getPlayer()))
+            		handleWin();
+            	else
+            		handleDeath();
             break;
         case DOWN:
             player.moveDown(dungeon);
-//            if (dungeon.getGameState() == true)
-//            	if (dungeon.getPlayer() != null)
-//            		handleWin();
-//            	else
-//            		handleDeath();
+            if (dungeon.getGameState() == true)
+            	if (dungeon.getEntities().contains(dungeon.getPlayer()))
+            		handleWin();
+            	else
+            		handleDeath();
             break;
         case LEFT:
             player.moveLeft(dungeon);
-//            if (dungeon.getGameState() == true)
-//            	if (dungeon.getPlayer() != null)
-//            		handleWin();
-//            	else
-//            		handleDeath();
+            if (dungeon.getGameState() == true)
+            	if (dungeon.getEntities().contains(dungeon.getPlayer()))
+            		handleWin();
+            	else
+            		handleDeath();
             break;
         case RIGHT:
             player.moveRight(dungeon);
-//            if (dungeon.getGameState() == true)
-//            	if (dungeon.getPlayer() != null)
-//            		handleWin();
-//            	else
-//            		handleDeath();
+            if (dungeon.getGameState() == true)
+            	if (dungeon.getEntities().contains(dungeon.getPlayer()))
+            		handleWin();
+            	else
+            		handleDeath();
             break;
         case SPACE:
         	handleDropBomb();

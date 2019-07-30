@@ -8,6 +8,7 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import javafx.stage.Stage;
+import unsw.compositeGoal.*;
 import unsw.dungeon.Bomb;
 import unsw.dungeon.Boulder;
 import unsw.dungeon.Door;
@@ -34,127 +35,149 @@ import unsw.dungeon.Wall;
  */
 public abstract class DungeonLoader {
 
-    private JSONObject json;
-    private String filename;
-    private Stage stage;
+	private JSONObject json;
+	private String filename;
+	private Stage stage;
 
-    public DungeonLoader(String filename, Stage stage) throws FileNotFoundException {
-        json = new JSONObject(new JSONTokener(new FileReader("dungeons/" + filename)));
-        this.filename = filename;
-        this.stage = stage;
-    }
+	public DungeonLoader(String filename, Stage stage) throws FileNotFoundException {
+		json = new JSONObject(new JSONTokener(new FileReader("dungeons/" + filename)));
+		this.filename = filename;
+		this.stage = stage;
+	}
 
-    /**
-     * Parses the JSON to create a dungeon.
-     * @return
-     */
-    public Dungeon load() {
-        int width = json.getInt("width");
-        int height = json.getInt("height");
+	/**
+	 * Parses the JSON to create a dungeon.
+	 * @return
+	 */
+	public Dungeon load() {
+		int width = json.getInt("width");
+		int height = json.getInt("height");
 
-        Dungeon dungeon = new Dungeon(width, height);
+		Dungeon dungeon = new Dungeon(width, height);
 
-        JSONArray jsonEntities = json.getJSONArray("entities");
+		JSONArray jsonEntities = json.getJSONArray("entities");
 
-        for (int i = 0; i < jsonEntities.length(); i++) {
-            loadEntity(dungeon, jsonEntities.getJSONObject(i));
-        }
-        
-        //String jsonGoals = json.getString("goal-condition");
-        
-        // Adding player to all enemy hit-lists
-        Player player = dungeon.getPlayer();
-        player.registerObservers();
-        return dungeon;
-    }
+		for (int i = 0; i < jsonEntities.length(); i++) {
+			loadEntity(dungeon, jsonEntities.getJSONObject(i));
+		}
 
-    private void loadEntity(Dungeon dungeon, JSONObject json) {
-        String type = json.getString("type");
-        int x = json.getInt("x");
-        int y = json.getInt("y");
+		JSONObject jsonGoals = json.getJSONObject("goal-condition");
+		if (jsonGoals.get("goal").equals("AND") || jsonGoals.get("goal").equals("OR")) {
+			CompositeAND goal = new CompositeAND();
+			JSONArray jsonSubGoals = jsonGoals.getJSONArray("subgoals");
+			for (int i = 0; i < jsonSubGoals.length(); i++) {
+				JSONObject subObj = (JSONObject) jsonSubGoals.get(i);
+				Component subgoal = createGoal(subObj.get("goal").toString());
+				goal.add(subgoal);
+				dungeon.setGoal(goal);
+			}
+		}else if (!jsonGoals.get("goal").equals("OR")) {
+			CompositeOR goal = new CompositeOR();
+			JSONArray jsonSubGoals = jsonGoals.getJSONArray("subgoals");
+			for (int i = 0; i < jsonSubGoals.length(); i++) {
+				JSONObject subObj = (JSONObject) jsonSubGoals.get(i);
+				Component subgoal = createGoal(subObj.get("goal").toString());
+				goal.add(subgoal);
+				dungeon.setGoal(goal);
+			}
+		} else {
+			Component goal = createGoal(jsonGoals.get("goal").toString());
+			dungeon.setGoal(goal);
+		}
 
-        Entity entity = null;
-        switch (type) {
-        case "player":
-            Player player = new Player(dungeon, x, y);
-            dungeon.setPlayer(player);
-            onLoad(player);
-            entity = player;
-            break;
-        case "wall":
-            Wall wall = new Wall(x, y);
-            onLoad(wall);
-            entity = wall;
-            break;
-        case "bomb":
-            Bomb bomb = new Bomb(x, y);
-            onLoad(bomb);
-            entity = bomb;
-            break;
-        case "boulder":
-            Boulder boulder = new Boulder(x, y);
-            onLoad(boulder);
-            entity = boulder;
-            break;
-        case "key":
-            Key key = new Key(dungeon, x, y);
-            onLoad(key);
-            entity = key;
-            break;
-        case "door":
-            Door door = new Door(dungeon, x, y);
-            onLoad(door);
-            entity = door;
-            break;
-        case "enemy":
-            Enemy enemy = new Enemy(x, y);
-            onLoad(enemy);
-            entity = enemy;
-            break;
-        case "switch":
-            FloorSwitch floorSwitch = new FloorSwitch(x, y);
-            onLoad(floorSwitch);
-            entity = floorSwitch;
-            break;
-        case "potion":
-            InvincibilityPotion potion = new InvincibilityPotion(x, y);
-            onLoad(potion);
-            entity = potion;
-            break;
-        case "sword":
-            Sword sword = new Sword(x, y);
-            onLoad(sword);
-            entity = sword;
-            break;
-        case "treasure":
-            Treasure treasure = new Treasure(x, y);
-            onLoad(treasure);
-            entity = treasure;
-            break;
-        case "exit":
-        	Exit exit = new Exit(x,y);
-        	onLoad(exit);
-        	entity = exit;
-        	break;
-        }
-        
-        if (entity != null) {
-        	dungeon.addEntity(entity);
-        }
-    }
+		// Adding player to all enemy hit-lists
+		Player player = dungeon.getPlayer();
+		player.registerObservers();
+		return dungeon;
+	}
 
-    public abstract void onLoad(Player player);
-    public abstract void onLoad(Wall wall);
-    public abstract void onLoad(Bomb bomb);
-    public abstract void onLoad(Boulder boulder);
-    public abstract void onLoad(Key key);
-    public abstract void onLoad(Door door);
-    public abstract void onLoad(Enemy enemy);
-    public abstract void onLoad(FloorSwitch floorSwitch);
-    public abstract void onLoad(InvincibilityPotion potion);
-    public abstract void onLoad(Sword sword);
-    public abstract void onLoad(Treasure treasure);
-    public abstract void onLoad(Exit exit);
+	private void loadEntity(Dungeon dungeon, JSONObject json) {
+		String type = json.getString("type");
+		int x = json.getInt("x");
+		int y = json.getInt("y");
+
+		Entity entity = null;
+		switch (type) {
+		case "player":
+			Player player = new Player(dungeon, x, y);
+			dungeon.setPlayer(player);
+			onLoad(player);
+			entity = player;
+			break;
+		case "wall":
+			Wall wall = new Wall(x, y);
+			onLoad(wall);
+			entity = wall;
+			break;
+		case "bomb":
+			Bomb bomb = new Bomb(x, y);
+			onLoad(bomb);
+			entity = bomb;
+			break;
+		case "boulder":
+			Boulder boulder = new Boulder(x, y);
+			onLoad(boulder);
+			entity = boulder;
+			break;
+		case "key":
+			Key key = new Key(dungeon, x, y);
+			onLoad(key);
+			entity = key;
+			break;
+		case "door":
+			Door door = new Door(dungeon, x, y);
+			onLoad(door);
+			entity = door;
+			break;
+		case "enemy":
+			Enemy enemy = new Enemy(x, y);
+			onLoad(enemy);
+			entity = enemy;
+			break;
+		case "switch":
+			FloorSwitch floorSwitch = new FloorSwitch(x, y);
+			onLoad(floorSwitch);
+			entity = floorSwitch;
+			break;
+		case "potion":
+			InvincibilityPotion potion = new InvincibilityPotion(x, y);
+			onLoad(potion);
+			entity = potion;
+			break;
+		case "sword":
+			Sword sword = new Sword(x, y);
+			onLoad(sword);
+			entity = sword;
+			break;
+		case "treasure":
+			Treasure treasure = new Treasure(x, y);
+			onLoad(treasure);
+			entity = treasure;
+			break;
+		case "exit":
+			Exit exit = new Exit(x,y);
+			onLoad(exit);
+			entity = exit;
+			break;
+		}
+
+		if (entity != null) {
+			dungeon.addEntity(entity);
+		}
+	}
+
+	public abstract void onLoad(Player player);
+	public abstract void onLoad(Wall wall);
+	public abstract void onLoad(Bomb bomb);
+	public abstract void onLoad(Boulder boulder);
+	public abstract void onLoad(Key key);
+	public abstract void onLoad(Door door);
+	public abstract void onLoad(Enemy enemy);
+	public abstract void onLoad(FloorSwitch floorSwitch);
+	public abstract void onLoad(InvincibilityPotion potion);
+	public abstract void onLoad(Sword sword);
+	public abstract void onLoad(Treasure treasure);
+	public abstract void onLoad(Exit exit);
 
 	public String getFilename() {
 		return filename;
@@ -162,6 +185,24 @@ public abstract class DungeonLoader {
 
 	public Stage getStage() {
 		return stage;
+	}
+	
+	private Component createGoal(String goal) {
+		if(goal.equals("exit")) {
+			LeafExit goalComponent = new LeafExit();
+			return goalComponent;
+		}else if(goal.equals("boulders")) {
+			LeafSwitch goalComponent = new LeafSwitch();
+			return goalComponent;
+		}else if(goal.equals("enemies")) {
+			LeafEnemy goalComponent = new LeafEnemy();
+			return goalComponent;
+		}else if(goal.equals("treasure")) {
+			LeafTreasure goalComponent = new LeafTreasure();
+			return goalComponent;
+		} else {
+			return null;
+		}
 	}
 
 }
