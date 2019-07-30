@@ -22,7 +22,7 @@
                </viewport>
             </ImageView>
             <Button fx:id="exitButton" layoutX="69.0" layoutY="272.0" mnemonicParsing="false" onAction="#handleExit" prefHeight="67.0" prefWidth="479.0" style="-fx-background-color: #1a2d4c;" text="Exit" />
-            <Label layoutX="69.0" prefHeight="120.0" prefWidth="559.0" text="Welcome To Dungeon Crawler !" textFill="#dd0a0a">
+            <Label layoutX="69.0" prefHeight="120.0" prefWidth="559.0" text="Welcome To Dungeon Crawler !" textFill="#972929">
                <font>
                   <Font size="34.0" />
                </font>
