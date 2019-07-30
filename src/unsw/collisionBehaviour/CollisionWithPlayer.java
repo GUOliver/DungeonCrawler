@@ -25,6 +25,8 @@ public class CollisionWithPlayer implements CollisionBehaviour{
 					dungeon.setEnemyTotal(dungeon.getEnemyTotal() - 1);
 					player.removeObserver(enemy);
 				} else {
+					
+					dungeon.removeEntity(player);
 					dungeon.setGameState(true);
 				}
 			}

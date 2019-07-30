@@ -187,8 +187,10 @@ public class EnemyMovementTest {
 		maze.setGoal(exit);
 		
 		c1.moveDown(maze);
+		assertEquals(c2.getX(),3);
+		
 		c1.moveRight(maze);
-		assertEquals(4,c2.getX());
+		assertEquals(c2.getX(),4);
 		// Check item still exists
 		List<Entity> box = maze.findEntity(3, 1);
 		assertTrue(!box.isEmpty());
@@ -213,7 +215,7 @@ public class EnemyMovementTest {
 		c1.moveRight(maze);
 
 		// Enemy moves through open door
-		assertEquals(4,c2.getX());
+		assertEquals(4, c2.getX());
 	}
 	
 	@Test
@@ -234,7 +236,8 @@ public class EnemyMovementTest {
 		c1.moveRight(maze);
 
 		// Enemy cant move through closed door
-		assertEquals(2,c2.getX());
+		assertEquals(3,c2.getX());
+		assertEquals(0,c2.getY());
 	}
 	
 	@Test
@@ -253,7 +256,7 @@ public class EnemyMovementTest {
 		
 		c1.moveDown(maze);
 		c1.moveRight(maze);
-		assertEquals(4,c2.getX());
+		assertEquals(4, c2.getX());
 		// Check item still exists
 		List<Entity> box = maze.findEntity(3, 1);
 		assertTrue(!box.isEmpty());
@@ -275,7 +278,7 @@ public class EnemyMovementTest {
 		
 		c1.moveDown(maze);
 		c1.moveRight(maze);
-		assertEquals(4,c2.getX());
+		assertEquals(4, c2.getX());
 		// Check item still exists
 		List<Entity> box = maze.findEntity(3, 1);
 		assertTrue(!box.isEmpty());
@@ -315,7 +318,7 @@ public class EnemyMovementTest {
 		// enemies should not be able to collide or swap places
 		assertEquals(5,c1.getX());
 		assertEquals(2,c2.getX());
-		assertEquals(1,c3.getX());
+		assertEquals(0,c3.getX());
 	}
 	
 	@Test

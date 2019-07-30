@@ -151,6 +151,7 @@ public class Dungeon {
 	 * @param entity - the BoardEntity to be added
 	 */
     public void addEntity(Entity entity) {
+    	if (this.gameState == true) return;
     	
     	if (entity.getType().equals("exit")) {
     		if (this.isHasExit() == true ) {
@@ -334,6 +335,10 @@ public class Dungeon {
 	 * @return
 	 */
 	public boolean getGoalComplete() {
+		if (goals == null) {
+			System.out.println("You havent set up the goal yet !");
+			return false;
+		}
 		return goals.checkComplete(this);
 	}
 	
@@ -379,6 +384,36 @@ public class Dungeon {
 		}
 		
 		return tempArray;
+	}
+	
+
+	/**
+	 * check if the enemy can move onto that grid or not
+	 * @param character generallu an enemy
+	 * @param destX the coord x for the destination
+	 * @param destY the coord y for the destination
+	 * @return true or false
+	 */
+	public boolean canMoveOnto(Entity character, int destX, int destY) {
+		List<Entity> items = this.findEntity(destX, destY);
+		for (Entity item : items) {
+			if (item.canMoveOnto(this, character) == false) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	
+	/**
+	 * check if the coord is valid or not
+	 * @param x the x coord
+	 * @param y the y coord
+	 * @return the true or false
+	 */
+	public boolean isValidCoord(int x, int y) {
+		if (x < 0 || y < 0) return false;
+		return (x < this.getWidth() && y < this.getHeight());
 	}
     
     

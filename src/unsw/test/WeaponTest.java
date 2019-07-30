@@ -40,8 +40,6 @@ public class WeaponTest {
 		dungeon.addEntity(enemy2);
 		LeafExit exit = new LeafExit();
 		dungeon.setGoal(exit);
-		enemy1.moveUp(dungeon);
-		enemy1.moveDown(dungeon);
 		
 		List<Entity> entities = dungeon.findEntity(1, 0);
 		assertTrue(entities.contains(sword));
@@ -99,7 +97,7 @@ public class WeaponTest {
 		dungeon.addEntity(boulder1);
 		dungeon.addEntity(boulder2);
 		dungeon.addEntity(wall);
-		player.registerObservers();
+		// player.registerObservers();
 		
 		// get the unlit bomb
 		player.moveUp(dungeon);
