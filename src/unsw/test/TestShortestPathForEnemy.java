@@ -55,7 +55,7 @@ public class TestShortestPathForEnemy {
 		//1	 _
 		//2			 E
 		
-		@Test
+	@Test
 	public void testKillBySword() {
 		Dungeon maze = new Dungeon(10, 10);
 		
@@ -83,13 +83,14 @@ public class TestShortestPathForEnemy {
 		assertTrue(1 == c2.getX());
 		assertTrue(1 == c2.getY());
 		
-		
+		// kill the enemy
 		c1.moveRight(maze);
 		assertTrue(1 == c2.getX());
 		assertTrue(2 == c2.getY());
 		
 		assertTrue(maze.findEntity(1, 2).size() == 1);
 		assertTrue(maze.findEntity(1, 2).get(0) instanceof Player);
+		assertEquals(c1.getSwordNum(), 4);
 		
 	
 	}
