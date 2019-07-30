@@ -43,50 +43,54 @@ public class TestShortestPathForEnemy {
 		assertTrue(1 == c2.getX());
 		assertTrue(2 == c2.getY());
 		
-		
+		// be killed by the enemy 
 		assertTrue(maze.getGameState());
 		assertTrue(maze.findEntity(1, 2).size() == 1);
 		assertTrue(maze.findEntity(1, 2).get(0) instanceof Enemy);
 	
 	}
 	
-	
-		@Test
-		public void testKillBySword() {
-			Dungeon maze = new Dungeon(3, 3);
-			
-			Player c1 = new Player(maze, 0, 0);
-			Enemy c2 = new Enemy(2, 2);
-			Sword sword = new Sword(0, 1);
-			maze.addEntity(c1);
-			maze.addEntity(sword);
-			maze.setPlayer(c1);
-			maze.addEntity(c2);
-			c1.registerObservers();
-			assertEquals(1, maze.getEnemyTotal());
-			
-			
-			LeafExit exit = new LeafExit();
-			maze.setGoal(exit);
-			
-			c1.moveDown(maze);
-			
-			assertTrue(2 == c2.getX());
-			assertTrue(1 == c2.getY());
-			
-			c1.moveDown(maze);
-			
-			assertTrue(1 == c2.getX());
-			assertTrue(1 == c2.getY());
-			
-			
-			c1.moveRight(maze);
-			assertTrue(1 == c2.getX());
-			assertTrue(2 == c2.getY());
-			
-			assertTrue(maze.findEntity(1, 2).size() == 1);
-			assertTrue(maze.findEntity(1, 2).get(0) instanceof Player);
-			
+		//   0	 1   2
+		//0	 		
+		//1	 _
+		//2			 E
 		
-		}
+		@Test
+	public void testKillBySword() {
+		Dungeon maze = new Dungeon(10, 10);
+		
+		Player c1 = new Player(maze, 0, 0);
+		Enemy c2 = new Enemy(2, 2);
+		Sword sword = new Sword(0, 1);
+		maze.addEntity(c1);
+		maze.addEntity(sword);
+		maze.setPlayer(c1);
+		maze.addEntity(c2);
+		c1.registerObservers();
+		assertEquals(1, maze.getEnemyTotal());
+		
+		LeafExit exit = new LeafExit();
+		maze.setGoal(exit);
+		
+		// get the sword
+		c1.moveDown(maze);
+		
+		assertTrue(2 == c2.getX());
+		assertTrue(1 == c2.getY());
+		
+		c1.moveDown(maze);
+		
+		assertTrue(1 == c2.getX());
+		assertTrue(1 == c2.getY());
+		
+		
+		c1.moveRight(maze);
+		assertTrue(1 == c2.getX());
+		assertTrue(2 == c2.getY());
+		
+		assertTrue(maze.findEntity(1, 2).size() == 1);
+		assertTrue(maze.findEntity(1, 2).get(0) instanceof Player);
+		
+	
+	}
 }

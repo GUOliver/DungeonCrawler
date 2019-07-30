@@ -1,22 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Pane layoutY="3.0" prefHeight="400.0" prefWidth="600.0">
+      <Pane layoutY="3.0" prefHeight="400.0" prefWidth="600.0" stylesheets="@style.css">
          <children>
-            <Button fx:id="startButton" layoutX="61.0" layoutY="167.0" mnemonicParsing="false" onAction="#handleStart" prefHeight="67.0" prefWidth="479.0" text="Start" />
-            <Button fx:id="exitButton" layoutX="61.0" layoutY="284.0" mnemonicParsing="false" onAction="#handleExit" prefHeight="67.0" prefWidth="479.0" text="Exit" />
-            <Label layoutX="63.0" prefHeight="104.0" prefWidth="508.0" text="Welcome To Dungeon Crawler !">
+            <ImageView fitHeight="441.0" fitWidth="809.0" layoutX="-82.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../Desktop/Screen%20Shot%202019-07-30%20at%206.14.56%20pm.png" />
+               </image>
+               <viewport>
+                  <Rectangle2D />
+               </viewport>
+            </ImageView>
+            <Button fx:id="exitButton" layoutX="69.0" layoutY="272.0" mnemonicParsing="false" onAction="#handleExit" prefHeight="67.0" prefWidth="479.0" style="-fx-background-color: #1a2d4c;" text="Exit" />
+            <Label layoutX="69.0" prefHeight="120.0" prefWidth="559.0" text="Welcome To Dungeon Crawler !" textFill="#dd0a0a">
                <font>
-                  <Font size="26.0" />
+                  <Font size="34.0" />
                </font>
             </Label>
+            <Button fx:id="startButton" layoutX="69.0" layoutY="146.0" mnemonicParsing="false" onAction="#handleStart" prefHeight="67.0" prefWidth="479.0" style="-fx-background-color: #1a2d4c;" text="Start" />
          </children>
       </Pane>
    </children>

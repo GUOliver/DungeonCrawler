@@ -1,7 +1,19 @@
-#pane{
-    -fx-background-image: url("https://opengameart.org/sites/default/files/styles/medium/public/parallax-mountain-animX1.gif");
-    -fx-background-repeat: stretch;   
-    -fx-background-size: 900 506;
-    -fx-background-position: center center;
-    -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0); 
+.button{
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+	-fx-text-alignment: center;
+    -fx-text-fill: Red;
+    -fx-font-size: 18;
+}
+
+.button:hover {
+    -fx-background-color: DarkCyan;
+    -fx-text-fill: White;
+}
+
+.button:pressed {
+    -fx-background-color: Black;
+    -fx-text-fill: White;
 }

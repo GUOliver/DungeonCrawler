@@ -21,7 +21,7 @@ public class MovingToPlayer implements MovementStrategy{
 		
 		if (entity.isEnemy()) {
 			Enemy enemy = (Enemy)entity;
-			//int dungeonSize = dungeon.getHeight() * dungeon.getWidth();
+//			
 //			if (enemy.getX()<enemy.getPlayerX()) {
 //				enemy.moveRight(dungeon);
 //			} else if (enemy.getX()>enemy.getPlayerX()) {
@@ -65,6 +65,10 @@ public class MovingToPlayer implements MovementStrategy{
 		int dungeonSize = dungeon.getHeight() * dungeon.getWidth();
 		
 		int[] visited = new int[dungeonSize];
+		for (int i = 0; i < visited.length; i++) {
+			visited[i] = -2;
+		}
+		
 		if (this.findPathBFS(dungeon, entity, src, dest, visited)) {
 			
 			int v = dest;
@@ -119,7 +123,13 @@ public class MovingToPlayer implements MovementStrategy{
 		int v;
 		
 		for (int i = 0; i < visited.length; i++) {
-			visited[i] = -1;
+			int checkX = this.indexToCoordX(i, dungeon);
+			int checkY = this.indexToCoordY(i, dungeon);
+			
+			// only put the vertex that can move onto in the visited
+			if (dungeon.canMoveOnto(entity, checkX, checkY)) {
+				visited[i] = -1;
+			}
 		}
 		
 		// udpate src
@@ -131,6 +141,12 @@ public class MovingToPlayer implements MovementStrategy{
 			v = q.removeLast();
 			//System.out.println(v);
 			for (int w = 0; w < visited.length; w++) {
+				
+				// if the vertex can not be moved onto, continue
+				if (visited[w] == -2) {
+					continue;
+				}
+				
 				ArrayList<Integer> neighbours = new ArrayList<Integer>();
 				this.addNeighbour(dungeon, neighbours, entity, v);
 				
