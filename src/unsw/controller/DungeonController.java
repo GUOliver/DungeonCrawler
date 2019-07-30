@@ -61,36 +61,38 @@ public class DungeonController extends BasicController{
         switch (event.getCode()) {
         case UP:
             player.moveUp(dungeon);
-            if (dungeon.getGameState() == true)
-            	if (dungeon.getPlayer() != null)
-            		handleWin();
-            	else
-            		handleDeath();
+//            if (dungeon.getGameState() == true)
+//            	if (dungeon.getPlayer() != null)
+//            		handleWin();
+//            	else
+//            		handleDeath();
             break;
         case DOWN:
             player.moveDown(dungeon);
-            if (dungeon.getGameState() == true)
-            	if (dungeon.getPlayer() != null)
-            		handleWin();
-            	else
-            		handleDeath();
+//            if (dungeon.getGameState() == true)
+//            	if (dungeon.getPlayer() != null)
+//            		handleWin();
+//            	else
+//            		handleDeath();
             break;
         case LEFT:
             player.moveLeft(dungeon);
-            if (dungeon.getGameState() == true)
-            	if (dungeon.getPlayer() != null)
-            		handleWin();
-            	else
-            		handleDeath();
+//            if (dungeon.getGameState() == true)
+//            	if (dungeon.getPlayer() != null)
+//            		handleWin();
+//            	else
+//            		handleDeath();
             break;
         case RIGHT:
             player.moveRight(dungeon);
-            if (dungeon.getGameState() == true)
-            	if (dungeon.getPlayer() != null)
-            		handleWin();
-            	else
-            		handleDeath();
+//            if (dungeon.getGameState() == true)
+//            	if (dungeon.getPlayer() != null)
+//            		handleWin();
+//            	else
+//            		handleDeath();
             break;
+        case Q:
+        	handleQuit();
         default:
             break;
         }
@@ -110,6 +112,12 @@ public class DungeonController extends BasicController{
 		BasicScene gameWin = new BasicScene(this.getStage(), "Level Complete", "GameWinScene.fxml");
     	GameWinController gwc = new GameWinController(this.getStage(), getFilename());
 		gameWin.start(gwc);
+	}
+	
+	private void handleQuit() throws IOException {
+		BasicScene menuScreen = new BasicScene(this.getStage(), "Game Menu", "MainMenuScene.fxml");
+    	MainMenuController dmc = new MainMenuController(this.getStage());
+		menuScreen.start(dmc);
 	}
 
 }

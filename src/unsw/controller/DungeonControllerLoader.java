@@ -16,6 +16,7 @@ import unsw.dungeon.Boulder;
 import unsw.dungeon.Door;
 import unsw.dungeon.Enemy;
 import unsw.dungeon.Entity;
+import unsw.dungeon.Exit;
 import unsw.dungeon.FloorSwitch;
 import unsw.dungeon.InvincibilityPotion;
 import unsw.dungeon.Key;
@@ -37,6 +38,22 @@ public class DungeonControllerLoader extends DungeonLoader {
     //Images
     private Image playerImage;
     private Image wallImage;
+	private Image unlitBombImage;
+	private Image lit1BombImage;
+	private Image lit2BombImage;
+	private Image lit3BombImage;
+	private Image explodeBombImage;
+	private Image boulderImage;
+	private Image invincibilityImage;
+	private Image invincibilePlayerImage;
+	private Image lockedDoorImage;
+	private Image openDoorImage;
+	private Image exitImage;
+	private Image enemyImage;
+	private Image treasureImage;
+	private Image swordImage;
+	private Image keyImage;
+	private Image switchImage;
 
     public DungeonControllerLoader(String filename, Stage stage)
             throws FileNotFoundException {
@@ -44,7 +61,23 @@ public class DungeonControllerLoader extends DungeonLoader {
         entities = new ArrayList<>();
         playerImage = new Image("/human_new.png");
         wallImage = new Image("/brick_brown_0.png");
-        //TODO images for other entities
+        unlitBombImage = new Image("/bomb_unlit.png");
+        lit1BombImage = new Image("/bomb_lit_1.png");
+        lit2BombImage = new Image("/bomb_lit_2.png");
+        lit3BombImage = new Image("/bomb_lit_3.png");
+        explodeBombImage = new Image("/bomb_lit_4.png");
+        boulderImage = new Image("/boulder.png");
+        invincibilityImage = new Image("/brilliant_blue_new.png");
+        invincibilePlayerImage = new Image("/human_invincible.png");
+        lockedDoorImage = new Image("/closed_door.png");
+        openDoorImage = new Image("/open_door.png");
+        exitImage = new Image("/exit.png");
+        enemyImage = new Image("/gnome.png");
+        treasureImage = new Image("/gold_pile.png");
+        swordImage = new Image("/greatsword_1_new.png");
+        keyImage = new Image("/key.png");
+        switchImage = new Image("/pressure_plate.png");
+        
     }
 
     @Override
@@ -61,56 +94,62 @@ public class DungeonControllerLoader extends DungeonLoader {
     
     @Override
 	public void onLoad(Bomb bomb) {
-		// TODO Auto-generated method stub
-		
+    	ImageView view = new ImageView(unlitBombImage);
+        addEntity(bomb, view);
 	}
 
 	@Override
 	public void onLoad(Boulder boulder) {
-		// TODO Auto-generated method stub
-		
+		ImageView view = new ImageView(boulderImage);
+        addEntity(boulder, view);
 	}
 
 	@Override
 	public void onLoad(Key key) {
-		// TODO Auto-generated method stub
-		
+		ImageView view = new ImageView(keyImage);
+        addEntity(key, view);
 	}
 
 	@Override
 	public void onLoad(Door door) {
-		// TODO Auto-generated method stub
-		
+		ImageView view = new ImageView(lockedDoorImage);
+        addEntity(door, view);
 	}
 
 	@Override
 	public void onLoad(Enemy enemy) {
-		// TODO Auto-generated method stub
-		
+		ImageView view = new ImageView(enemyImage);
+        addEntity(enemy, view);
 	}
 
 	@Override
 	public void onLoad(FloorSwitch floorSwitch) {
-		// TODO Auto-generated method stub
-		
+		ImageView view = new ImageView(switchImage);
+        addEntity(floorSwitch, view);
 	}
 
 	@Override
 	public void onLoad(InvincibilityPotion potion) {
-		// TODO Auto-generated method stub
-		
+		ImageView view = new ImageView(invincibilityImage);
+        addEntity(potion, view);
 	}
 
 	@Override
 	public void onLoad(Sword sword) {
-		// TODO Auto-generated method stub
-		
+		ImageView view = new ImageView(swordImage);
+        addEntity(sword, view);
 	}
 
 	@Override
 	public void onLoad(Treasure treasure) {
-		// TODO Auto-generated method stub
-		
+		ImageView view = new ImageView(treasureImage);
+        addEntity(treasure, view);
+	}
+	
+	@Override
+	public void onLoad(Exit exit) {
+		ImageView view = new ImageView(exitImage);
+        addEntity(exit, view);
 	}
 
 

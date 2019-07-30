@@ -14,6 +14,7 @@ import unsw.dungeon.Door;
 import unsw.dungeon.Dungeon;
 import unsw.dungeon.Enemy;
 import unsw.dungeon.Entity;
+import unsw.dungeon.Exit;
 import unsw.dungeon.FloorSwitch;
 import unsw.dungeon.InvincibilityPotion;
 import unsw.dungeon.Key;
@@ -128,7 +129,11 @@ public abstract class DungeonLoader {
             onLoad(treasure);
             entity = treasure;
             break;
-        // TODO Handle other possible entities
+        case "exit":
+        	Exit exit = new Exit(x,y);
+        	onLoad(exit);
+        	entity = exit;
+        	break;
         }
         
         if (entity != null) {
@@ -137,26 +142,17 @@ public abstract class DungeonLoader {
     }
 
     public abstract void onLoad(Player player);
-
     public abstract void onLoad(Wall wall);
-    
     public abstract void onLoad(Bomb bomb);
-    
     public abstract void onLoad(Boulder boulder);
-    
     public abstract void onLoad(Key key);
-    
     public abstract void onLoad(Door door);
-    
     public abstract void onLoad(Enemy enemy);
-    
     public abstract void onLoad(FloorSwitch floorSwitch);
-    
     public abstract void onLoad(InvincibilityPotion potion);
-    
     public abstract void onLoad(Sword sword);
-    
     public abstract void onLoad(Treasure treasure);
+    public abstract void onLoad(Exit exit);
 
 	public String getFilename() {
 		return filename;
@@ -165,7 +161,5 @@ public abstract class DungeonLoader {
 	public Stage getStage() {
 		return stage;
 	}
-
-    // TODO Create additional abstract methods for the other entities
 
 }

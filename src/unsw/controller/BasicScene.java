@@ -42,6 +42,7 @@ public class BasicScene {
        
         Parent root = this.fxmlLoader.load();
         Scene sc = new Scene(root);
+        root.requestFocus();
         this.stage.setScene(sc);
         this.stage.show();
        
@@ -58,6 +59,7 @@ public class BasicScene {
        
         Parent root = this.fxmlLoader.load();
         Scene sc = new Scene(root);
+        root.requestFocus();
         this.stage.setScene(sc);
         this.stage.show();
        
