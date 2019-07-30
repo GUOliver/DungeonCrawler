@@ -15,21 +15,6 @@ public class DungeonApplication extends Application {
     	MainMenuScene startScreen = new MainMenuScene(primaryStage);
         startScreen.start();
         
-        
-//        primaryStage.setTitle("Dungeon");
-//
-//        DungeonControllerLoader dungeonLoader = new DungeonControllerLoader("maze.json", primaryStage);
-//
-//        DungeonController controller = dungeonLoader.loadController();
-//
-//        FXMLLoader loader = new FXMLLoader(getClass().getResource("DungeonView.fxml"));
-//        loader.setController(controller);
-//        Parent root = loader.load();
-//        Scene scene = new Scene(root);
-//        root.requestFocus();
-//        primaryStage.setScene(scene);
-//        primaryStage.show();
-        
     }
 
     public static void main(String[] args) {

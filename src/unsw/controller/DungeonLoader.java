@@ -60,6 +60,8 @@ public abstract class DungeonLoader {
             loadEntity(dungeon, jsonEntities.getJSONObject(i));
         }
         
+        //String jsonGoals = json.getString("goal-condition");
+        
         // Adding player to all enemy hit-lists
         Player player = dungeon.getPlayer();
         player.registerObservers();

@@ -45,14 +45,14 @@ public class MovingToPlayer implements MovementStrategy{
 		int fromX = entity.getX();
 		int fromY = entity.getY();
 		
-		System.out.println("going from (" + fromX + ", " + fromY + ") to (" + destX + ", " + destY + ")");
+//		System.out.println("going from (" + fromX + ", " + fromY + ") to (" + destX + ", " + destY + ")");
 		if (fromX == destX && fromY == destY) {
 			return;
 		}
 		
 		if(! dungeon.canMoveOnto(entity, destX, destY)) {
 			// if we can't get to the final square, return NONE
-			System.out.println("cant get to " + destX + "," + destY + " entities on point: " + dungeon.findEntity(destX, destY));
+//			System.out.println("cant get to " + destX + "," + destY + " entities on point: " + dungeon.findEntity(destX, destY));
 			return;
 		}
 		
@@ -70,19 +70,19 @@ public class MovingToPlayer implements MovementStrategy{
 			int v = dest;
 			int pre = 0;
 			while (v != src) {
-				System.out.printf("%d - ", v);
+//				System.out.printf("%d - ", v);
 				pre = v;
 				v = visited[v];
 			}
-			System.out.printf("%d\n", src);
+//			System.out.printf("%d\n", src);
 			
-			System.out.printf("next move: %d\n", pre);
+//			System.out.printf("next move: %d\n", pre);
 			
 			
 	
 			int nextX = this.indexToCoordX(pre, dungeon);
 			int nextY = this.indexToCoordY(pre, dungeon);
-			System.out.printf("nextX: %d, nextY: %d\n", nextX, nextY);
+//			System.out.printf("nextX: %d, nextY: %d\n", nextX, nextY);
 			
 			if (nextX == fromX -1 && nextY == fromY) {
 				// means left
@@ -97,7 +97,7 @@ public class MovingToPlayer implements MovementStrategy{
 			} else if (nextX == fromX && nextY == fromY + 1) {
 				((Enemy) entity).moveDown(dungeon);
 			} else {
-				System.out.println("not supposed to happen nextX = " + nextX + ", nextY = " + nextY);
+//				System.out.println("not supposed to happen nextX = " + nextX + ", nextY = " + nextY);
 				return;
 			}
 		} else {

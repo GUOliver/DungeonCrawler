@@ -603,15 +603,7 @@
       "type": "wall"
     }
   ],
-  "goal-condition": {
-    "goal": "AND",
-    "subgoals": [
-      {
-        "goal": "enemies"
-      },
-      {
-        "goal": "treasure"
-      }
+  "goal-condition": {"goal": "AND","subgoals": [{"goal": "enemies"},{"goal": "treasure"}
     ]
   }
 }

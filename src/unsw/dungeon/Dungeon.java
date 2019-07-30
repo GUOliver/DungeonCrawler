@@ -336,7 +336,7 @@ public class Dungeon {
 	 */
 	public boolean getGoalComplete() {
 		if (goals == null) {
-			System.out.println("You havent set up the goal yet !");
+//			System.out.println("You havent set up the goal yet !");
 			return false;
 		}
 		return goals.checkComplete(this);

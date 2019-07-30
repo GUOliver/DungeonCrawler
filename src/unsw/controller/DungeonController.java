@@ -91,8 +91,12 @@ public class DungeonController extends BasicController{
 //            	else
 //            		handleDeath();
             break;
+        case SPACE:
+        	handleDropBomb();
+        	break;
         case Q:
         	handleQuit();
+        	break;
         default:
             break;
         }
@@ -119,6 +123,11 @@ public class DungeonController extends BasicController{
     	MainMenuController dmc = new MainMenuController(this.getStage());
 		menuScreen.start(dmc);
 	}
+	
+	private void handleDropBomb(){
+		dungeon.getPlayer().dropBomb();
+	}
+
 
 }
 
