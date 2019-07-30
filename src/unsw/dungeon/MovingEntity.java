@@ -259,7 +259,7 @@ public abstract class MovingEntity extends Entity {
 	public boolean isBarrier(int x, int y, Dungeon dungeon) {
 		List<Entity> items = dungeon.findEntity(x, y);
 		for (Entity item : items) {
-			if (item.getType().equals("wall") || item.getType().equals("locked door")) {
+			if (item.getType().equals("wall") || item.getType().equals("locked door") || item.getType().equals("boulder")) {
 				return true;
 			} 
 		}
