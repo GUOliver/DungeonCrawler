@@ -68,7 +68,7 @@ public class DungeonControllerLoader extends DungeonLoader {
         explodeBombImage = new Image("/bomb_lit_4.png");
         boulderImage = new Image("/boulder.png");
         invincibilityImage = new Image("/brilliant_blue_new.png");
-        invincibilePlayerImage = new Image("/human_invincible.png");
+        //invincibilePlayerImage = new Image("/human_invincible.png");
         lockedDoorImage = new Image("/closed_door.png");
         openDoorImage = new Image("/open_door.png");
         exitImage = new Image("/exit.png");
@@ -95,6 +95,11 @@ public class DungeonControllerLoader extends DungeonLoader {
     @Override
 	public void onLoad(Bomb bomb) {
     	ImageView view = new ImageView(unlitBombImage);
+    	/*bomb.tickProperty().addListener(
+    			changed() {
+    				view.setImage(value);
+    			}
+    	)*/
         addEntity(bomb, view);
 	}
 

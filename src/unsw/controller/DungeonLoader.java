@@ -62,7 +62,7 @@ public abstract class DungeonLoader {
 		}
 
 		JSONObject jsonGoals = json.getJSONObject("goal-condition");
-		if (jsonGoals.get("goal").equals("AND") || jsonGoals.get("goal").equals("OR")) {
+		if (jsonGoals.get("goal").equals("AND")) {
 			CompositeAND goal = new CompositeAND();
 			JSONArray jsonSubGoals = jsonGoals.getJSONArray("subgoals");
 			for (int i = 0; i < jsonSubGoals.length(); i++) {
@@ -71,7 +71,7 @@ public abstract class DungeonLoader {
 				goal.add(subgoal);
 				dungeon.setGoal(goal);
 			}
-		}else if (!jsonGoals.get("goal").equals("OR")) {
+		}else if (jsonGoals.get("goal").equals("OR")) {
 			CompositeOR goal = new CompositeOR();
 			JSONArray jsonSubGoals = jsonGoals.getJSONArray("subgoals");
 			for (int i = 0; i < jsonSubGoals.length(); i++) {
