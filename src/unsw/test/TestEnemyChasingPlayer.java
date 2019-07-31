@@ -17,7 +17,6 @@ public class TestEnemyChasingPlayer {
 	@Test
 	public void testEnemyChasingPlayer() {
 		Dungeon maze = new Dungeon(10, 10);
-		
 		Player c1 = new Player(maze, 3, 3);
 		Enemy c2 = new Enemy(9, 9);
 		
