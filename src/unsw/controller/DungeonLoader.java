@@ -2,11 +2,18 @@ package unsw.controller;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+import javafx.beans.Observable;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import unsw.compositeGoal.*;
 import unsw.dungeon.Bomb;
@@ -60,7 +67,11 @@ public abstract class DungeonLoader {
 		for (int i = 0; i < jsonEntities.length(); i++) {
 			loadEntity(dungeon, jsonEntities.getJSONObject(i));
 		}
+		
+		trackEntityList(dungeon.getEntities());
+		
 
+		// Adding goals
 		JSONObject jsonGoals = json.getJSONObject("goal-condition");
 		if (jsonGoals.get("goal").equals("AND")) {
 			CompositeAND goal = new CompositeAND();
@@ -90,6 +101,19 @@ public abstract class DungeonLoader {
 		player.registerObservers();
 		return dungeon;
 	}
+	
+	 
+    private void trackEntityList(ObservableList<Entity> entities) {
+    	entities.addListener(new ListChangeListener<Entity>() {
+
+			@Override
+			public void onChanged(Change<? extends Entity> c) {
+				if (c.wasAdded()) {
+					List<Entity> = c.getAddedSubList();
+					for ()
+				}
+			}});
+    }
 
 	private void loadEntity(Dungeon dungeon, JSONObject json) {
 		String type = json.getString("type");
@@ -111,7 +135,7 @@ public abstract class DungeonLoader {
 			break;
 		case "bomb":
 			Bomb bomb = new Bomb(x, y);
-			onLoad(bomb);
+			onLoad(bomb, bomb.getBombState());
 			entity = bomb;
 			break;
 		case "boulder":
@@ -168,7 +192,7 @@ public abstract class DungeonLoader {
 
 	public abstract void onLoad(Player player);
 	public abstract void onLoad(Wall wall);
-	public abstract void onLoad(Bomb bomb);
+	public abstract void onLoad(Bomb bomb, boolean state);
 	public abstract void onLoad(Boulder boulder);
 	public abstract void onLoad(Key key);
 	public abstract void onLoad(Door door);
@@ -178,6 +202,8 @@ public abstract class DungeonLoader {
 	public abstract void onLoad(Sword sword);
 	public abstract void onLoad(Treasure treasure);
 	public abstract void onLoad(Exit exit);
+	
+
 
 	public String getFilename() {
 		return filename;

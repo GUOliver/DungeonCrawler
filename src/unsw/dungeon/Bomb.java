@@ -5,6 +5,8 @@ package unsw.dungeon;
 
 import java.util.ArrayList;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import unsw.collisionBehaviour.*;
 public class Bomb extends Entity{
 
@@ -13,7 +15,7 @@ public class Bomb extends Entity{
 	*private Timer timer;
 	*/
 	private boolean bombState;
-	private int tick;
+	private IntegerProperty tick;
 	private boolean isExploded;
 	
 	/**
@@ -27,7 +29,7 @@ public class Bomb extends Entity{
 		setCollisionBehaviour(new PickUpUnlitBomb());
 		setBombState(false);
 		this.setExploded(false);
-		setTick(3);
+		setTick(-1);
 	}
 	
 	/**
@@ -113,7 +115,7 @@ public class Bomb extends Entity{
 	 * @param num
 	 */
 	public void setTick(int num) {
-		this.tick = num;
+		this.tick = new SimpleIntegerProperty(num);
 	}
 	
 	/**
@@ -121,6 +123,14 @@ public class Bomb extends Entity{
 	 * @return the tick number
 	 */
 	public int getTick() {
+		return tick.get();
+	}
+	
+	/**
+	 * get the tick 
+	 * @return the tick number
+	 */
+	public IntegerProperty getTickProperty() {
 		return tick;
 	}
 	

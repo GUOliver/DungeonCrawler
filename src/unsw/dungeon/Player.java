@@ -52,14 +52,15 @@ public class Player extends MovingEntity implements Subject {
     		int x = this.getX();
     		int y = this.getY();
     		Bomb bomb = this.bombs.get(this.getBombs().size() - 1);
+    		bomb.setBombState(true);
+    		bomb.setTick(3);
     		bomb.setX(x);
     		bomb.setY(y);
-    		
-    		// add to the map, where the player stands
-    		dungeon.addEntity(bomb);
+
     		// remove from player
     		removeBombFromPlayer();
-    		bomb.setBombState(true);
+    		// add to the map, where the player stands
+    		dungeon.addEntity(bomb);
     	}
     }
 

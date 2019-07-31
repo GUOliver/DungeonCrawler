@@ -93,13 +93,24 @@ public class DungeonControllerLoader extends DungeonLoader {
     }
     
     @Override
-	public void onLoad(Bomb bomb) {
-    	ImageView view = new ImageView(unlitBombImage);
-    	/*bomb.tickProperty().addListener(
-    			changed() {
-    				view.setImage(value);
-    			}
-    	)*/
+	public void onLoad(Bomb bomb, boolean state) {
+    	final ImageView view = new ImageView(unlitBombImage);
+    	if (state != false) {
+    		view.setImage(lit1BombImage);
+    		bomb.getTickProperty().addListener(new ChangeListener<Number>() {
+                @Override
+                public void changed(ObservableValue<? extends Number> observable,
+                        Number oldValue, Number newValue) {
+                    if (newValue.intValue() == 2) {
+                    	view.setImage(lit2BombImage);
+                    } else if (newValue.intValue() == 1) {
+                    	view.setImage(lit3BombImage);
+                    } else if (newValue.intValue() == 0) {
+                    	view.setImage(explodeBombImage);
+                    }
+                }
+            });
+    	}
         addEntity(bomb, view);
 	}
 

@@ -4,6 +4,8 @@ package unsw.dungeon;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import unsw.compositeGoal.Component;
 
 /**
@@ -18,7 +20,7 @@ import unsw.compositeGoal.Component;
 public class Dungeon {
 	
     private int width, height;
-    private List<Entity> entities;
+    private ObservableList<Entity> entities;
     private Component goals;
     private Player player;
     private int switchTotal;
@@ -38,7 +40,7 @@ public class Dungeon {
     public Dungeon(int width, int height) {
         this.width = width;
         this.height = height;
-        this.entities = new ArrayList<Entity>();
+        this.entities = FXCollections.observableArrayList();
         this.player = null;
         this.switchTotal = 0;
         this.enemyTotal = 0;
@@ -196,7 +198,7 @@ public class Dungeon {
 	 * set the entities
 	 * @param entities the entities list we want to add
 	 */
-	public void setEntities(List<Entity> entities) {
+	public void setEntities(ObservableList<Entity> entities) {
 		this.entities = entities;
 	}
 	
