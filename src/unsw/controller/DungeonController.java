@@ -24,13 +24,9 @@ public class DungeonController extends BasicController{
     private GridPane squares;
 
     private List<ImageView> initialEntities;
-
     private Player player;
-
     private Dungeon dungeon;
-    
     private String filename;
-    
     
     public DungeonController(Stage stage, Dungeon dungeon, List<ImageView> initialEntities, String filename) {
         super(stage);
@@ -61,35 +57,19 @@ public class DungeonController extends BasicController{
         switch (event.getCode()) {
         case UP:
             player.moveUp(dungeon);
-            if (dungeon.getGameState() == true)
-            	if (dungeon.getEntities().contains(dungeon.getPlayer()))
-            		handleWin();
-            	else
-            		handleDeath();
+            checkGameState();
             break;
         case DOWN:
             player.moveDown(dungeon);
-            if (dungeon.getGameState() == true)
-            	if (dungeon.getEntities().contains(dungeon.getPlayer()))
-            		handleWin();
-            	else
-            		handleDeath();
+            checkGameState();
             break;
         case LEFT:
             player.moveLeft(dungeon);
-            if (dungeon.getGameState() == true)
-            	if (dungeon.getEntities().contains(dungeon.getPlayer()))
-            		handleWin();
-            	else
-            		handleDeath();
+            checkGameState();
             break;
         case RIGHT:
             player.moveRight(dungeon);
-            if (dungeon.getGameState() == true)
-            	if (dungeon.getEntities().contains(dungeon.getPlayer()))
-            		handleWin();
-            	else
-            		handleDeath();
+            checkGameState();
             break;
         case SPACE:
         	handleDropBomb();
@@ -104,6 +84,14 @@ public class DungeonController extends BasicController{
 
 	public String getFilename() {
 		return filename;
+	}
+	
+	private void checkGameState() throws IOException {
+		if (dungeon.getGameState() == true)
+        	if (dungeon.getEntities().contains(dungeon.getPlayer()))
+        		handleWin();
+        	else
+        		handleDeath();
 	}
 	
 	private void handleDeath() throws IOException {
@@ -126,6 +114,9 @@ public class DungeonController extends BasicController{
 	
 	private void handleDropBomb(){
 		dungeon.getPlayer().dropBomb();
+		Image litbomb = new Image("/bomb_lit_1.png");
+		ImageView view = new ImageView(litbomb);
+		squares.getChildren().add(view);
 	}
 
 
