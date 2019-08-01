@@ -166,7 +166,6 @@ public abstract class DungeonLoader {
 		}
 	}
 
-	public abstract void onLoad(Entity entity);
 	public abstract void onLoad(Player player);
 	public abstract void onLoad(Wall wall);
 	public abstract void onLoad(Bomb bomb);

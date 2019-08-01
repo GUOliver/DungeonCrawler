@@ -1,11 +1,13 @@
 package unsw.dungeon;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import unsw.collisionBehaviour.*;
 
 public class Door extends Entity {
 	
 	private int keyId;
-	private boolean isOpen;
+	private BooleanProperty isOpen;
 	
 	/**
 	 * This class is a locked door, which requires a key of matching ID
@@ -17,7 +19,7 @@ public class Door extends Entity {
 		super(x, y, "locked door");
 		setKeyId(dungeon.getNumDoors());
 		setCollisionBehaviour(new DoorUnlock());
-		this.isOpen = false;
+		this.isOpen = new SimpleBooleanProperty(false);
 	}
 	
 	/**
@@ -41,6 +43,14 @@ public class Door extends Entity {
 	 * @return true or false
 	 */
 	public boolean isOpen() {
+		return isOpen.get();
+	}
+	
+	/**
+	 * check if the door is open 
+	 * @return true or false
+	 */
+	public BooleanProperty isOpenProperty() {
 		return isOpen;
 	}
 	
@@ -49,7 +59,7 @@ public class Door extends Entity {
 	 * @param isOpen
 	 */
 	public void setIsOpen(boolean isOpen) {
-		this.isOpen = isOpen;
+		this.isOpen.set(isOpen);
 	}
 	
 	/**

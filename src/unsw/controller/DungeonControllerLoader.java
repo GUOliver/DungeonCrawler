@@ -139,15 +139,6 @@ public class DungeonControllerLoader extends DungeonLoader {
 		ImageView view = new ImageView(exitImage);
         addEntity(exit, view);
 	}
-	
-	@Override
-	public void onLoad(Entity entity) {
-		if (entity instanceof Bomb) {
-			Bomb bomb = (Bomb)entity;
-			onLoad(bomb);
-		}
-	}
-
 
     private void addEntity(Entity entity, ImageView view) {
         trackPosition(entity, view);

@@ -57,7 +57,7 @@ public class MapController extends BasicController{
     void handleLevelOne(ActionEvent event) throws IOException {
     	
     	BasicScene gameScene = new BasicScene(this.getStage(), "Dungeon", "DungeonView.fxml");
-        DungeonControllerLoader dungeonLoader = new DungeonControllerLoader("maze.json",this.getStage());
+        DungeonControllerLoader dungeonLoader = new DungeonControllerLoader("hardMaze.json",this.getStage());
         DungeonController controller = dungeonLoader.loadController();
         gameScene.start(controller);
 

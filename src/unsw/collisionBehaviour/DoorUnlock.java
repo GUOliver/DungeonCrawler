@@ -13,8 +13,10 @@ public class DoorUnlock implements CollisionBehaviour {
 		if (player instanceof Player && door instanceof Door) {
 			Player p = (Player)player;
 			Door d = (Door)door;
-			p.removeKeys(d.getKeyId());
-			d.setIsOpen(true);
+			if (!d.isOpen()) {
+				p.removeKeys(d.getKeyId());
+				d.setIsOpen(true);
+			}
 		}
 	}
 

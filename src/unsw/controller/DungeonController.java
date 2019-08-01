@@ -15,6 +15,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import unsw.dungeon.Bomb;
+import unsw.dungeon.Door;
 import unsw.dungeon.Dungeon;
 import unsw.dungeon.Entity;
 import unsw.dungeon.Player;
@@ -42,6 +43,7 @@ public class DungeonController extends BasicController{
 	private Image invinciblePlayerImage;
 	private Image openDoorImage;
 	private Image swordPlayerImage;
+	private Image lockedDoorImage;
 
 	public DungeonController(Stage stage, Dungeon dungeon, List<ImageView> initialEntities, String filename) {
 		super(stage);
@@ -58,6 +60,7 @@ public class DungeonController extends BasicController{
 		invinciblePlayerImage = new Image("/human_invincible.png");
 		swordPlayerImage = new Image("/human_sword.png");
 		openDoorImage = new Image("/open_door.png");
+        lockedDoorImage = new Image("/closed_door.png");
 	}
 
 	@FXML
@@ -75,6 +78,9 @@ public class DungeonController extends BasicController{
 			squares.getChildren().add(entity);
 
 		handlePlayerImage(player);
+		for (Entity ent : dungeon.getEntities())
+			if (ent instanceof Door)
+				handleDoorImage((Door)ent);
 		trackEntityList(dungeon.getEntities());
 	}
 
@@ -201,6 +207,18 @@ public class DungeonController extends BasicController{
 			}
 		});
 	}
+	
+	private void handleDoorImage(Door door) {
+		ImageView doorView = findLockedDoorImage(door);
+		door.isOpenProperty().addListener(new ChangeListener<Boolean>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, 
+					Boolean oldValue, Boolean newValue) {
+				if (newValue == true)
+					doorView.setImage(openDoorImage);
+			}});
+	}
 
 	private void trackEntityList(ObservableList<Entity> entities) {
 		entities.addListener(new ListChangeListener<Entity>() {
@@ -222,7 +240,7 @@ public class DungeonController extends BasicController{
 
 	private void removeImage(Entity entity) {
 		ImageView image = findImage(entity);
-		System.out.println("About to remove image");
+		//System.out.println("About to remove image");
 		squares.getChildren().remove(image);
 		initialEntities.remove(image);
 	}
@@ -250,6 +268,20 @@ public class DungeonController extends BasicController{
 						compareImageFiles(view.getImage(),invinciblePlayerImage)==false && 
 						compareImageFiles(view.getImage(),swordPlayerImage)==false) {
 					//System.out.println("Found item that is not player");
+					image = view;
+				}
+			}
+		}
+		return image;
+	}
+	
+	private ImageView findLockedDoorImage(Entity entity) {
+		ImageView image = null;
+		for (ImageView view : initialEntities) {
+			if (GridPane.getColumnIndex(view)==entity.getX() && 
+					GridPane.getRowIndex(view)==entity.getY()) {
+				if(compareImageFiles(view.getImage(),lockedDoorImage)==true) {
+					//System.out.println("Found item that is door");
 					image = view;
 				}
 			}

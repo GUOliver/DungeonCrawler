@@ -186,7 +186,7 @@ public class Player extends MovingEntity implements Subject {
 	 * @param keyId id of key
 	 */
 	public void removeKeys(int keyId) {
-		this.keys.remove(keyId);
+		this.keys.set(keyId, -1);
 	}
 
 	/**

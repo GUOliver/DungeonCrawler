@@ -81,7 +81,9 @@ public class KeyDoorTest {
 		// move through door
 		c1.moveRight(maze);
 		assertEquals(4, c1.getX());
-		assertTrue(c1.getKeys().isEmpty());
+		for (Integer keyID :c1.getKeys()) {
+			assertTrue(keyID<0);
+		}
 	}
 	
 	@Test
