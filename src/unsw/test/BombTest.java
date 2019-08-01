@@ -43,11 +43,11 @@ public class BombTest {
 		c1.registerObservers();
 		
 		c1.moveDown(maze);
-		assertEquals(1,c1.getBombs().size());
+		assertEquals(1,c1.getBombNum());
 		c1.moveDown(maze);
 		List<Entity> box = maze.findEntity(1, 2);
 		assertTrue(box.isEmpty());
-		assertEquals(2,c1.getBombs().size());
+		assertEquals(2,c1.getBombNum());
 	}
 	
 	@Test
@@ -63,9 +63,9 @@ public class BombTest {
 		maze.setGoal(exit);
 		
 		c1.moveDown(maze);
-		assertEquals(1,c1.getBombs().size());
+		assertEquals(1,c1.getBombNum());
 		c1.dropBomb();
-		assertEquals(0,c1.getBombs().size());
+		assertEquals(0,c1.getBombNum());
 		c1.moveDown(maze);
 		List<Entity> box = maze.findEntity(1, 2);
 		assertTrue(box.get(0) instanceof Bomb);
@@ -105,14 +105,18 @@ public class BombTest {
 		
 		// get the unlit bomb
 		player.moveUp(dungeon);
-		player.dropBomb();
+		bomb = player.dropBomb();
 		
-		bomb.tickTock(dungeon);
+		//bomb.tickTock(dungeon);
+		player.moveDown(dungeon);
+		assertEquals(3, bomb.getTick());
+		//bomb.tickTock(dungeon);
+		player.moveDown(dungeon);
 		assertEquals(2, bomb.getTick());
-		bomb.tickTock(dungeon);
+		//bomb.tickTock(dungeon);
+		player.moveLeft(dungeon);
 		assertEquals(1, bomb.getTick());
-		bomb.tickTock(dungeon);
-		assertEquals(0, bomb.getTick());
+		player.moveLeft(dungeon);
 		
 		List<Entity> entities = dungeon.findEntity(2,2);
 		
@@ -142,10 +146,50 @@ public class BombTest {
 		boolean checkMove = c1.moveLeft(maze);
 		assertTrue(checkMove);
 		// Player places bomb
-		c1.dropBomb();
+		c2 = c1.dropBomb();
 		// Can move off the lit bomb
 		checkMove = c1.moveRight(maze);
 		assertTrue(checkMove);
+		//Can't move back onto lit bomb
+		checkMove = c1.moveLeft(maze);
+		assertTrue(!checkMove);
+		
+	}
+	
+	@Test
+	public void testExplodedBombPickup() {
+		Dungeon maze = new Dungeon(15,15);
+		Player c1 = new Player(maze, 2, 1);
+		Bomb c2 = new Bomb(1,1);
+		maze.addEntity(c1);
+		maze.setPlayer(c1);
+		maze.addEntity(c2);
+		c1.registerObservers();
+		LeafExit exit = new LeafExit();
+		maze.setGoal(exit);
+		
+		// Player picks up bomb
+		boolean checkMove = c1.moveLeft(maze);
+		assertTrue(checkMove);
+		// Player places bomb
+		Bomb bomb = c1.dropBomb();
+		assertTrue(bomb!=null);
+		// Can move off the lit bomb
+		c1.moveRight(maze);
+		assertEquals(3, bomb.getTick());
+		c1.moveRight(maze);
+		assertEquals(2, bomb.getTick());
+		c1.moveRight(maze);
+		assertEquals(1, bomb.getTick());
+		c1.moveRight(maze);
+		assertEquals(0, bomb.getTick());
+		
+		c1.moveLeft(maze);
+		c1.moveLeft(maze);
+		c1.moveLeft(maze);
+		c1.moveLeft(maze);
+		c1.moveLeft(maze);
+		assertEquals(0,c1.getBombNum());
 		
 	}
 	

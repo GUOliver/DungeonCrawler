@@ -54,6 +54,7 @@ public class DungeonControllerLoader extends DungeonLoader {
 	private Image swordImage;
 	private Image keyImage;
 	private Image switchImage;
+	private Image swordPlayerImage;
 
     public DungeonControllerLoader(String filename, Stage stage)
             throws FileNotFoundException {
@@ -68,7 +69,8 @@ public class DungeonControllerLoader extends DungeonLoader {
         explodeBombImage = new Image("/bomb_lit_4.png");
         boulderImage = new Image("/boulder.png");
         invincibilityImage = new Image("/brilliant_blue_new.png");
-        //invincibilePlayerImage = new Image("/human_invincible.png");
+        invincibilePlayerImage = new Image("/human_invincible.png");
+        swordPlayerImage = new Image("/human_sword.png");
         lockedDoorImage = new Image("/closed_door.png");
         openDoorImage = new Image("/open_door.png");
         exitImage = new Image("/exit.png");
@@ -94,12 +96,23 @@ public class DungeonControllerLoader extends DungeonLoader {
     
     @Override
 	public void onLoad(Bomb bomb) {
-    	ImageView view = new ImageView(unlitBombImage);
-    	/*bomb.tickProperty().addListener(
-    			changed() {
-    				view.setImage(value);
-    			}
-    	)*/
+    	final ImageView view = new ImageView(unlitBombImage);
+    	if (bomb.getBombState()) {
+    		view.setImage(lit1BombImage);
+    		bomb.getTickProperty().addListener(new ChangeListener<Number>() {
+                @Override
+                public void changed(ObservableValue<? extends Number> observable,
+                        Number oldValue, Number newValue) {
+                    if (newValue.intValue() == 2) {
+                    	view.setImage(lit2BombImage);
+                    } else if (newValue.intValue() == 1) {
+                    	view.setImage(lit3BombImage);
+                    } else if (newValue.intValue() == 0) {
+                    	view.setImage(explodeBombImage);
+                    }
+                }
+            });
+    	}
         addEntity(bomb, view);
 	}
 
@@ -156,6 +169,14 @@ public class DungeonControllerLoader extends DungeonLoader {
 		ImageView view = new ImageView(exitImage);
         addEntity(exit, view);
 	}
+	
+	@Override
+	public void onLoad(Entity entity) {
+		if (entity instanceof Bomb) {
+			Bomb bomb = (Bomb)entity;
+			onLoad(bomb);
+		}
+	}
 
 
     private void addEntity(Entity entity, ImageView view) {
@@ -201,6 +222,12 @@ public class DungeonControllerLoader extends DungeonLoader {
     public DungeonController loadController() throws FileNotFoundException {
         return new DungeonController(getStage(),load(), entities, getFilename());
     }
+
+	@Override
+	public void removeImage(Entity entity) {
+		for (ImageView image : entities) {
+		}
+	}
 
 	
 

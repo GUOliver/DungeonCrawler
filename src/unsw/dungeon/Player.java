@@ -19,7 +19,7 @@ import unsw.playerState.PlayerState;
 public class Player extends MovingEntity implements Subject {
 
 	private Dungeon dungeon;
-    private ArrayList<Bomb> bombs;
+    private int bombs;
     private int swordNum;
     private int invincibleTime;
     private ArrayList<Integer> keys;
@@ -36,7 +36,7 @@ public class Player extends MovingEntity implements Subject {
     public Player(Dungeon dungeon, int x, int y) {
         super(x, y, "player");
         this.dungeon = dungeon;
-        this.bombs = new ArrayList<Bomb>();
+        this.bombs = 0;
         this.swordNum = 0;
         this.treasureCollected = 0;
         this.invincibleTime = 0;
@@ -47,27 +47,28 @@ public class Player extends MovingEntity implements Subject {
     }
     
 
-    public void dropBomb() {
-    	if (getBombs().size() > 0) {
+    public Bomb dropBomb() {
+    	if (getBombNum() > 0) {
     		int x = this.getX();
     		int y = this.getY();
-    		Bomb bomb = this.bombs.get(this.getBombs().size() - 1);
-    		bomb.setX(x);
-    		bomb.setY(y);
-    		
+    		Bomb bomb = new Bomb(x,y);
+    		bomb.setBombState(true);
+    		bomb.setTick(4);
+    		bomb.setType("lit bomb 0");
+    		// remove from player
+    		removeBomb();
     		// add to the map, where the player stands
     		dungeon.addEntity(bomb);
-    		// remove from player
-    		removeBombFromPlayer();
-    		bomb.setBombState(true);
-    	}
+    		return bomb;
+    	} else
+    		return null;
     }
 
 	/**
 	 * List of bombs collected
 	 * @return Bombs
 	 */
-    public ArrayList<Bomb> getBombs() {
+    public int getBombNum() {
 		return bombs;
 	}
     
@@ -75,15 +76,15 @@ public class Player extends MovingEntity implements Subject {
      * add the bomb to player
      * @param bomb 
      */
-	public void addBomb(Bomb bomb) {
-		this.bombs.add(bomb);
+	public void addBomb() {
+		this.bombs = this.bombs+1;
 	}
 	
 	/**
 	 * remove bomb from player
 	 */
-	public void removeBombFromPlayer() {
-		this.bombs.remove(this.getBombs().size() - 1);
+	public void removeBomb() {
+		this.bombs = this.bombs-1;
 	}
 	
 	/**

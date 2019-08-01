@@ -5,6 +5,8 @@ package unsw.dungeon;
 
 import java.util.ArrayList;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import unsw.collisionBehaviour.*;
 public class Bomb extends Entity{
 
@@ -13,7 +15,7 @@ public class Bomb extends Entity{
 	*private Timer timer;
 	*/
 	private boolean bombState;
-	private int tick;
+	private IntegerProperty tick;
 	private boolean isExploded;
 	
 	/**
@@ -27,7 +29,7 @@ public class Bomb extends Entity{
 		setCollisionBehaviour(new PickUpUnlitBomb());
 		setBombState(false);
 		this.setExploded(false);
-		setTick(3);
+		setTick(-1);
 	}
 	
 	/**
@@ -91,15 +93,17 @@ public class Bomb extends Entity{
 		for (Entity item : toBeRm) {
 			if (item instanceof Player) {
 				// if the player in invincibility, do nothing
-				if (((Player) item).getInvincibleTime() > 0) {
-					return;
+				if (((Player) item).getInvincibleTime() <= 0) {
+					// normal player is dead, game over
+					dungeon.removeEntity(item);
+					dungeon.setGameState(true);
 				}
-				// else, normal player is dead, good game (game over)
-				dungeon.removeEntity(item);
-				dungeon.setGameState(true);
 			}
 			
-			if ((item instanceof Enemy) || (item instanceof Boulder)) {
+			else if (item instanceof Enemy) {
+				dungeon.setEnemyTotal(dungeon.getEnemyTotal()-1);
+				dungeon.removeEntity(item);
+			} else if (item instanceof Boulder) {
 				dungeon.removeEntity(item);
 			}
 		}
@@ -113,7 +117,7 @@ public class Bomb extends Entity{
 	 * @param num
 	 */
 	public void setTick(int num) {
-		this.tick = num;
+		this.tick = new SimpleIntegerProperty(num);
 	}
 	
 	/**
@@ -121,6 +125,14 @@ public class Bomb extends Entity{
 	 * @return the tick number
 	 */
 	public int getTick() {
+		return tick.get();
+	}
+	
+	/**
+	 * get the tick 
+	 * @return the tick number
+	 */
+	public IntegerProperty getTickProperty() {
 		return tick;
 	}
 	
@@ -130,7 +142,10 @@ public class Bomb extends Entity{
 	 */
 	@Override
 	public boolean canMoveOnto(Dungeon dungeon, Entity mover) {
-		return true;
+		if (bombState)
+			return false;
+		else
+			return true;
 	}
 	
 	/**
