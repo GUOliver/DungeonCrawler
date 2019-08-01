@@ -170,10 +170,17 @@ public abstract class MovingEntity extends Entity {
 			
 			player.notifyObservers();
 			// If the entity moving is player, after player moves make enemies move
-			Enemy[] tempArray = dungeon.getEnemyArray();
-			for(int i = 0; i < tempArray.length;i++) {
-				if (tempArray[i]!=null)
-					tempArray[i].moveEnemy(dungeon);
+			Enemy[] EnemyArray = dungeon.getEnemyArray();
+			for(int i = 0; i < EnemyArray.length;i++) {
+				if (EnemyArray[i]!=null)
+					EnemyArray[i].moveEnemy(dungeon);
+			}
+			
+			// Ticks all bombs
+			Bomb[] BombArray = dungeon.getBombArray();
+			for(int i = 0; i < BombArray.length;i++) {
+				if (BombArray[i]!=null)
+					BombArray[i].tickTock(dungeon);
 			}
 			
 			// Checks if invincibility ran out
@@ -182,6 +189,7 @@ public abstract class MovingEntity extends Entity {
 			} else if (player.getInvincibleTime()>0) {
 				player.setInvincibleTime(player.getInvincibleTime()-1);
 			}
+			
 
 		}
 		// Enemies moving onto players should also cause collision

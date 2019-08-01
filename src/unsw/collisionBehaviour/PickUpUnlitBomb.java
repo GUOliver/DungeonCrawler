@@ -13,8 +13,7 @@ public class PickUpUnlitBomb implements CollisionBehaviour {
 	public void interact(Dungeon dungeon, Entity character, Entity it) {
 		if (character instanceof Player) {
 			Player player = (Player) character;
-			Bomb bomb = (Bomb) it;
-			player.addBomb(bomb);
+			player.addBomb();
 			dungeon.removeEntity(it);
 		}
 		

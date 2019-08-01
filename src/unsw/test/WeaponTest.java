@@ -101,8 +101,10 @@ public class WeaponTest {
 		
 		// get the unlit bomb
 		player.moveUp(dungeon);
-		player.dropBomb();
+		bomb = player.dropBomb();
 		
+		bomb.tickTock(dungeon);
+		assertEquals(3, bomb.getTick());
 		bomb.tickTock(dungeon);
 		assertEquals(2, bomb.getTick());
 		bomb.tickTock(dungeon);

@@ -2,18 +2,12 @@ package unsw.controller;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
-
-import javafx.beans.Observable;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import unsw.compositeGoal.*;
 import unsw.dungeon.Bomb;
@@ -67,9 +61,9 @@ public abstract class DungeonLoader {
 		for (int i = 0; i < jsonEntities.length(); i++) {
 			loadEntity(dungeon, jsonEntities.getJSONObject(i));
 		}
-		
+
 		trackEntityList(dungeon.getEntities());
-		
+
 
 		// Adding goals
 		JSONObject jsonGoals = json.getJSONObject("goal-condition");
@@ -101,19 +95,25 @@ public abstract class DungeonLoader {
 		player.registerObservers();
 		return dungeon;
 	}
-	
-	 
-    private void trackEntityList(ObservableList<Entity> entities) {
-    	entities.addListener(new ListChangeListener<Entity>() {
+
+
+	private void trackEntityList(ObservableList<Entity> entities) {
+		entities.addListener(new ListChangeListener<Entity>() {
 
 			@Override
 			public void onChanged(Change<? extends Entity> c) {
-				if (c.wasAdded()) {
-					List<Entity> = c.getAddedSubList();
-					for ()
-				}
-			}});
-    }
+				while (c.next()) {
+					if (c.wasAdded()) {
+						for (Entity item : c.getAddedSubList()) {
+							onLoad(item);
+						}
+					} else if (c.wasRemoved()) {
+						for (Entity item : c.getRemoved()) {
+							removeImage(item);
+						}
+					}
+				}}});
+	}
 
 	private void loadEntity(Dungeon dungeon, JSONObject json) {
 		String type = json.getString("type");
@@ -135,7 +135,7 @@ public abstract class DungeonLoader {
 			break;
 		case "bomb":
 			Bomb bomb = new Bomb(x, y);
-			onLoad(bomb, bomb.getBombState());
+			onLoad(bomb);
 			entity = bomb;
 			break;
 		case "boulder":
@@ -190,9 +190,10 @@ public abstract class DungeonLoader {
 		}
 	}
 
+	public abstract void onLoad(Entity entity);
 	public abstract void onLoad(Player player);
 	public abstract void onLoad(Wall wall);
-	public abstract void onLoad(Bomb bomb, boolean state);
+	public abstract void onLoad(Bomb bomb);
 	public abstract void onLoad(Boulder boulder);
 	public abstract void onLoad(Key key);
 	public abstract void onLoad(Door door);
@@ -202,7 +203,7 @@ public abstract class DungeonLoader {
 	public abstract void onLoad(Sword sword);
 	public abstract void onLoad(Treasure treasure);
 	public abstract void onLoad(Exit exit);
-	
+	public abstract void removeImage(Entity entity);
 
 
 	public String getFilename() {
@@ -212,7 +213,7 @@ public abstract class DungeonLoader {
 	public Stage getStage() {
 		return stage;
 	}
-	
+
 	private Component createGoal(String goal) {
 		if(goal.equals("exit")) {
 			LeafExit goalComponent = new LeafExit();

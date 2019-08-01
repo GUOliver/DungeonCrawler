@@ -190,7 +190,7 @@ public class Dungeon {
 	 * get all entities of the dungeon
 	 * @return the list of entities
 	 */
-	public List<Entity> getEntities() {
+	public ObservableList<Entity> getEntities() {
 		return entities;
 	}
 	
@@ -381,6 +381,19 @@ public class Dungeon {
 		for (Entity ent : entities) {
 			if (ent.isEnemy()) {
 				tempArray[iter] = (Enemy)ent;
+				iter++;
+			}
+		}
+		
+		return tempArray;
+	}
+	
+	public Bomb[] getBombArray() {
+		Bomb[] tempArray = new Bomb[entities.size()];
+		int iter = 0;
+		for (Entity ent : entities) {
+			if (ent instanceof Bomb) {
+				tempArray[iter] = (Bomb)ent;
 				iter++;
 			}
 		}

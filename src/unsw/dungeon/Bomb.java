@@ -93,15 +93,17 @@ public class Bomb extends Entity{
 		for (Entity item : toBeRm) {
 			if (item instanceof Player) {
 				// if the player in invincibility, do nothing
-				if (((Player) item).getInvincibleTime() > 0) {
-					return;
+				if (((Player) item).getInvincibleTime() <= 0) {
+					// normal player is dead, game over
+					dungeon.removeEntity(item);
+					dungeon.setGameState(true);
 				}
-				// else, normal player is dead, good game (game over)
-				dungeon.removeEntity(item);
-				dungeon.setGameState(true);
 			}
 			
-			if ((item instanceof Enemy) || (item instanceof Boulder)) {
+			else if (item instanceof Enemy) {
+				dungeon.setEnemyTotal(dungeon.getEnemyTotal()-1);
+				dungeon.removeEntity(item);
+			} else if (item instanceof Boulder) {
 				dungeon.removeEntity(item);
 			}
 		}
@@ -140,7 +142,10 @@ public class Bomb extends Entity{
 	 */
 	@Override
 	public boolean canMoveOnto(Dungeon dungeon, Entity mover) {
-		return true;
+		if (bombState)
+			return false;
+		else
+			return true;
 	}
 	
 	/**
