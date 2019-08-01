@@ -38,8 +38,8 @@ public class DungeonController extends BasicController{
 	private Image lit3BombImage;
 	private Image explodeBombImage;
 	private Image unlitBombImage;
-    private Image playerImage;
-	private Image invincibilePlayerImage;
+	private Image playerImage;
+	private Image invinciblePlayerImage;
 	private Image openDoorImage;
 	private Image swordPlayerImage;
 
@@ -49,16 +49,15 @@ public class DungeonController extends BasicController{
 		this.player = dungeon.getPlayer();
 		this.initialEntities = new ArrayList<>(initialEntities);
 		this.filename = filename;
-		trackEntityList(dungeon.getEntities());
 		lit1BombImage = new Image("/bomb_lit_1.png");
 		lit2BombImage = new Image("/bomb_lit_2.png");
 		lit3BombImage = new Image("/bomb_lit_3.png");
 		explodeBombImage = new Image("/bomb_lit_4.png");
 		unlitBombImage = new Image("/bomb_unlit.png");
-        playerImage = new Image("/human_new.png");
-        invincibilePlayerImage = new Image("/human_invincible.png");
-        swordPlayerImage = new Image("/human_sword.png");
-        openDoorImage = new Image("/open_door.png");
+		playerImage = new Image("/human_new.png");
+		invinciblePlayerImage = new Image("/human_invincible.png");
+		swordPlayerImage = new Image("/human_sword.png");
+		openDoorImage = new Image("/open_door.png");
 	}
 
 	@FXML
@@ -75,6 +74,8 @@ public class DungeonController extends BasicController{
 		for (ImageView entity : initialEntities)
 			squares.getChildren().add(entity);
 
+		handlePlayerImage(player);
+		trackEntityList(dungeon.getEntities());
 	}
 
 	@FXML
@@ -144,12 +145,12 @@ public class DungeonController extends BasicController{
 	private void handleBombImage(Bomb bomb) {
 		ImageView view = new ImageView(unlitBombImage);
 		GridPane.setColumnIndex(view, bomb.getX());
-        GridPane.setRowIndex(view, bomb.getY());
+		GridPane.setRowIndex(view, bomb.getY());
 		bomb.getTickProperty().addListener(new ChangeListener<Number>() {
 			@Override
 			public void changed(ObservableValue<? extends Number> observable,
 					Number oldValue, Number newValue) {
-				System.out.println(newValue.intValue());
+				//System.out.println(newValue.intValue());
 				if (newValue.intValue() == 3) {
 					view.setImage(lit1BombImage);
 				} else if (newValue.intValue() == 2) {
@@ -163,6 +164,42 @@ public class DungeonController extends BasicController{
 		});
 		squares.getChildren().add(view);
 		initialEntities.add(view);
+	}
+
+	private void handlePlayerImage(Player player) {
+		ImageView playerView = findPlayerImage();
+		player.getInvincibleTimeProperty().addListener(new ChangeListener<Number>() {
+			@Override
+			public void changed(ObservableValue<? extends Number> observable,
+					Number oldValue, Number newValue) {
+				//System.out.println(newValue.intValue());
+				if (newValue.intValue() > 0) {
+					playerView.setImage(invinciblePlayerImage);
+				} else if (newValue.intValue() == 0) {
+					if (player.getSwordNum()==0)
+						playerView.setImage(playerImage);
+					else
+						playerView.setImage(swordPlayerImage);
+				}
+			}
+		});
+		
+		player.getSwordNumProperty().addListener(new ChangeListener<Number>() {
+			@Override
+			public void changed(ObservableValue<? extends Number> observable,
+					Number oldValue, Number newValue) {
+				//System.out.println(newValue.intValue());
+				if (newValue.intValue() > 0) {
+					if (player.getInvincibleTime()==0)
+						playerView.setImage(swordPlayerImage);
+				} else if (newValue.intValue() == 0) {
+					if (player.getInvincibleTime()>0)
+						playerView.setImage(invinciblePlayerImage);
+					else
+						playerView.setImage(playerImage);
+				}
+			}
+		});
 	}
 
 	private void trackEntityList(ObservableList<Entity> entities) {
@@ -182,19 +219,58 @@ public class DungeonController extends BasicController{
 					}
 				}}});
 	}
-	
+
 	private void removeImage(Entity entity) {
+		ImageView image = findImage(entity);
+		System.out.println("About to remove image");
+		squares.getChildren().remove(image);
+		initialEntities.remove(image);
+	}
+
+	private boolean compareImageFiles(Image viewImage, Image image) {
+		for (int i = 0; i<viewImage.getWidth();i++) {
+			for (int j = 0; j<viewImage.getHeight();j++) {
+				if (viewImage.getPixelReader().getArgb(i, j) != 
+						image.getPixelReader().getArgb(i, j)) {
+					//System.out.println("Compare return false");
+					return false;
+				}
+			}
+		}
+		//System.out.println("Compare return true");
+		return true;
+	}
+
+	private ImageView findImage(Entity entity) {
 		ImageView image = null;
 		for (ImageView view : initialEntities) {
 			if (GridPane.getColumnIndex(view)==entity.getX() && 
-					GridPane.getRowIndex(view)==entity.getY() &&
-					view.getImage()!=playerImage) {
-				image = view;
+					GridPane.getRowIndex(view)==entity.getY()) {
+				if(compareImageFiles(view.getImage(),playerImage)==false && 
+						compareImageFiles(view.getImage(),invinciblePlayerImage)==false && 
+						compareImageFiles(view.getImage(),swordPlayerImage)==false) {
+					//System.out.println("Found item that is not player");
+					image = view;
+				}
 			}
 		}
-		if (image!=null) {
-			image.setImage(null);
+		return image;
+	}
+
+	private ImageView findPlayerImage() {
+		ImageView image = null;
+		for (ImageView view : initialEntities) {
+			if (GridPane.getColumnIndex(view)==player.getX() && 
+					GridPane.getRowIndex(view)==player.getY()){
+				if(compareImageFiles(view.getImage(),playerImage)==true || 
+						compareImageFiles(view.getImage(),invinciblePlayerImage)==true || 
+						compareImageFiles(view.getImage(),swordPlayerImage)==true) {
+					//System.out.println("Found item that is player");
+					image = view;
+				}
+			}
 		}
+		return image;
 	}
 
 }

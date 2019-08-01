@@ -3,6 +3,8 @@ package unsw.dungeon;
 
 import java.util.ArrayList;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import unsw.collisionBehaviour.*;
 import unsw.movementStrategy.MovementStrategy;
 import unsw.playerObserve.Observer;
@@ -20,8 +22,8 @@ public class Player extends MovingEntity implements Subject {
 
 	private Dungeon dungeon;
     private int bombs;
-    private int swordNum;
-    private int invincibleTime;
+    private IntegerProperty swordNum;
+    private IntegerProperty invincibleTime;
     private ArrayList<Integer> keys;
 	private int treasureCollected;
 	private ArrayList<Observer> listObservers;
@@ -37,9 +39,9 @@ public class Player extends MovingEntity implements Subject {
         super(x, y, "player");
         this.dungeon = dungeon;
         this.bombs = 0;
-        this.swordNum = 0;
+        this.swordNum = new SimpleIntegerProperty(0);
         this.treasureCollected = 0;
-        this.invincibleTime = 0;
+        this.invincibleTime = new SimpleIntegerProperty(0);
         this.keys = new ArrayList<Integer>();
         this.playerState = new NormalState();
         this.listObservers = new ArrayList<Observer>();
@@ -92,6 +94,14 @@ public class Player extends MovingEntity implements Subject {
 	 * @return swordNum
 	 */
 	public int getSwordNum() {
+		return swordNum.get();
+	}
+	
+	/**
+	 * Number of sword uses left
+	 * @return swordNum
+	 */
+	public IntegerProperty getSwordNumProperty() {
 		return swordNum;
 	}
 	
@@ -99,8 +109,8 @@ public class Player extends MovingEntity implements Subject {
 	 * addSwordNum
 	 * @param count
 	 */
-	public void addSwordNum(int count) {
-		this.swordNum += count;
+	public void setSwordNum(int num) {
+		this.swordNum.set(num);
 	}
 	
 	/**
@@ -108,6 +118,14 @@ public class Player extends MovingEntity implements Subject {
 	 * @return invincibleTime
 	 */
 	public int getInvincibleTime() {
+		return invincibleTime.get();
+	}
+	
+	/**
+	 * getInvincibleTime IntegerProperty wrapper
+	 * @return invincibleTime
+	 */
+	public IntegerProperty getInvincibleTimeProperty() {
 		return invincibleTime;
 	}
 	
@@ -116,7 +134,7 @@ public class Player extends MovingEntity implements Subject {
 	 * @param invincibleTime
 	 */
 	public void setInvincibleTime(int invincibleTime) {
-		this.invincibleTime = invincibleTime;
+		this.invincibleTime.set(invincibleTime);
 	}
 	
 	/**

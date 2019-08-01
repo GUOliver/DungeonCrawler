@@ -12,7 +12,7 @@ public class PickUpSword implements CollisionBehaviour{
 		// 
 		if (character instanceof Player && sword instanceof Sword) {
 			Player player = (Player) character;
-			player.addSwordNum(5);
+			player.setSwordNum(5);
 			dungeon.removeEntity(sword);	
 		}
 		

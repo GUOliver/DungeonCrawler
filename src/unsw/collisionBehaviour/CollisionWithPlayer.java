@@ -21,7 +21,7 @@ public class CollisionWithPlayer implements CollisionBehaviour{
 					player.removeObserver(enemy);
 				} else if (player.getSwordNum() > 0) {
 					dungeon.removeEntity(e2);
-					player.addSwordNum(-1);
+					player.setSwordNum(player.getSwordNum()-1);
 					dungeon.setEnemyTotal(dungeon.getEnemyTotal() - 1);
 					player.removeObserver(enemy);
 				} else {
