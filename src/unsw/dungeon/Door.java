@@ -47,8 +47,8 @@ public class Door extends Entity {
 	}
 	
 	/**
-	 * check if the door is open 
-	 * @return true or false
+	 * check if the door is open as an observable BooleanProperty
+	 * @return BooleanProperty wrapping boolean isOpen
 	 */
 	public BooleanProperty isOpenProperty() {
 		return isOpen;

@@ -166,10 +166,17 @@ public class DungeonController extends BasicController{
 		}
 	}
 
+	/**
+	 * Gets the filename of dungeon loaded in form of "filename.json"
+	 * @return
+	 */
 	public String getFilename() {
 		return filename;
 	}
 
+	/**
+	 * Checks if the game is over due to completion or player death
+	 */
 	private void checkGameState() throws IOException {
 		if (dungeon.getGameState() == true)
 			if (dungeon.getEntities().contains(dungeon.getPlayer()))
@@ -178,28 +185,46 @@ public class DungeonController extends BasicController{
 				handleDeath();
 	}
 
+	/**
+	 * loads the game over scene on player death
+	 */
 	private void handleDeath() throws IOException {
 		BasicScene gameOver = new BasicScene(this.getStage(), "Game Over", "GameOverScene.fxml");
 		GameOverController goc = new GameOverController(this.getStage(), getFilename());
 		gameOver.start(goc);
 	}
 
+	/**
+	 * loads the level complete on player death
+	 */
 	private void handleWin() throws IOException {
 		BasicScene gameWin = new BasicScene(this.getStage(), "Level Complete", "GameWinScene.fxml");
 		GameWinController gwc = new GameWinController(this.getStage(), getFilename());
 		gameWin.start(gwc);
 	}
-
+	
+	/**
+	 * quits to main menu
+	 */
 	private void handleQuit() throws IOException {
 		BasicScene menuScreen = new BasicScene(this.getStage(), "Game Menu", "MainMenuScene.fxml");
 		MainMenuController dmc = new MainMenuController(this.getStage());
 		menuScreen.start(dmc);
 	}
-
+	
+	/**
+	 * allows dropping bomb by player
+	 */
 	private void handleDropBomb(){
 		dungeon.getPlayer().dropBomb();
 	}
 	
+	/**
+	 * Adds inventory sword quantity displayer, and attaches listener
+	 * @param player Player
+	 * @param x X coordinate for displayer
+	 * @param y Y coordinate for displayer
+	 */
 	private void handleSwordNum(Player player, int x, int y) {
 		ImageView view = new ImageView(num0);
 		GridPane.setColumnIndex(view, x);
@@ -227,6 +252,12 @@ public class DungeonController extends BasicController{
 		squares.getChildren().add(view);
 	}
 	
+	/**
+	 * Adds bomb quantity displayer, and attaches listener
+	 * @param player Player
+	 * @param x X coordinate for displayer
+	 * @param y Y coordinate for displayer
+	 */
 	private void handleBombNum(Player player, int x, int y) {
 		ImageView view = new ImageView(num0);
 		GridPane.setColumnIndex(view, x);
@@ -262,6 +293,12 @@ public class DungeonController extends BasicController{
 		squares.getChildren().add(view);
 	}
 	
+	/**
+	 * Adds key number quantity displayer, and attaches listener
+	 * @param player Player
+	 * @param x X coordinate for displayer
+	 * @param y Y coordinate for displayer
+	 */
 	private void handleKeyNum(Player player, int x, int y) {
 		ImageView view = new ImageView(num0);
 		GridPane.setColumnIndex(view, x);
@@ -297,6 +334,11 @@ public class DungeonController extends BasicController{
 		squares.getChildren().add(view);
 	}
 
+	/**
+	 * Handles image after dropping a lit bomb. 
+	 * Adds listener to change bomb depending on tick
+	 * @param bomb Bomb being placed
+	 */
 	private void handleBombImage(Bomb bomb) {
 		ImageView view = new ImageView(unlitBombImage);
 		GridPane.setColumnIndex(view, bomb.getX());
@@ -321,6 +363,10 @@ public class DungeonController extends BasicController{
 		initialEntities.add(view);
 	}
 
+	/**
+	 * Handles player image change based on player states
+	 * @param player Player
+	 */
 	private void handlePlayerImage(Player player) {
 		ImageView playerView = findPlayerImage();
 		player.getInvincibleTimeProperty().addListener(new ChangeListener<Number>() {
@@ -357,6 +403,10 @@ public class DungeonController extends BasicController{
 		});
 	}
 	
+	/**
+	 * Handles door image change depending on open/close
+	 * @param door Door being listened to
+	 */
 	private void handleDoorImage(Door door) {
 		ImageView doorView = findLockedDoorImage(door);
 		door.isOpenProperty().addListener(new ChangeListener<Boolean>() {
@@ -369,6 +419,10 @@ public class DungeonController extends BasicController{
 			}});
 	}
 
+	/** 
+	 * Tracks location of all entities to react to movement
+	 * @param entities Entity list
+	 */
 	private void trackEntityList(ObservableList<Entity> entities) {
 		entities.addListener(new ListChangeListener<Entity>() {
 			@Override
@@ -387,6 +441,10 @@ public class DungeonController extends BasicController{
 				}}});
 	}
 
+	/**
+	 * Removes image representing a backend entity
+	 * @param entity Entity to have image removed
+	 */
 	private void removeImage(Entity entity) {
 		ImageView image = findImage(entity);
 		//System.out.println("About to remove image");
@@ -394,6 +452,12 @@ public class DungeonController extends BasicController{
 		initialEntities.remove(image);
 	}
 
+	/**
+	 * Compares two images to check if identical
+	 * @param viewImage Image 1
+	 * @param image Image 2
+	 * @return boolean result true if Image 1 and Image 2 are identical
+	 */
 	private boolean compareImageFiles(Image viewImage, Image image) {
 		for (int i = 0; i<viewImage.getWidth();i++) {
 			for (int j = 0; j<viewImage.getHeight();j++) {
@@ -408,6 +472,11 @@ public class DungeonController extends BasicController{
 		return true;
 	}
 
+	/**
+	 * Find the image representing input entity
+	 * @param entity Input entity
+	 * @return ImageView node representing entity
+	 */
 	private ImageView findImage(Entity entity) {
 		ImageView image = null;
 		for (ImageView view : initialEntities) {
@@ -424,11 +493,16 @@ public class DungeonController extends BasicController{
 		return image;
 	}
 	
-	private ImageView findLockedDoorImage(Entity entity) {
+	/**
+	 * Find the image representing specific locked door
+	 * @param entity player
+	 * @return ImageView node representing entity
+	 */
+	private ImageView findLockedDoorImage(Door door) {
 		ImageView image = null;
 		for (ImageView view : initialEntities) {
-			if (GridPane.getColumnIndex(view)==entity.getX() && 
-					GridPane.getRowIndex(view)==entity.getY()) {
+			if (GridPane.getColumnIndex(view)==door.getX() && 
+					GridPane.getRowIndex(view)==door.getY()) {
 				if(compareImageFiles(view.getImage(),lockedDoorImage)==true) {
 					//System.out.println("Found item that is door");
 					image = view;
@@ -438,6 +512,10 @@ public class DungeonController extends BasicController{
 		return image;
 	}
 
+	/**
+	 * Find the image representing player
+	 * @return ImageView node representing entity
+	 */
 	private ImageView findPlayerImage() {
 		ImageView image = null;
 		for (ImageView view : initialEntities) {

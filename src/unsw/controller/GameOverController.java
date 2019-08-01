@@ -26,6 +26,10 @@ public class GameOverController extends BasicController{
 		this.filename = filename;
 	}
 	
+	/**
+	 * Reloads the dungeon
+	 * @param event player input
+	 */
 	@FXML
     void handleRetry(ActionEvent event) throws IOException {
 		BasicScene gameScene = new BasicScene(this.getStage(), "Dungeon", "DungeonView.fxml");
@@ -34,11 +38,19 @@ public class GameOverController extends BasicController{
         gameScene.start(controller);
     }
 
+    /**
+     * Exits the program
+     * @param event player input
+     */
     @FXML
     void handleExit(ActionEvent event) {
     	System.exit(1);
     }
 
+    /**
+     * Goes back to main menu
+     * @param event player input
+     */
     @FXML
     void handleBack(ActionEvent event) throws IOException {
     	
@@ -47,6 +59,10 @@ public class GameOverController extends BasicController{
 		menuScreen.start(dmc);
     }
 
+    /**
+     * Gets the filename of the dungeon loaded
+     * @return String filename in format of "name.json"
+     */
 	public String getFilename() {
 		return filename;
 	}

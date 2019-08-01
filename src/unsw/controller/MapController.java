@@ -28,7 +28,7 @@ public class MapController extends BasicController{
     
     
     /**
-     * the map constroller
+     * the map controller
      * @param stage the window
      */
     public MapController(Stage stage) {
@@ -37,7 +37,7 @@ public class MapController extends BasicController{
 
     @FXML
     /**
-     * when click the butto back
+     * when click the button back
      * @param event the click 
      * @throws IOException 
      */

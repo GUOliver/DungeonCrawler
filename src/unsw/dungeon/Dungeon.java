@@ -70,7 +70,7 @@ public class Dungeon {
 	}
 
     /**
-     * 
+     * Finds entities that occupy coordinate
      * @param x the x coord
      * @param y the y coord
      * @return the list of entities on a given spot
@@ -88,7 +88,7 @@ public class Dungeon {
 	}
     
     /**
-     * 
+     * Find entities that match the provided string
      * @param x the x coordinnate
      * @param y the y coordinnate
      * @param type the given type of the entity
@@ -104,6 +104,12 @@ public class Dungeon {
     	return null;
     }
     
+    /**
+     * Find the types of entities at a coordinate location
+     * @param x the x coordinate
+     * @param y the y coordinate
+     * @return List of all entity types on a location
+     */
     public List<String> findEntityType(int x, int y) {
 		List<String> entityTypes = new ArrayList<String>();
 		List<Entity> entities = findEntity(x, y);
@@ -124,8 +130,8 @@ public class Dungeon {
     }
 	
 	/**
-	 * get the hight
-	 * @return the hight
+	 * get the height
+	 * @return the height
 	 */
     public int getHeight() {
         return height;
@@ -375,6 +381,10 @@ public class Dungeon {
 		*/
     }
 	
+	/**
+	 * Finds all the enemies in the dungeon
+	 * @return A physical array of size of all entities containing enemies
+	 */
 	public Enemy[] getEnemyArray() {
 		Enemy[] tempArray = new Enemy[entities.size()];
 		int iter = 0;
@@ -388,6 +398,10 @@ public class Dungeon {
 		return tempArray;
 	}
 	
+	/**
+	 * Finds all the bombs in the dungeon
+	 * @return A physical array of size of all entities containing bombs
+	 */
 	public Bomb[] getBombArray() {
 		Bomb[] tempArray = new Bomb[entities.size()];
 		int iter = 0;

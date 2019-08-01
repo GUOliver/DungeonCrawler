@@ -2,6 +2,7 @@ package unsw.controller;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.ArrayList;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -59,6 +60,8 @@ public abstract class DungeonLoader {
 		for (int i = 0; i < jsonEntities.length(); i++) {
 			loadEntity(dungeon, jsonEntities.getJSONObject(i));
 		}
+		
+		checkStartBoulderOnSwitch(dungeon);
 
 		// Adding goals
 		JSONObject jsonGoals = json.getJSONObject("goal-condition");
@@ -81,7 +84,7 @@ public abstract class DungeonLoader {
 				dungeon.setGoal(goal);
 			}
 		} else {
-			Component goal = createGoal(jsonGoals.get("goal").toString());
+			Component goal = createGoal(jsonGoals.getString("goal"));
 			dungeon.setGoal(goal);
 		}
 
@@ -89,6 +92,29 @@ public abstract class DungeonLoader {
 		Player player = dungeon.getPlayer();
 		player.registerObservers();
 		return dungeon;
+	}
+	
+	/**
+	 * Checks after loading if there are already boulders existing on switches
+	 * @param dungeon Dungeon
+	 */
+	private void checkStartBoulderOnSwitch(Dungeon dungeon){
+		ArrayList<Boulder> bold = new ArrayList<Boulder>();
+		ArrayList<FloorSwitch> swit = new ArrayList<FloorSwitch>();
+		for (Entity ent : dungeon.getEntities()) {
+			if (ent instanceof Boulder)
+				bold.add((Boulder)ent);
+			else if (ent instanceof FloorSwitch)
+				swit.add((FloorSwitch)ent);
+		}
+		
+		for (Boulder boulder : bold) {
+			for (FloorSwitch floor : swit) {
+				if (boulder.getX()==floor.getX() &&
+						boulder.getY()==floor.getY())
+					dungeon.addBoulderOnSwitch(1);
+			}
+		}
 	}
 
 	private void loadEntity(Dungeon dungeon, JSONObject json) {
@@ -188,6 +214,11 @@ public abstract class DungeonLoader {
 		return stage;
 	}
 
+	/**
+	 * Creates a leafgoal
+	 * @param goal String defining leafgoal
+	 * @return Component leafgoal
+	 */
 	private Component createGoal(String goal) {
 		if(goal.equals("exit")) {
 			LeafExit goalComponent = new LeafExit();

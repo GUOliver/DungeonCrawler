@@ -24,6 +24,13 @@ public class MovingToPlayer extends dfsSearchPath implements MovementStrategy{
 	}
 
 	
+	/**
+	 * Calculates with dfs shortest path the correct next step
+	 * @param dungeon Current dungeon
+	 * @param entity Moving entity
+	 * @param destX X coord
+	 * @param destY Y coord
+	 */
 	public void moveNext(Dungeon dungeon, MovingEntity entity, int destX, int destY) {
 		int fromX = entity.getX();
 		int fromY = entity.getY();

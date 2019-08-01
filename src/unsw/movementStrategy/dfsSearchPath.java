@@ -67,6 +67,14 @@ public abstract class dfsSearchPath {
 
 
 	 	
+	/**
+	 * Add neighbour node
+	 * @param dungeon Dungeon
+	 * @param neighbours Existing neighbour list
+	 * @param character character
+	 * @param src starting vertex
+	 * @return
+	 */
 	public ArrayList<Integer> addNeighbour(Dungeon dungeon, ArrayList<Integer>neighbours, 
 					Entity character, int src) {
 		
