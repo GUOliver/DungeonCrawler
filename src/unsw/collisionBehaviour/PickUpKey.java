@@ -17,6 +17,7 @@ public class PickUpKey implements CollisionBehaviour {
 			
 			dungeon.removeEntity(keyEntity);
 			player.addKeys(key.getKeyID());
+			player.setKeyNum(player.getKeyNum()+1);
 		}
 
 	}

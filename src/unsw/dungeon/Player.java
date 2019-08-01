@@ -21,13 +21,14 @@ import unsw.playerState.PlayerState;
 public class Player extends MovingEntity implements Subject {
 
 	private Dungeon dungeon;
-    private int bombs;
+    private IntegerProperty bombs;
     private IntegerProperty swordNum;
     private IntegerProperty invincibleTime;
     private ArrayList<Integer> keys;
 	private int treasureCollected;
 	private ArrayList<Observer> listObservers;
 	private PlayerState playerState;
+	private IntegerProperty keyNum;
 
     /**
      * Create a player positioned in square (x,y)
@@ -38,11 +39,12 @@ public class Player extends MovingEntity implements Subject {
     public Player(Dungeon dungeon, int x, int y) {
         super(x, y, "player");
         this.dungeon = dungeon;
-        this.bombs = 0;
+        this.bombs = new SimpleIntegerProperty(0);
         this.swordNum = new SimpleIntegerProperty(0);
         this.treasureCollected = 0;
         this.invincibleTime = new SimpleIntegerProperty(0);
         this.keys = new ArrayList<Integer>();
+        this.keyNum = new SimpleIntegerProperty(0);
         this.playerState = new NormalState();
         this.listObservers = new ArrayList<Observer>();
         setCollisionBehaviour(new CollisionWithPlayer());
@@ -65,12 +67,32 @@ public class Player extends MovingEntity implements Subject {
     	} else
     		return null;
     }
+    
+    public int getKeyNum() {
+    	return keyNum.get();
+    }
+    
+    public IntegerProperty getKeyNumProperty() {
+    	return keyNum;
+    }
+    
+    public void setKeyNum(int num) {
+    	keyNum.set(num);
+    }
 
 	/**
 	 * List of bombs collected
 	 * @return Bombs
 	 */
     public int getBombNum() {
+		return bombs.get();
+	}
+    
+    /**
+	 * List of bombs collected
+	 * @return Bombs
+	 */
+    public IntegerProperty getBombNumProperty() {
 		return bombs;
 	}
     
@@ -79,14 +101,14 @@ public class Player extends MovingEntity implements Subject {
      * @param bomb 
      */
 	public void addBomb() {
-		this.bombs = this.bombs+1;
+		bombs.set(bombs.get()+1);
 	}
 	
 	/**
 	 * remove bomb from player
 	 */
 	public void removeBomb() {
-		this.bombs = this.bombs-1;
+		bombs.set(bombs.get()-1);
 	}
 	
 	/**

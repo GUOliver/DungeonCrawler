@@ -44,6 +44,16 @@ public class DungeonController extends BasicController{
 	private Image openDoorImage;
 	private Image swordPlayerImage;
 	private Image lockedDoorImage;
+	private Image num0;
+	private Image num1;
+	private Image num2;
+	private Image num3;
+	private Image num4;
+	private Image num5;
+	private Image num6;
+	private Image num7;
+	private Image num8;
+	private Image num9;
 
 	public DungeonController(Stage stage, Dungeon dungeon, List<ImageView> initialEntities, String filename) {
 		super(stage);
@@ -61,18 +71,60 @@ public class DungeonController extends BasicController{
 		swordPlayerImage = new Image("/human_sword.png");
 		openDoorImage = new Image("/open_door.png");
         lockedDoorImage = new Image("/closed_door.png");
+        num0 = new Image("/number_0.png");
+        num1 = new Image("/number_1.png");
+        num2 = new Image("/number_2.png");
+        num3 = new Image("/number_3.png");
+        num4 = new Image("/number_4.png");
+        num5 = new Image("/number_5.png");
+        num6 = new Image("/number_6.png");
+        num7 = new Image("/number_7.png");
+        num8 = new Image("/number_8.png");
+        num9 = new Image("/number_9.png");
 	}
 
 	@FXML
 	public void initialize() {
 		Image ground = new Image("/dirt_0_new.png");
+		Image sidebar = new Image("/dirt_1_new.png");
+        Image swordImage = new Image("/greatsword_1_new.png");
+        Image equals = new Image("/equals.png");
+        Image inv1 = new Image("/inventory_1.png");
+        Image inv2 = new Image("/inventory_2.png");
+        Image inv3 = new Image("/inventory_3.png");
+        Image keyImage = new Image("/key.png");
+        
+        int width = dungeon.getWidth();
+        int height = dungeon.getHeight();
 
 		// Add the ground first so it is below all other entities
-		for (int x = 0; x < dungeon.getWidth(); x++) {
-			for (int y = 0; y < dungeon.getHeight(); y++) {
-				squares.add(new ImageView(ground), x, y);
+		for (int x = 0; x < width+5; x++) {
+			for (int y = 0; y < height; y++) {
+				if (x < width)
+					squares.add(new ImageView(ground), x, y);
+				else
+					if (x == width+1 && y == 0)
+						squares.add(new ImageView(inv1), width+1, 0);
+					else if (x == width+2 && y == 0)
+						squares.add(new ImageView(inv2), width+2, 0);
+					else if (x == width+3 && y == 0)
+						squares.add(new ImageView(inv3), width+3, 0);
+					else
+						squares.add(new ImageView(sidebar), x,y);
 			}
 		}
+		
+		// Inventory Items
+		squares.add(new ImageView(swordImage), width+1, 1);
+		squares.add(new ImageView(equals), width+2, 1);
+		squares.add(new ImageView(unlitBombImage), width+1, 2);
+		squares.add(new ImageView(equals), width+2, 2);
+		squares.add(new ImageView(keyImage), width+1, 3);
+		squares.add(new ImageView(equals), width+2, 3);
+		
+		handleSwordNum(player,width+3,1);
+		handleBombNum(player,width+3,2);
+		handleKeyNum(player,width+3,3);
 
 		for (ImageView entity : initialEntities)
 			squares.getChildren().add(entity);
@@ -146,6 +198,103 @@ public class DungeonController extends BasicController{
 
 	private void handleDropBomb(){
 		dungeon.getPlayer().dropBomb();
+	}
+	
+	private void handleSwordNum(Player player, int x, int y) {
+		ImageView view = new ImageView(num0);
+		GridPane.setColumnIndex(view, x);
+		GridPane.setRowIndex(view, y);
+		player.getSwordNumProperty().addListener(new ChangeListener<Number>() {
+			@Override
+			public void changed(ObservableValue<? extends Number> observable,
+					Number oldValue, Number newValue) {
+				//System.out.println(newValue.intValue());
+				if (newValue.intValue() == 5) {
+					view.setImage(num5);
+				} else if (newValue.intValue() == 4) {
+					view.setImage(num4);
+				} else if (newValue.intValue() == 3) {
+					view.setImage(num3);
+				} else if (newValue.intValue() == 2) {
+					view.setImage(num2);
+				} else if (newValue.intValue() == 1) {
+					view.setImage(num1);
+				} else if (newValue.intValue() == 0) {
+					view.setImage(num0);
+				}
+			}
+		});
+		squares.getChildren().add(view);
+	}
+	
+	private void handleBombNum(Player player, int x, int y) {
+		ImageView view = new ImageView(num0);
+		GridPane.setColumnIndex(view, x);
+		GridPane.setRowIndex(view, y);
+		player.getBombNumProperty().addListener(new ChangeListener<Number>() {
+			@Override
+			public void changed(ObservableValue<? extends Number> observable,
+					Number oldValue, Number newValue) {
+				//System.out.println(newValue.intValue());
+				if (newValue.intValue() == 9) {
+					view.setImage(num9);
+				} else if (newValue.intValue() == 8) {
+					view.setImage(num8);
+				} else if (newValue.intValue() == 7) {
+					view.setImage(num7);
+				} else if (newValue.intValue() == 6) {
+					view.setImage(num6);
+				} else if (newValue.intValue() == 5) {
+					view.setImage(num5);
+				} else if (newValue.intValue() == 4) {
+					view.setImage(num4);
+				} else if (newValue.intValue() == 3) {
+					view.setImage(num3);
+				} else if (newValue.intValue() == 2) {
+					view.setImage(num2);
+				} else if (newValue.intValue() == 1) {
+					view.setImage(num1);
+				} else if (newValue.intValue() == 0) {
+					view.setImage(num0);
+				}
+			}
+		});
+		squares.getChildren().add(view);
+	}
+	
+	private void handleKeyNum(Player player, int x, int y) {
+		ImageView view = new ImageView(num0);
+		GridPane.setColumnIndex(view, x);
+		GridPane.setRowIndex(view, y);
+		player.getKeyNumProperty().addListener(new ChangeListener<Number>() {
+			@Override
+			public void changed(ObservableValue<? extends Number> observable,
+					Number oldValue, Number newValue) {
+				//System.out.println(newValue.intValue());
+				if (newValue.intValue() == 9) {
+					view.setImage(num9);
+				} else if (newValue.intValue() == 8) {
+					view.setImage(num8);
+				} else if (newValue.intValue() == 7) {
+					view.setImage(num7);
+				} else if (newValue.intValue() == 6) {
+					view.setImage(num6);
+				} else if (newValue.intValue() == 5) {
+					view.setImage(num5);
+				} else if (newValue.intValue() == 4) {
+					view.setImage(num4);
+				} else if (newValue.intValue() == 3) {
+					view.setImage(num3);
+				} else if (newValue.intValue() == 2) {
+					view.setImage(num2);
+				} else if (newValue.intValue() == 1) {
+					view.setImage(num1);
+				} else if (newValue.intValue() == 0) {
+					view.setImage(num0);
+				}
+			}
+		});
+		squares.getChildren().add(view);
 	}
 
 	private void handleBombImage(Bomb bomb) {

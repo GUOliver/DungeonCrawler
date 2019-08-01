@@ -16,6 +16,7 @@ public class DoorUnlock implements CollisionBehaviour {
 			if (!d.isOpen()) {
 				p.removeKeys(d.getKeyId());
 				d.setIsOpen(true);
+				p.setKeyNum(p.getKeyNum()-1);
 			}
 		}
 	}
