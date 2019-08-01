@@ -6,8 +6,6 @@ import java.io.FileReader;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
-import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
 import javafx.stage.Stage;
 import unsw.compositeGoal.*;
 import unsw.dungeon.Bomb;
@@ -62,9 +60,6 @@ public abstract class DungeonLoader {
 			loadEntity(dungeon, jsonEntities.getJSONObject(i));
 		}
 
-		trackEntityList(dungeon.getEntities());
-
-
 		// Adding goals
 		JSONObject jsonGoals = json.getJSONObject("goal-condition");
 		if (jsonGoals.get("goal").equals("AND")) {
@@ -94,25 +89,6 @@ public abstract class DungeonLoader {
 		Player player = dungeon.getPlayer();
 		player.registerObservers();
 		return dungeon;
-	}
-
-
-	private void trackEntityList(ObservableList<Entity> entities) {
-		entities.addListener(new ListChangeListener<Entity>() {
-
-			@Override
-			public void onChanged(Change<? extends Entity> c) {
-				while (c.next()) {
-					if (c.wasAdded()) {
-						for (Entity item : c.getAddedSubList()) {
-							onLoad(item);
-						}
-					} else if (c.wasRemoved()) {
-						for (Entity item : c.getRemoved()) {
-							removeImage(item);
-						}
-					}
-				}}});
 	}
 
 	private void loadEntity(Dungeon dungeon, JSONObject json) {
@@ -203,7 +179,6 @@ public abstract class DungeonLoader {
 	public abstract void onLoad(Sword sword);
 	public abstract void onLoad(Treasure treasure);
 	public abstract void onLoad(Exit exit);
-	public abstract void removeImage(Entity entity);
 
 
 	public String getFilename() {

@@ -111,6 +111,7 @@ public class WeaponTest {
 		assertEquals(1, bomb.getTick());
 		bomb.tickTock(dungeon);
 		assertEquals(0, bomb.getTick());
+		bomb.tickTock(dungeon);
 		
 		List<Entity> entities = dungeon.findEntity(2,2);
 		

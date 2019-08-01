@@ -117,6 +117,7 @@ public class BombTest {
 		player.moveLeft(dungeon);
 		assertEquals(1, bomb.getTick());
 		player.moveLeft(dungeon);
+		player.moveRight(dungeon);
 		
 		List<Entity> entities = dungeon.findEntity(2,2);
 		
@@ -153,6 +154,7 @@ public class BombTest {
 		//Can't move back onto lit bomb
 		checkMove = c1.moveLeft(maze);
 		assertTrue(!checkMove);
+		assertEquals(3, c2.getTick());
 		
 	}
 	

@@ -36,7 +36,7 @@ public class MovingToPlayer extends dfsSearchPath implements MovementStrategy{
 		
 		if(! dungeon.canMoveOnto(entity, destX, destY)) {
 			// if we can't get to the final square, return NONE
-			System.out.println("cant get to " + destX + "," + destY + " entities on point: " + dungeon.findEntity(destX, destY));
+			//System.out.println("cant get to " + destX + "," + destY + " entities on point: " + dungeon.findEntity(destX, destY));
 			return;
 		}
 		
@@ -77,7 +77,7 @@ public class MovingToPlayer extends dfsSearchPath implements MovementStrategy{
 			} else if (nextX == fromX && nextY == fromY + 1) {
 				((Enemy) entity).moveDown(dungeon);
 			} else {
-				System.out.println("not supposed to happen nextX = " + nextX + ", nextY = " + nextY);
+				//System.out.println("not supposed to happen nextX = " + nextX + ", nextY = " + nextY);
 				return;
 			}
 		} else {

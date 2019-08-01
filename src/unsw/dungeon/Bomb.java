@@ -54,7 +54,7 @@ public class Bomb extends Entity{
 	 */
 	public void tickTock(Dungeon dungeon) {
 		if (getBombState() == true) {
-			setTick(getTick() - 1);
+			tick.set(tick.get()-1);
 			
 			if(getTick() == 0) {
 				setType("lit bomb 4");
@@ -71,6 +71,10 @@ public class Bomb extends Entity{
 			
 			else if (getTick() == 1) {
 				setType("lit bomb 3");			
+			}
+			
+			else if (getTick() == -1) {
+				dungeon.removeEntity(this);
 			}
 		}
 		
@@ -107,8 +111,6 @@ public class Bomb extends Entity{
 				dungeon.removeEntity(item);
 			}
 		}
-		
-		dungeon.removeEntity(this);
 		
 	}
 

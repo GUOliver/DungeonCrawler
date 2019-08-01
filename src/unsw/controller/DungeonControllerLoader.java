@@ -39,22 +39,15 @@ public class DungeonControllerLoader extends DungeonLoader {
     private Image playerImage;
     private Image wallImage;
 	private Image unlitBombImage;
-	private Image lit1BombImage;
-	private Image lit2BombImage;
-	private Image lit3BombImage;
-	private Image explodeBombImage;
 	private Image boulderImage;
 	private Image invincibilityImage;
-	private Image invincibilePlayerImage;
 	private Image lockedDoorImage;
-	private Image openDoorImage;
 	private Image exitImage;
 	private Image enemyImage;
 	private Image treasureImage;
 	private Image swordImage;
 	private Image keyImage;
 	private Image switchImage;
-	private Image swordPlayerImage;
 
     public DungeonControllerLoader(String filename, Stage stage)
             throws FileNotFoundException {
@@ -63,16 +56,9 @@ public class DungeonControllerLoader extends DungeonLoader {
         playerImage = new Image("/human_new.png");
         wallImage = new Image("/brick_brown_0.png");
         unlitBombImage = new Image("/bomb_unlit.png");
-        lit1BombImage = new Image("/bomb_lit_1.png");
-        lit2BombImage = new Image("/bomb_lit_2.png");
-        lit3BombImage = new Image("/bomb_lit_3.png");
-        explodeBombImage = new Image("/bomb_lit_4.png");
         boulderImage = new Image("/boulder.png");
         invincibilityImage = new Image("/brilliant_blue_new.png");
-        invincibilePlayerImage = new Image("/human_invincible.png");
-        swordPlayerImage = new Image("/human_sword.png");
         lockedDoorImage = new Image("/closed_door.png");
-        openDoorImage = new Image("/open_door.png");
         exitImage = new Image("/exit.png");
         enemyImage = new Image("/gnome.png");
         treasureImage = new Image("/gold_pile.png");
@@ -96,23 +82,7 @@ public class DungeonControllerLoader extends DungeonLoader {
     
     @Override
 	public void onLoad(Bomb bomb) {
-    	final ImageView view = new ImageView(unlitBombImage);
-    	if (bomb.getBombState()) {
-    		view.setImage(lit1BombImage);
-    		bomb.getTickProperty().addListener(new ChangeListener<Number>() {
-                @Override
-                public void changed(ObservableValue<? extends Number> observable,
-                        Number oldValue, Number newValue) {
-                    if (newValue.intValue() == 2) {
-                    	view.setImage(lit2BombImage);
-                    } else if (newValue.intValue() == 1) {
-                    	view.setImage(lit3BombImage);
-                    } else if (newValue.intValue() == 0) {
-                    	view.setImage(explodeBombImage);
-                    }
-                }
-            });
-    	}
+    	ImageView view = new ImageView(unlitBombImage);
         addEntity(bomb, view);
 	}
 
@@ -200,7 +170,7 @@ public class DungeonControllerLoader extends DungeonLoader {
         entity.x().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable,
-                    Number oldValue, Number newValue) {
+                    Number oldValue, Number newValue) { 
                 GridPane.setColumnIndex(node, newValue.intValue());
             }
         });
@@ -223,12 +193,5 @@ public class DungeonControllerLoader extends DungeonLoader {
         return new DungeonController(getStage(),load(), entities, getFilename());
     }
 
-	@Override
-	public void removeImage(Entity entity) {
-		for (ImageView image : entities) {
-		}
-	}
-
-	
 
 }
