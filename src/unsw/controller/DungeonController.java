@@ -8,11 +8,23 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.HPos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import unsw.dungeon.Bomb;
 import unsw.dungeon.Door;
@@ -161,6 +173,8 @@ public class DungeonController extends BasicController{
 		case Q:
 			handleQuit();
 			break;
+		case ENTER:
+			handleGoal();
 		default:
 			break;
 		}
@@ -177,6 +191,73 @@ public class DungeonController extends BasicController{
 			else
 				handleDeath();
 	}
+	
+
+	private void handleGoal() throws IOException {
+		
+		Label l = new Label("Goal: ");
+		l.setStyle("-fx-font-size: 16;");
+		l.setTextFill(Color.rgb(255, 255, 255));
+		squares.add(l,dungeon.getWidth(),5, 4, 1);
+		GridPane.setHalignment(l, HPos.CENTER);
+		
+		
+		Label l2 = new Label(dungeon.getGoal().goalName());
+		l2.setStyle("-fx-font-size: 16;");
+		l2.setWrapText(true);
+		l2.setTextFill(Color.rgb(255, 255, 255));
+		squares.add(l2,dungeon.getWidth(), 6, 4, 3);
+		GridPane.setHalignment(l2, HPos.CENTER);
+			
+		if (dungeon.getHeight() > 10) {
+			ImageView i = new ImageView(new Image("/greatsword_1_new.png"));
+			squares.add(i,dungeon.getWidth(),dungeon.getHeight()/2 + 2 , 4, 1 );
+			
+			l = new Label("Only can use five times");
+			l.setStyle("-fx-font-size: 11;");
+			l.setWrapText(true);
+			l.setTextFill(Color.rgb(255, 255, 255));
+			squares.add(l,dungeon.getWidth() + 2,dungeon.getHeight()/2 + 2, 4, 1 );
+			
+			
+			i = new ImageView(new Image("/key.png"));
+			squares.add(i,dungeon.getWidth(),dungeon.getHeight()/2 + 3 , 4, 1 );
+			
+			l = new Label("Can open the door");
+			l.setStyle("-fx-font-size: 11;");
+			l.setWrapText(true);
+			l.setTextFill(Color.rgb(255, 255, 255));
+			squares.add(l,dungeon.getWidth() + 2,dungeon.getHeight()/2 + 3, 4, 1 );
+			
+			i = new ImageView(new Image("/exit.png"));
+			squares.add(i,dungeon.getWidth(),dungeon.getHeight()/2 + 4 , 4, 1 );
+			
+			l = new Label("The Exit");
+			l.setStyle("-fx-font-size: 11;");
+			l.setWrapText(true);
+			l.setTextFill(Color.rgb(255, 255, 255));
+			squares.add(l,dungeon.getWidth() + 2,dungeon.getHeight()/2 + 4, 4, 1 );
+			
+			i = new ImageView(new Image("/pressure_plate.png"));
+			squares.add(i,dungeon.getWidth(),dungeon.getHeight()/2 + 5 , 4, 1);
+			l = new Label("The Switch, push boulder to activate it ");
+			l.setStyle("-fx-font-size: 11;");
+			l.setWrapText(true);
+			l.setTextFill(Color.rgb(255, 255, 255));
+			squares.add(l,dungeon.getWidth() + 2,dungeon.getHeight()/2 + 5, 4, 2);
+			
+			i = new ImageView(new Image("/brilliant_blue_new.png"));
+			squares.add(i,dungeon.getWidth(),dungeon.getHeight()/2 + 7, 4, 1 );
+			
+			l = new Label("Invinvible in 10 sec ");
+			l.setStyle("-fx-font-size: 11;");
+			l.setWrapText(true);
+			l.setTextFill(Color.rgb(255, 255, 255));
+			squares.add(l,dungeon.getWidth() + 2,dungeon.getHeight()/2 + 7, 4, 1);
+		}
+	
+	}
+
 
 	private void handleDeath() throws IOException {
 		BasicScene gameOver = new BasicScene(this.getStage(), "Game Over", "GameOverScene.fxml");

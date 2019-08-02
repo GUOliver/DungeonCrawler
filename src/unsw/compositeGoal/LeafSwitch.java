@@ -8,7 +8,7 @@ public class LeafSwitch implements Component {
 	private boolean complete;
 	
 	public LeafSwitch() {
-		this.goal = "Switches";
+		this.goal = "move boulders on all Switches";
 		this.complete = false;
 	}
 

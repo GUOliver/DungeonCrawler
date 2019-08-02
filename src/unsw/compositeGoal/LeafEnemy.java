@@ -8,7 +8,7 @@ public class LeafEnemy implements Component {
 	private boolean complete;
 	
 	public LeafEnemy() {
-		this.goal = "Enemies";
+		this.goal = "Kill all the Enemies";
 		this.complete = false;
 	}
 

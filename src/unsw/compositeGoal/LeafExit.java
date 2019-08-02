@@ -8,7 +8,7 @@ public class LeafExit implements Component {
 	private boolean complete;
 	
 	public LeafExit() {
-		this.goal = "Exit";
+		this.goal = "reach the Exit";
 		this.complete = false;
 	}
 

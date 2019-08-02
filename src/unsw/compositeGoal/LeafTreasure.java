@@ -8,7 +8,7 @@ public class LeafTreasure implements Component {
 	private boolean complete;
 	
 	public LeafTreasure() {
-		this.goal = "Treasure";
+		this.goal = "collect all the Treasure";
 		this.complete = false;
 	}
 

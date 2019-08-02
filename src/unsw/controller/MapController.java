@@ -34,6 +34,8 @@ public class MapController extends BasicController{
     public MapController(Stage stage) {
 		super(stage);
 	}
+    
+    
 
     @FXML
     /**
@@ -56,10 +58,9 @@ public class MapController extends BasicController{
      */
     void handleLevelOne(ActionEvent event) throws IOException {
     	
-    	BasicScene gameScene = new BasicScene(this.getStage(), "Dungeon", "DungeonView.fxml");
-        DungeonControllerLoader dungeonLoader = new DungeonControllerLoader("hardMaze.json",this.getStage());
-        DungeonController controller = dungeonLoader.loadController();
-        gameScene.start(controller);
+    	BasicScene backGround = new BasicScene(this.getStage(), "Background", "BackgroundScene.fxml");
+    	BackgroundController bc = new BackgroundController(this.getStage(), "hardMaze.json");
+    	backGround.start(bc);
 
     }
 
@@ -70,12 +71,10 @@ public class MapController extends BasicController{
      * @throws IOException
      */
     void handleLevelTwo(ActionEvent event) throws IOException {
-    	
-    	BasicScene gameScene = new BasicScene(this.getStage(), "Dungeon", "DungeonView.fxml");
-        DungeonControllerLoader dungeonLoader = new DungeonControllerLoader("boulders.json",this.getStage());
-        DungeonController controller = dungeonLoader.loadController();
-        gameScene.start(controller);
-
+    	BasicScene backGround = new BasicScene(this.getStage(), "Background", "BackgroundScene.fxml");
+    	BackgroundController bc = new BackgroundController(this.getStage(), "boulders.json");
+    	backGround.start(bc);
+    
     }
 
     @FXML
@@ -85,10 +84,9 @@ public class MapController extends BasicController{
      * @throws IOException
      */
     void handleLevelThree(ActionEvent event) throws IOException {
-    	BasicScene gameScene = new BasicScene(this.getStage(), "Dungeon", "DungeonView.fxml");
-        DungeonControllerLoader dungeonLoader = new DungeonControllerLoader("advanced.json",this.getStage());
-        DungeonController controller = dungeonLoader.loadController();
-        gameScene.start(controller);
+    	BasicScene backGround = new BasicScene(this.getStage(), "Background", "BackgroundScene.fxml");
+    	BackgroundController bc = new BackgroundController(this.getStage(), "advanced.json");
+    	backGround.start(bc);
     }
 
 }
