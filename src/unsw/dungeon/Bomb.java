@@ -131,8 +131,8 @@ public class Bomb extends Entity{
 	}
 	
 	/**
-	 * get the tick 
-	 * @return the tick number
+	 * get the tick as an observable IntegerProperty
+	 * @return IntegerProperty wrapping tick value
 	 */
 	public IntegerProperty getTickProperty() {
 		return tick;

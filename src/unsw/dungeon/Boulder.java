@@ -3,7 +3,7 @@ import unsw.collisionBehaviour.*;
 public class Boulder extends Entity{
 	
 	/**
-	 * 
+	 * Boulder constructor
 	 * @param x x coordinate
 	 * @param y	y coordinate
 	 */
