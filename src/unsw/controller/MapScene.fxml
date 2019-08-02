@@ -5,6 +5,8 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
@@ -14,10 +16,18 @@
             <Image url="@../../../bin/background.png" />
          </image>
       </ImageView>
-      <Label layoutX="199.0" layoutY="14.0" prefHeight="73.0" prefWidth="378.0" text="Game Level" textFill="#dadada">
+      <Label layoutX="199.0" layoutY="14.0" prefHeight="73.0" prefWidth="378.0" text="Game Level">
          <font>
             <Font size="34.0" />
          </font>
+         <textFill>
+            <LinearGradient endX="0.8173076923076925" endY="1.0" startX="0.4182692307692308">
+               <stops>
+                  <Stop color="RED" />
+                  <Stop color="WHITE" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
       </Label>
       <Button fx:id="levelOne" layoutX="61.0" layoutY="99.0" mnemonicParsing="false" onAction="#handleLevelOne" prefHeight="67.0" prefWidth="479.0" style="-fx-background-color: #1a2d4c;" text="Dungeon Simple Maze" />
       <Button fx:id="levelTwo" layoutX="61.0" layoutY="192.0" mnemonicParsing="false" onAction="#handleLevelTwo" prefHeight="67.0" prefWidth="479.0" style="-fx-background-color: #1a2d4c;" text="Dungeon Regular" />

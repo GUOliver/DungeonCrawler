@@ -39,17 +39,17 @@
             <LinearGradient endX="0.43749999999999994" endY="1.0" startX="1.0">
                <stops>
                   <Stop color="#e10000" />
-                  <Stop color="#f5f2ee" offset="1.0" />
+                  <Stop color="#fffdb7" offset="1.0" />
                </stops>
             </LinearGradient>
          </textFill>
       </Label>
       <Label layoutX="322.0" layoutY="276.0" prefHeight="35.0" prefWidth="199.0" text="Enter to show the help menu">
          <textFill>
-            <LinearGradient endX="0.3076923076923077" startX="0.5673076923076923" startY="1.0">
+            <LinearGradient endX="0.3076923076923077" endY="0.9278846153846154" startX="0.3317307692307692" startY="0.009615384615384671">
                <stops>
                   <Stop color="#e10000" />
-                  <Stop color="WHITE" offset="1.0" />
+                  <Stop color="#fcf300" offset="1.0" />
                </stops>
             </LinearGradient>
          </textFill></Label>
@@ -62,7 +62,7 @@
                </stops>
             </LinearGradient>
          </textFill></Label>
-      <Label layoutX="83.0" layoutY="80.0" prefHeight="144.0" prefWidth="434.0" text="Long long ago, a warrior ’s  family was slaughter by the monsters from a notorious dungeon called UNSWChancellory… Now after five years hellish trained in UNSWTRIMESTER, he became something else, a true warrior is now on his way for revenge…" wrapText="true">
+      <Label layoutX="83.0" layoutY="80.0" prefHeight="144.0" prefWidth="434.0" text="Long long ago, a warrior's family was slaughtered by the monsters from a notorious dungeon called UNSWChancellory… Now after five years hellish trained in UNSWTRIMESTER, he became something else, a true warrior is now on his way for revenge…" wrapText="true">
          <font>
             <Font size="17.0" />
          </font>

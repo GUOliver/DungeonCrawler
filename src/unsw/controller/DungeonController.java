@@ -288,8 +288,8 @@ public class DungeonController extends BasicController{
 	 * quits to main menu
 	 */
 	private void handleQuit() throws IOException {
-		BasicScene menuScreen = new BasicScene(this.getStage(), "Game Menu", "MainMenuScene.fxml");
-		MainMenuController dmc = new MainMenuController(this.getStage());
+		BasicScene menuScreen = new BasicScene(this.getStage(), "Game Menu", "MapScene.fxml");
+		MapController dmc = new MapController(this.getStage());
 		menuScreen.start(dmc);
 	}
 	
