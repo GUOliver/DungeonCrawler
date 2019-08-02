@@ -605,7 +605,7 @@ public class DungeonController extends BasicController{
 				if(compareImageFiles(view.getImage(),playerImage)==true || 
 						compareImageFiles(view.getImage(),invinciblePlayerImage)==true || 
 						compareImageFiles(view.getImage(),swordPlayerImage)==true) {
-					//System.out.println("Found item that is player");
+					
 					image = view;
 				}
 			}
