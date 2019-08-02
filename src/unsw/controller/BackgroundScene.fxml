@@ -20,12 +20,12 @@
       <BorderPane layoutX="171.0" layoutY="176.0" prefHeight="200.0" prefWidth="220.0" />
       <Button fx:id="backButton" layoutX="55.0" layoutY="341.0" mnemonicParsing="false" onAction="#handleBack" style="-fx-background-color: #1a2d4c;" stylesheets="@style.css" text="Back" />
       <Button fx:id="playButton" layoutX="482.0" layoutY="341.0" mnemonicParsing="false" onAction="#handlePlay" style="-fx-background-color: #1a2d4c;" stylesheets="@style.css" text="Play" />
-      <Label layoutX="58.0" layoutY="14.0" prefHeight="66.0" prefWidth="518.0" text="Warriar,  Welcome To The World Of Dungeon...">
+      <Label layoutX="58.0" layoutY="14.0" prefHeight="66.0" prefWidth="518.0" text="Warrior,  Welcome To The World Of Dungeon...">
          <font>
             <Font size="23.0" />
          </font>
          <textFill>
-            <LinearGradient endX="1.0" endY="1.0" startX="0.28365384615384615">
+            <LinearGradient endX="1.0" endY="1.0">
                <stops>
                   <Stop color="RED" />
                   <Stop color="WHITE" offset="1.0" />
@@ -33,7 +33,7 @@
             </LinearGradient>
          </textFill>
       </Label>
-      <Label layoutX="88.0" layoutY="276.0" prefHeight="35.0" prefWidth="199.0" text="Arrow Key to move the chacter" textFill="#e7f21c" />
+      <Label layoutX="88.0" layoutY="276.0" prefHeight="35.0" prefWidth="220.0" text="Arrow Key to move the character" textFill="#ffcb88" />
       <Label layoutX="322.0" layoutY="237.0" prefHeight="44.0" prefWidth="220.0" text="Space Key to place the bomb">
          <textFill>
             <LinearGradient endX="0.43749999999999994" endY="1.0" startX="1.0">
@@ -62,7 +62,7 @@
                </stops>
             </LinearGradient>
          </textFill></Label>
-      <Label layoutX="84.0" layoutY="97.0" prefHeight="103.0" prefWidth="424.0" text="Long long ago, a warrior ’s  family was slaughter by the monsters from a notorious dungeon called UNSWChancellory… Now after five years hellish trained in UNSWTRIMESTER, he became something else, a true warrior is now on his way for revenge…" wrapText="true">
+      <Label layoutX="83.0" layoutY="80.0" prefHeight="144.0" prefWidth="434.0" text="Long long ago, a warrior ’s  family was slaughter by the monsters from a notorious dungeon called UNSWChancellory… Now after five years hellish trained in UNSWTRIMESTER, he became something else, a true warrior is now on his way for revenge…" wrapText="true">
          <font>
             <Font size="17.0" />
          </font>
@@ -70,7 +70,7 @@
             <LinearGradient endX="1.0" endY="1.0">
                <stops>
                   <Stop color="#a9ae0d" />
-                  <Stop color="WHITE" offset="1.0" />
+                  <Stop color="#e4e4e4" offset="1.0" />
                </stops>
             </LinearGradient>
          </textFill>
