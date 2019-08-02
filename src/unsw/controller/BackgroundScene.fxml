@@ -2,23 +2,78 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <BorderPane layoutX="179.0" layoutY="94.0" prefHeight="200.0" prefWidth="220.0" />
-      <Button fx:id="backButton" layoutX="73.0" layoutY="330.0" mnemonicParsing="false" onAction="#handleBack" stylesheets="@style.css" text="Back" />
-      <Button fx:id="playButton" layoutX="468.0" layoutY="330.0" mnemonicParsing="false" onAction="#handlePlay" stylesheets="@style.css" text="Play" />
-      <Label layoutX="14.0" layoutY="14.0" prefHeight="66.0" prefWidth="496.0" text="Warriar,  Welcome To The World Of Advanture...">
+      <ImageView fitHeight="420.0" fitWidth="618.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../bin/background.png" />
+         </image>
+      </ImageView>
+      <BorderPane layoutX="171.0" layoutY="176.0" prefHeight="200.0" prefWidth="220.0" />
+      <Button fx:id="backButton" layoutX="55.0" layoutY="341.0" mnemonicParsing="false" onAction="#handleBack" style="-fx-background-color: #1a2d4c;" stylesheets="@style.css" text="Back" />
+      <Button fx:id="playButton" layoutX="482.0" layoutY="341.0" mnemonicParsing="false" onAction="#handlePlay" style="-fx-background-color: #1a2d4c;" stylesheets="@style.css" text="Play" />
+      <Label layoutX="58.0" layoutY="14.0" prefHeight="66.0" prefWidth="518.0" text="Warriar,  Welcome To The World Of Dungeon...">
          <font>
-            <Font size="21.0" />
+            <Font size="23.0" />
          </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0" startX="0.28365384615384615">
+               <stops>
+                  <Stop color="RED" />
+                  <Stop color="WHITE" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
       </Label>
-      <Label layoutX="189.0" layoutY="159.0" prefHeight="35.0" prefWidth="199.0" text="Arrow Key to move the chacter" />
-      <Label layoutX="189.0" layoutY="185.0" prefHeight="44.0" prefWidth="220.0" text="Space Key to place the bomb" />
-      <Label layoutX="189.0" layoutY="222.0" prefHeight="35.0" prefWidth="199.0" text="Enter to show the help menu" />
-      <Label layoutX="188.0" layoutY="122.0" prefHeight="44.0" prefWidth="208.0" text="Q to quit the game" />
+      <Label layoutX="88.0" layoutY="276.0" prefHeight="35.0" prefWidth="199.0" text="Arrow Key to move the chacter" textFill="#e7f21c" />
+      <Label layoutX="322.0" layoutY="237.0" prefHeight="44.0" prefWidth="220.0" text="Space Key to place the bomb">
+         <textFill>
+            <LinearGradient endX="0.43749999999999994" endY="1.0" startX="1.0">
+               <stops>
+                  <Stop color="#e10000" />
+                  <Stop color="#f5f2ee" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+      <Label layoutX="322.0" layoutY="276.0" prefHeight="35.0" prefWidth="199.0" text="Enter to show the help menu">
+         <textFill>
+            <LinearGradient endX="0.3076923076923077" startX="0.5673076923076923" startY="1.0">
+               <stops>
+                  <Stop color="#e10000" />
+                  <Stop color="WHITE" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill></Label>
+      <Label layoutX="88.0" layoutY="237.0" prefHeight="44.0" prefWidth="208.0" text="Q to quit the game">
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#e10000" />
+                  <Stop color="#f2ff00" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill></Label>
+      <Label layoutX="84.0" layoutY="97.0" prefHeight="103.0" prefWidth="424.0" text="Long long ago, a warrior ’s  family was slaughter by the monsters from a notorious dungeon called UNSWChancellory… Now after five years hellish trained in UNSWTRIMESTER, he became something else, a true warrior is now on his way for revenge…" wrapText="true">
+         <font>
+            <Font size="17.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#a9ae0d" />
+                  <Stop color="WHITE" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
    </children>
 </AnchorPane>

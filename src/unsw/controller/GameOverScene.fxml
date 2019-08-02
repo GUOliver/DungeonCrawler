@@ -2,18 +2,25 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" >
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label alignment="CENTER" layoutX="161.0" layoutY="14.0" prefHeight="73.0" prefWidth="279.0" text="Game Over">
+      <ImageView fitHeight="414.0" fitWidth="615.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../bin/background.png" />
+         </image>
+      </ImageView>
+      <Label alignment="CENTER" layoutX="150.0" layoutY="14.0" prefHeight="73.0" prefWidth="279.0" text="Game Over" textFill="#dac8c8">
          <font>
-            <Font size="18.0" />
+            <Font size="34.0" />
          </font>
       </Label>
-      <Button fx:id="retry" layoutX="61.0" layoutY="99.0" mnemonicParsing="false" onAction="#handleRetry" prefHeight="67.0" prefWidth="479.0" text="Retry" />
-      <Button fx:id="exit" layoutX="61.0" layoutY="299.0" mnemonicParsing="false" onAction="#handleExit" prefHeight="67.0" prefWidth="479.0" text="Exit Game" />
-      <Button fx:id="back" layoutX="61.0" layoutY="200.0" mnemonicParsing="false" onAction="#handleBack" prefHeight="67.0" prefWidth="479.0" text="Return to Main Menu" />
+      <Button fx:id="retry" layoutX="61.0" layoutY="114.0" mnemonicParsing="false" onAction="#handleRetry" prefHeight="67.0" prefWidth="479.0" style="-fx-background-color: #1a2d4c;" stylesheets="@style.css" text="Retry" />
+      <Button fx:id="exit" layoutX="61.0" layoutY="297.0" mnemonicParsing="false" onAction="#handleExit" prefHeight="67.0" prefWidth="479.0" style="-fx-background-color: #1a2d4c;" stylesheets="@style.css" text="Exit Game" />
+      <Button fx:id="back" layoutX="61.0" layoutY="203.0" mnemonicParsing="false" onAction="#handleBack" prefHeight="67.0" prefWidth="479.0" style="-fx-background-color: #1a2d4c;" stylesheets="@style.css" text="Return to Main Menu" />
    </children>
 </AnchorPane>
