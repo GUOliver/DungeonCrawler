@@ -365,20 +365,7 @@ public class Dungeon {
 	public void checkSetGameComplete() {
 		if (getGoalComplete())
 			gameState = true;
-		/*
-		if (this.gameState != true) {
-			if (this.switchTotal == this.getBoulderOnSwitch() && this.enemyTotal == 0 
-					&& this.treasureTotal == 0) {
-				if (this.hasExit == true) {
-					if (this.reachExit == true) {
-						this.gameState = true;
-					}
-				} else {
-					this.gameState = true;
-				}
-			}
-		}
-		*/
+	
     }
 	
 	/**

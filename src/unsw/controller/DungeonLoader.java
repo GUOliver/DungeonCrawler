@@ -21,6 +21,7 @@ import unsw.dungeon.InvincibilityPotion;
 import unsw.dungeon.Key;
 import unsw.dungeon.Player;
 import unsw.dungeon.Sword;
+import unsw.dungeon.ThroughWallPotion;
 import unsw.dungeon.Treasure;
 import unsw.dungeon.Wall;
 
@@ -170,6 +171,11 @@ public abstract class DungeonLoader {
 			onLoad(potion);
 			entity = potion;
 			break;
+		case "hover potion":
+			ThroughWallPotion hoverPotion = new ThroughWallPotion(x, y);
+			onLoad(hoverPotion);
+			entity = hoverPotion;
+			break;
 		case "sword":
 			Sword sword = new Sword(x, y);
 			onLoad(sword);
@@ -201,6 +207,8 @@ public abstract class DungeonLoader {
 	public abstract void onLoad(Enemy enemy);
 	public abstract void onLoad(FloorSwitch floorSwitch);
 	public abstract void onLoad(InvincibilityPotion potion);
+	public abstract void onLoad(ThroughWallPotion potion);
+	
 	public abstract void onLoad(Sword sword);
 	public abstract void onLoad(Treasure treasure);
 	public abstract void onLoad(Exit exit);

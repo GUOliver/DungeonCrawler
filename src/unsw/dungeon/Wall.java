@@ -18,6 +18,9 @@ public class Wall extends Entity {
     
     @Override
     public boolean canMoveOnto(Dungeon dungeon, Entity mover) {
+    	if (mover instanceof Player && ((Player) mover).getThroughWallTime() > 0) {
+    		return true;
+    	}
 		return false;
 	}
     

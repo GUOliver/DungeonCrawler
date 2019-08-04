@@ -1,7 +1,5 @@
 package unsw.movementStrategy;
 
-
-
 import unsw.dungeon.Dungeon;
 import unsw.dungeon.Enemy;
 import unsw.dungeon.MovingEntity;
@@ -26,7 +24,7 @@ public class MovingAwayPlayer extends dfsSearchPath implements MovementStrategy{
 
 	
 	/**
-	 * Calculates with dfs shortest path the correct next step
+	 * Calculates with dfs shortest path the correct next step, the opposite direction
 	 * @param dungeon Current dungeon
 	 * @param entity Moving entity
 	 * @param destX X coord
@@ -69,19 +67,19 @@ public class MovingAwayPlayer extends dfsSearchPath implements MovementStrategy{
 			}
 		
 			int nextX = this.indexToCoordX(pre, dungeon);
-			int nextY = this.indexToCoordY(pre, dungeon);
-//			System.out.printf("next move: (%d, %d)\n", nextX, nextY);
-			Boolean checkUp = dungeon.canMoveOnto(enemy, enemy.getX(), enemy.getY() - 1);
-			Boolean checkDown = dungeon.canMoveOnto(enemy, enemy.getY(), enemy.getY() + 1);
-			Boolean checkLeft = dungeon.canMoveOnto(enemy, enemy.getX() - 1, enemy.getY());
-			Boolean checkRight = dungeon.canMoveOnto(enemy, enemy.getX() + 1, enemy.getY());
+			int nextY = this.indexToCoordY(pre, dungeon);			
 			
 			if (nextX == fromX -1 && nextY == fromY) {
-				// means left
-				if (checkRight) {
+				// means left orginally, but now has to move right
+				nextX = fromX + 1;
+				if (dungeon.canMoveOnto(enemy, nextX, nextY)) {
 					enemy.moveRight(dungeon);
 				} else {
-					if (checkDown && enemy.getY() < (dungeon.getHeight() / 2)) {
+					if (dungeon.canMoveOnto(enemy, fromX, fromY + 1) && dungeon.canMoveOnto(enemy, fromX, fromY - 1)) {
+						
+						if (Math.random() > 0.5) {enemy.moveUp(dungeon);}
+						else {enemy.moveDown(dungeon);}
+					} else if (dungeon.canMoveOnto(enemy, fromX, fromY + 1)) {
 						enemy.moveDown(dungeon);
 					} else {
 						enemy.moveUp(dungeon);
@@ -90,40 +88,61 @@ public class MovingAwayPlayer extends dfsSearchPath implements MovementStrategy{
 				
 				
 			} else if (nextX == fromX + 1 && nextY == fromY) {
-				// means right
-				if (checkLeft) {
+				nextX = fromX - 1;
+				// means right, but now has to go left
+				if (dungeon.canMoveOnto(enemy, nextX, nextY)) {
 					enemy.moveLeft(dungeon);
 				} else {
-					if (checkDown && enemy.getY() < (dungeon.getHeight() / 2)) {
+					if (dungeon.canMoveOnto(enemy, fromX, fromY + 1) && dungeon.canMoveOnto(enemy, fromX, fromY - 1)) {
+						if (Math.random() < 0.5) {enemy.moveUp(dungeon);}
+						else {enemy.moveDown(dungeon);}
+					} else if (dungeon.canMoveOnto(enemy, fromX, fromY + 1)) {
 						enemy.moveDown(dungeon);
 					} else {
 						enemy.moveUp(dungeon);
 					}
 				}
 				
-			} else if (nextX == fromX && nextY == fromY - 1) {
-				// means up
-				if (checkDown) {
+			} 
+			
+			else if (nextX == fromX && nextY == fromY - 1) {
+				nextY = fromY + 1;
+				// means up, but now has to go down
+				if (dungeon.canMoveOnto(enemy, nextX, nextY)) {
+					
 					enemy.moveDown(dungeon);
+					
 				} else {
-					if (checkRight && enemy.getX() < (dungeon.getWidth() / 2)) {
+					if (dungeon.canMoveOnto(enemy, fromX+1, fromY) && dungeon.canMoveOnto(enemy, fromX-1, fromY)) {
+						if (Math.random() < 0.5) {enemy.moveLeft(dungeon);}
+						else {enemy.moveRight(dungeon);}
+					} else if (dungeon.canMoveOnto(enemy, fromX+1, fromY)) {
 						enemy.moveRight(dungeon);
 					} else {
 						enemy.moveLeft(dungeon);
 					}
 				}
 			} else if (nextX == fromX && nextY == fromY + 1) {
-				if (checkUp) {
+				
+				nextY = fromY - 1;
+				if (dungeon.canMoveOnto(enemy, nextX, nextY)) {
+					
 					enemy.moveUp(dungeon);
+					
 				} else {
-					if (checkRight && enemy.getX() < (dungeon.getWidth() / 2)) {
+					
+					if (dungeon.canMoveOnto(enemy, fromX+1, fromY) && dungeon.canMoveOnto(enemy, fromX-1, fromY)) {
+						if (Math.random() > 0.5) {enemy.moveLeft(dungeon);}
+						else {enemy.moveRight(dungeon);}
+					} else if (dungeon.canMoveOnto(enemy, fromX+1, fromY)) {
 						enemy.moveRight(dungeon);
 					} else {
 						enemy.moveLeft(dungeon);
 					}
 				}
 			} else {
-				//System.out.println("not supposed to happen nextX = " + nextX + ", nextY = " + nextY);
+				// for debugging
+				System.out.println("not supposed to happen nextX = " + nextX + ", nextY = " + nextY);
 				return;
 			}
 		} else {
@@ -131,4 +150,5 @@ public class MovingAwayPlayer extends dfsSearchPath implements MovementStrategy{
 		}
 		
 	}
+	
 }

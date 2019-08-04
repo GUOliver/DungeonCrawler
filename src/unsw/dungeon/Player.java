@@ -29,6 +29,7 @@ public class Player extends MovingEntity implements Subject {
 	private ArrayList<Observer> listObservers;
 	private PlayerState playerState;
 	private IntegerProperty keyNum;
+	private SimpleIntegerProperty throughWallTime;
 
     /**
      * Create a player positioned in square (x,y)
@@ -48,6 +49,7 @@ public class Player extends MovingEntity implements Subject {
         this.playerState = new NormalState();
         this.listObservers = new ArrayList<Observer>();
         setCollisionBehaviour(new CollisionWithPlayer());
+        this.throughWallTime = new SimpleIntegerProperty(0);
     }
     
 
@@ -151,12 +153,38 @@ public class Player extends MovingEntity implements Subject {
 		return invincibleTime;
 	}
 	
+	
 	/**
 	 * setInvincibleTime
 	 * @param invincibleTime
 	 */
 	public void setInvincibleTime(int invincibleTime) {
 		this.invincibleTime.set(invincibleTime);
+	}
+	
+
+	/**
+	 * getThroughWallTime
+	 * @return invincibleTime
+	 */
+	public int getThroughWallTime() {
+		return throughWallTime.get();
+	}
+	
+	/**
+	 * getThroughWallProperty wrapper
+	 * @return invincibleTime
+	 */
+	public IntegerProperty getThroughWallProperty() {
+		return throughWallTime;
+	}
+	
+	/**
+	 * set through wall time
+	 * @param throughWallTime
+	 */
+	public void setThroughWallTime(int throughWallTime) {
+		this.throughWallTime.set(throughWallTime);
 	}
 	
 	/**
@@ -325,5 +353,4 @@ public class Player extends MovingEntity implements Subject {
 	public ArrayList<Observer> getObserversList(){
 		return this.listObservers;
 	}
-
 }

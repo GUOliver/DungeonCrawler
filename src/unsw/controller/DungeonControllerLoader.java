@@ -22,6 +22,7 @@ import unsw.dungeon.InvincibilityPotion;
 import unsw.dungeon.Key;
 import unsw.dungeon.Player;
 import unsw.dungeon.Sword;
+import unsw.dungeon.ThroughWallPotion;
 import unsw.dungeon.Treasure;
 import unsw.dungeon.Wall;
 
@@ -49,6 +50,8 @@ public class DungeonControllerLoader extends DungeonLoader {
 	private Image keyImage;
 	private Image switchImage;
 
+	private Image hoverPotionImage;
+
     public DungeonControllerLoader(String filename, Stage stage)
             throws FileNotFoundException {
         super(filename, stage);
@@ -58,6 +61,7 @@ public class DungeonControllerLoader extends DungeonLoader {
         unlitBombImage = new Image("/bomb_unlit.png");
         boulderImage = new Image("/boulder.png");
         invincibilityImage = new Image("/brilliant_blue_new.png");
+        hoverPotionImage = new Image("/bubbly.png");
         lockedDoorImage = new Image("/closed_door.png");
         exitImage = new Image("/exit.png");
         enemyImage = new Image("/gnome.png");
@@ -120,6 +124,12 @@ public class DungeonControllerLoader extends DungeonLoader {
 	public void onLoad(InvincibilityPotion potion) {
 		ImageView view = new ImageView(invincibilityImage);
         addEntity(potion, view);
+	}
+	
+	@Override
+	public void onLoad(ThroughWallPotion hoverPotion) {
+		ImageView view = new ImageView(hoverPotionImage);
+        addEntity(hoverPotion, view);
 	}
 
 	@Override

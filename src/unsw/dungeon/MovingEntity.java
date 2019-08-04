@@ -155,8 +155,9 @@ public abstract class MovingEntity extends Entity {
 			Player player = (Player) this;
 			for (Entity entity : items) {
 				// call the collision for this colliding with the entities on the tile
-				entity.interact(dungeon, player);
-				
+				if (! (entity instanceof Wall)) {
+					entity.interact(dungeon, player);
+				}
 				// if the boulder pushed into switch, two interaction occurred here, so make 
 				// the interaction betweem boulder and switch mannualy 
 				if (entity instanceof Boulder) {
@@ -189,6 +190,12 @@ public abstract class MovingEntity extends Entity {
 			} else if (player.getInvincibleTime()>0) {
 				player.setInvincibleTime(player.getInvincibleTime()-1);
 			}
+			
+			
+			if (player.getThroughWallTime() > 0) {
+				player.setThroughWallTime(player.getThroughWallTime()-1);
+			}
+			
 			
 
 		}
